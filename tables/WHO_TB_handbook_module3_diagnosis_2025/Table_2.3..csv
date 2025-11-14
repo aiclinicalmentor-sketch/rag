@@ -1,0 +1,9 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,unit,note
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.3.,1,Purpose,,Detection of TB and RIF resistance,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.3.,2,Principle of action,,Nucleic acid amplification testing,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.3.,3,Complexity,Reagents,Most reagents are enclosed in a disposable sealed container to which a clinical specimen is added; the disposable sealed container does not have special storage requirements,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.3.,4,,Skills,"Basic technical skills (e.g. basic pipetting, precision not critical)",,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.3.,5,,Pipetting,"Either no, or only one, pipetting step in the process",,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.3.,6,,Testing procedure,May require an initial manual specimen treatment step before transferring the specimen into the disposable sealed container for automated processing Automated DNA extraction Automated real-time PCR,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.3.,7,Type of test result reporting,,Automated,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.3.,8,Setting of use,,Basic laboratory (no special infrastructure needed),,

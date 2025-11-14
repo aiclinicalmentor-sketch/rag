@@ -1,0 +1,6 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,unit,note
+WHO_TB_handbook_module4_treatment_2025,Table 2.5.1.,1,,Regimen,Duration,Core Drugs (months),Variable/ Additional Drugs (months),Key Features,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.5.1.,2,Modified 9-month regimens (4–5 drugs),9BLMZ,9 months,"B, L, M, Z",-,All-oral regimen for fluoroquinolone susceptible MDR/RR-TB.,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.5.1.,3,,9BLLfxCZ,9 months,"B, L, Lfx , Z",C,All-oral regimen for fluoroquinolone susceptible MDR/RR-TB.,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.5.1.,4,,9BLLfxDZ,9 months,"B, L, Lfx , Z",D,All-oral regimen for fluoroquinolone susceptible MDR/RR-TB.,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.5.1.,5,9-month regimen (7 drugs),Ethionamide variation 4–6 B (6m) - Lfx / M-C-Z-E- Hh - Eto / 5 Lfx /M-C-Z-E Linezolid variation 4–6 B (6m) - Lfx / M-C-Z-E- Hh - L(2m) / 5 Lfx /M-C-Z-E,9–11 months,"B ( 6), Lfx /M (9–11), Z (9–11), C (9–11), E (9–11), Hh (4–6)","Eto (4–6), L (2)",All-oral regimen for fluoroquinolone susceptible MDR/RR-TB. Ethionamide and linezolid are used for specific durations ; duration depends on treatment response at month 4.,,

@@ -1,0 +1,2 @@
+doc_id,chunk_id,section_path,content_type,caption,pages,text,tokens_est,attachment_id,attachment_path,see_also,notes
+WHO-TB-Module1-TPT-2024,WHO-TB-Module1-TPT-2024|T-0002,,table,Table 2. <Exact caption from PDF>,24,Headers: ColumnA | ColumnB | ColumnC | ColumnD. Key findings: <add 2–3 bullets>.,,T-0002,tables/WHO-TB-Module1-TPT-2024/T-0002.csv,,Replace ColumnA-D with real headers; set section_path; add key findings.
