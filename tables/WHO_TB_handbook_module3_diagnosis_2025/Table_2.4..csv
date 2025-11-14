@@ -1,0 +1,9 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,unit,note
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.4.,1,Purpose,,Detection of TB and resistance to RIF and INH,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.4.,2,Principle of action,,Nucleic acid amplification testing,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.4.,3,Complexity,Reagents,Reagents are available within standardized kits and may have temperature requirements for storage; the sample is added automatically or manually to a disposable sealed container for testing,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.4.,4,,Skills,"Moderate technical skills (e.g. multiple sample or reagent handling steps, precision pipetting may be required, molecular workflows may be required)",,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.4.,5,,Pipetting,One or more non-precision or precision pipetting steps required by the procedure,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.4.,6,,Testing procedure,May require multiple specimen treatment steps before transferring the specimen into a sealed test container for automated processing Automated or manual DNA extraction Automated real-time PCR,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.4.,7,Type of test result reporting,,Automated,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.4.,8,Setting of use,,Laboratory (special infrastructure may be required),,

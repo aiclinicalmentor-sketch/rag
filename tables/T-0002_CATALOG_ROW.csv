@@ -1,0 +1,2 @@
+doc_id,table_id,page,section_path,caption,csv_path,image_path,headers_json,n_rows,key_findings
+WHO-TB-Module1-TPT-2024,T-0002,24,,Table 2. <Exact caption from PDF>,tables/WHO-TB-Module1-TPT-2024/T-0002.csv,figures/WHO-TB-Module1-TPT-2024/T-0002_p24.png,"[""ColumnA"",""ColumnB"",""ColumnC"",""ColumnD""]",,<2–3 bullets summarizing the table>

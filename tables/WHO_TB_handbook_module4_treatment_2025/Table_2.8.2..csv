@@ -1,0 +1,11 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,unit,note
+WHO_TB_handbook_module4_treatment_2025,Table 2.8.2.,1,Drug,Dosing adjustments for hepatic disease,Associated with hepatotoxicity,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.8.2.,2,Levofloxacin (170),None,No a,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.8.2.,3,"Moxifloxacin (170, 171)",None; use with caution secondary to risk of QT prolongation,No a,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.8.2.,4,"Amikacin (172, 173)",None,No,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.8.2.,5,"Ethionamide (173, 174)",None; use with caution,Yes,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.8.2.,6,"Cycloserine (173, 174)",None; use with caution in alcohol-related hepatitis,No,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.8.2.,7,"Linezolid (175, 176)",None; not evaluated in severe hepatic impairment,No; a single case has been reported,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.8.2.,8,Clofazimine (177),"Not studied; use with caution, dose reduction may be warranted",No,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.8.2.,9,"Bedaquiline (178, 179)",None; use with caution in severe hepatic impairment (not studied),Yes,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.8.2.,10,"Delamanid (180, 181)",None; not recommended in moderate and severe liver impairments,No,,

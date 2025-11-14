@@ -1,0 +1,8 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI,unit,note
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.5.,1,Intervention,Drug,Resistance prevalence,Test accuracy % (95% CI),Studies (participants),Certainty of evidence,Lower prevalence cut off,Middle prevalence cut off,Higher prevalence cut off,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.5.,2,High-complexity reverse hybridization NAAT,Pyrazinamide,"8,50,90%",Se: 81.2 (75.4– 85.8),7 ( 214 ),Very low,TP: 65 / FN: 15,TP: 406 / FN: 94,TP: 731 / FN: 169,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.5.,3,,,,Sp : 97.8 (96.5– 98.6),7 ( 750 ),Low,TN: 900 / FP: 20,TN: 489 / FP: 11,TN: 98 / FP: 2,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.5.,4,Targeted NGS,Pyrazinamide,"1,3,10%",Se: 88.4 (85.2– 91.7),3 ( 346 ),Moderate,TP: 9 / FN: 1,TP: 26 / FN: 4,TP: 88 / FN: 12,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.5.,5,,,,Sp : 98.5 (97.1– 100),3 ( 269 ),Moderate,TN: 980 / FP: 10,TN: 960 / FP: 10,TN: 891 / FP: 91,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.5.,6,Targeted NGS,Ethambutol,"1,3,10%",Se: 95.8 (94.0– 97.6),4 ( 432 ),Low,TP: 10 / FN: 0,TP: 29 / FN: 1,TP: 96 / FN: 4,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.5.,7,,,,Sp : 99.3 (98.2– 100),4 ( 268 ),Moderate,TN: 980 / FP: 10,TN: 960 / FP: 10,TN: 891 / FP: 9,,

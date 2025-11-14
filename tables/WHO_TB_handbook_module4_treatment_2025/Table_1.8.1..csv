@@ -1,0 +1,7 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,unit,note
+WHO_TB_handbook_module4_treatment_2025,Table 1.8.1.,1,Parameter,1 point,2 points,3 points,,
+WHO_TB_handbook_module4_treatment_2025,Table 1.8.1.,2,Ascitis,None,Mild,Moderate to severe,,
+WHO_TB_handbook_module4_treatment_2025,Table 1.8.1.,3,Serum albumin (g/dl),>3.5,2.8–3.5,<2.8,,
+WHO_TB_handbook_module4_treatment_2025,Table 1.8.1.,4,"Bilirubin, total (mg/dl)",<2,2–3,>3,,
+WHO_TB_handbook_module4_treatment_2025,Table 1.8.1.,5,Hepatic encephalopathy,No,Grade I–II,Grade III–IV,,
+WHO_TB_handbook_module4_treatment_2025,Table 1.8.1.,6,Prothrombin time (INR),<1.7,1.7–2.3,>2.3,,

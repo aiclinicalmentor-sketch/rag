@@ -1,0 +1,8 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,unit,note
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.1,1,Intervention,Test accuracy % (95% CI) a,Studies (participants),Certainty of evidence,2.5% prevalence,10% prevalence,30% prevalence,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.1,2,LC- aNAATs b,Se: 90.4 (88.0–92.4),34 ( 3636 ),High,TP: 23 / FN: 2,TP: 90 / FN: 10,TP: 271 / FN: 29,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.1,3,,Sp : 94.9 (93.0– 96.3),34 (11 204),High,TN: 925 / FP: 50,TN: 854 / FP: 46,TN: 664 / FP: 36,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.1,4,MC- aNAAT,Se: 93.0 (90.9–94.7),29 ( 4767 ),Moderate,TP: 23 / FN: 2,TP: 93 / FN: 7,TP: 279 / FN: 21,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.1,5,,Sp : 97.7 (95.6– 98.8),29 ( 9085 ),High,TN: 953 / FP: 22,TN: 879 / FP: 21,TN: 684 / FP: 16,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.1,6,LC- mNAATs,Se: 84 (78– 89),26 ( 4108 ),High,TP: 21 / FN: 4,TP: 84 / FN: 16,TP: 252 / FN: 48,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.1,7,,Sp : 96 (94– 97),26 (14 189),High,TN: 936 / FP: 39,TN: 864 / FP: 36,TN: 672 / FP: 28,,
