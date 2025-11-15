@@ -1,0 +1,6 @@
+# Ignore installed dependencies; package managers recreate these
+node_modules/
+
+# Common local environment overrides
+.env
+.env.local
