@@ -1,8 +1,4 @@
-// api/tb-openapi-schema.js
-//
-// Serves the OpenAPI schema (in YAML) for the TB Clinical Mentor GPT Action.
-
-const openApiYaml = `openapi: 3.1.0
+openapi: 3.1.0
 info:
   title: TB Clinical Mentor Actions API
   version: 1.0.0
@@ -14,10 +10,6 @@ info:
   contact:
     name: TB Clinical Mentor
     url: https://chatgpt.com/g/g-68e126775224819193328c1977555fd0-tb-clinical-mentor-v2
-  license:
-    name: Creative Commons Attribution 4.0 International
-    url: https://creativecommons.org/licenses/by/4.0/
-security: []
 servers:
   - url: https://rag-two-rouge.vercel.app
     description: This is the production domain that hosts this API.
@@ -148,14 +140,12 @@ components:
           type: string
           description: Excerpt of the guideline passage to show to clinicians.
         attachment_id:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: Optional attachment identifier if files are associated with the passage.
         attachment_path:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: Optional relative path to download the associated attachment.
         score:
           type: number
@@ -169,18 +159,3 @@ components:
         error:
           type: string
           description: Human-readable error message.
-`;
-
-module.exports = (req, res) => {
-  if (req.method !== "GET") {
-    res.statusCode = 405;
-    res.setHeader("Allow", "GET");
-    res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ error: "Use GET to retrieve the OpenAPI schema" }));
-    return;
-  }
-
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "application/yaml");
-  res.end(openApiYaml);
-};
