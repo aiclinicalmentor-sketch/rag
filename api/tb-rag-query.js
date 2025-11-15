@@ -141,6 +141,171 @@ function filterIndicesByScope(indices, chunks, scope) {
   });
 }
 
+function buildDocHintTokens(hint) {
+  if (!hint) return [];
+  const raw = String(hint).toLowerCase().trim();
+  if (!raw) return [];
+
+  const tokens = new Set();
+  tokens.add(raw);
+  tokens.add(raw.replace(/\s+/g, ""));
+  tokens.add(raw.replace(/\s+/g, "_"));
+  tokens.add(raw.replace(/[^a-z0-9]+/g, ""));
+
+  return Array.from(tokens).filter(Boolean);
+}
+
+function filterIndicesByDocHint(indices, chunks, hint) {
+  if (!hint) return indices;
+  const hintTokens = buildDocHintTokens(hint);
+  if (!hintTokens.length) return indices;
+
+  const filtered = indices.filter((idx) => {
+    const c = chunks[idx] || {};
+    const haystacks = [
+      (c.doc_id || "").toString().toLowerCase(),
+      (c.section_path || "").toString().toLowerCase(),
+      (c.guideline_title || "").toString().toLowerCase(),
+      (c.scope || "").toString().toLowerCase(),
+    ];
+
+    return haystacks.some((hay) =>
+      hay && hintTokens.some((token) => hay.includes(token))
+    );
+  });
+
+  return filtered.length ? filtered : indices;
+}
+
+function keywordScore(text, keywords) {
+  let score = 0;
+  for (const kw of keywords) {
+    if (text.includes(kw)) score += 1;
+  }
+  return score;
+}
+
+function inferScopeFromQuestion(question) {
+  const q = (question || "").toLowerCase();
+  if (!q) return null;
+
+  const diagnosisScore = keywordScore(q, [
+    "diagnos",
+    "algorithm",
+    "cxr",
+    "x-ray",
+    "radiograph",
+    "screen",
+    "xpert",
+    "naat",
+    "truenat",
+    "lamp",
+    "wrd",
+    "wrds",
+    "lpa",
+    "smear",
+    "ultra",
+  ]);
+
+  const treatmentScore = keywordScore(q, [
+    "treatment",
+    "regimen",
+    "therapy",
+    "dosing",
+    "dose",
+    "4-month",
+    "6-month",
+    "bpal",
+    "bdq",
+    "pretomanid",
+    "linezolid",
+    "dr-tb",
+    "drug-resistant",
+  ]);
+
+  const safetyScore = keywordScore(q, [
+    "adverse",
+    "toxicity",
+    "monitor",
+    "safety",
+    "ecg",
+    "qt",
+    "lft",
+    "renal",
+    "hepat",
+    "side effect",
+    "side effects",
+  ]);
+
+  const pediScore = keywordScore(q, ["child", "children", "paediatric", "pediatric", "adolescent", "infant", "neonate"]);
+
+  const programScore = keywordScore(q, [
+    "program",
+    "programmatic",
+    "supply chain",
+    "implementation",
+    "health system",
+    "adherence support",
+    "community",
+  ]);
+
+  if (diagnosisScore >= 2 || (diagnosisScore && q.includes("module 3"))) {
+    return "diagnosis";
+  }
+
+  if (pediScore >= 2) {
+    return "pediatrics";
+  }
+
+  if (safetyScore >= 2 || (safetyScore && q.includes("monitor"))) {
+    return "drug-safety";
+  }
+
+  if (programScore >= 2) {
+    return "programmatic";
+  }
+
+  if (treatmentScore >= 2) {
+    return "treatment";
+  }
+
+  return null;
+}
+
+const DOC_HINT_ALIASES = [
+  {
+    target: "module3_diagnosis",
+    keywords: ["module 3", "module3", "module iii"],
+    requires: ["diagnos", "algorithm", "cxr"],
+  },
+  {
+    target: "module4_treatment",
+    keywords: ["module 4", "module4", "module iv"],
+    requires: ["treat", "regimen", "therapy"],
+  },
+  {
+    target: "consolidated_module3",
+    keywords: ["consolidated", "module 3"],
+    requires: ["diagnos"],
+  },
+];
+
+function inferDocHintFromQuestion(question) {
+  const q = (question || "").toLowerCase();
+  if (!q) return null;
+
+  for (const alias of DOC_HINT_ALIASES) {
+    const hasKeyword = alias.keywords.some((kw) => q.includes(kw));
+    if (!hasKeyword) continue;
+    const requires = alias.requires || [];
+    if (!requires.length || requires.some((kw) => q.includes(kw))) {
+      return alias.target;
+    }
+  }
+
+  return null;
+}
+
 // Vercel Node function entry point
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
@@ -157,7 +322,17 @@ module.exports = async (req, res) => {
 
     const question = body.question;
     let topK = typeof body.top_k === "number" ? body.top_k : 5;
-    const scope = body.scope || null;
+    let scope = body.scope || null;
+    let documentHint =
+      typeof body.document_hint === "string" ? body.document_hint : null;
+
+    if (!scope) {
+      scope = inferScopeFromQuestion(question);
+    }
+
+    if (!documentHint) {
+      documentHint = inferDocHintFromQuestion(question);
+    }
 
     if (!question || typeof question !== "string" || !question.trim()) {
       res.statusCode = 400;
@@ -184,12 +359,15 @@ module.exports = async (req, res) => {
     const qEmbedding = await embedQuestion(question);
 
     // Start from all indices, then filter by scope if requested.
-    let indices = embeddings.map((_, idx) => idx);
-    indices = filterIndicesByScope(indices, chunks, scope);
+    const fullIndices = embeddings.map((_, idx) => idx);
+    let scopedIndices = filterIndicesByScope(fullIndices, chunks, scope);
+    if (!scopedIndices.length) {
+      scopedIndices = fullIndices;
+    }
 
+    let indices = filterIndicesByDocHint(scopedIndices, chunks, documentHint);
     if (!indices.length) {
-      // Fallback: if scope filtering removed everything, use full corpus.
-      indices = embeddings.map((_, idx) => idx);
+      indices = scopedIndices;
     }
 
     const scored = indices.map((idx) => ({
@@ -222,6 +400,7 @@ module.exports = async (req, res) => {
         question,
         top_k: topK,
         scope: scope || null,
+        document_hint: documentHint || null,
         results,
       })
     );

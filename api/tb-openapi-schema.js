@@ -5,7 +5,7 @@
 const openApiYaml = `openapi: 3.1.0
 info:
   title: TB Clinical Mentor Actions API
-  version: 1.1.0
+  version: 1.2.0
   description: >
     Action surface for the TB Clinical Mentor GPT. Clinicians supply a free-form
     question about a tuberculosis case, and the action returns the most relevant
@@ -43,6 +43,8 @@ paths:
         - Use "top_k" between 3 and 7 in most TB case discussions.
         - Optionally set "scope" to focus on a subset of the corpus:
           "diagnosis", "treatment", "drug-safety", "pediatrics", or "programmatic".
+        - Use "document_hint" if you need to anchor retrieval on a particular
+          WHO guideline/module (e.g. "module3_diagnosis" or the full doc_id).
 
         HOW TO USE THE RESPONSE:
         - Review the "results" array in order.
@@ -71,6 +73,7 @@ paths:
                     question: What are the recommended monitoring steps for a patient on bedaquiline?
                     top_k: 3
                     scope: "drug-safety"
+                    document_hint: module4_treatment
                     results:
                       - doc_id: tb_handbook_v3
                         guideline_title: WHO operational handbook on tuberculosis, Module 4: treatment
@@ -152,6 +155,14 @@ components:
           enum: [diagnosis, treatment, drug-safety, pediatrics, programmatic]
           examples:
             - diagnosis
+        document_hint:
+          type: string
+          description: >
+            Optional substring or friendly alias for the WHO guideline module that
+            should be prioritized (e.g. "module3_diagnosis",
+            "WHO_TB_handbook_module4_treatment_2025").
+          examples:
+            - module3_diagnosis
     QueryResponse:
       type: object
       additionalProperties: false
@@ -166,6 +177,12 @@ components:
         top_k:
           type: integer
           description: Number of passages requested / returned in "results".
+        document_hint:
+          type:
+            - string
+            - "null"
+          description: >
+            Echo of the resolved document hint used to bias retrieval (if any).
         results:
           type: array
           description: Relevant TB guidance passages ordered by similarity.
