@@ -1,5 +1,0 @@
-apis:
-  tb-clinical-mentor:
-    root: ./schema.yaml
-extends:
-  - recommended
