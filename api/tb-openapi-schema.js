@@ -5,7 +5,7 @@
 const openApiYaml = `openapi: 3.1.0
 info:
   title: TB Clinical Mentor Actions API
-  version: 1.0.0
+  version: 1.1.0
   description: >
     Action surface for the TB Clinical Mentor GPT. Clinicians supply a free-form
     question about a tuberculosis case, and the action returns the most relevant
@@ -19,7 +19,7 @@ info:
     url: https://creativecommons.org/licenses/by/4.0/
 security: []
 servers:
-  - url: https://rag-two-rouge.vercel.app
+  - url: "https://rag-two-rouge.vercel.app"
     description: This is the production domain that hosts this API.
 paths:
   /api/tb-rag-query:
@@ -29,8 +29,27 @@ paths:
       description: >
         Calculates an embedding for the clinician question and returns the top
         matching guideline or handbook passages from the on-device RAG store.
-        Use this action whenever additional TB-specific context is needed before
-        giving clinical advice.
+
+        WHEN TO USE:
+        - Use this action whenever the user is asking about tuberculosis
+          diagnosis, treatment, monitoring, adverse effects, or programmatic
+          management of a patient.
+        - Call this action BEFORE giving specific clinical advice so you can
+          base your reasoning on up-to-date WHO TB guidance.
+
+        HOW TO CALL:
+        - Put the full clinician question (including patient details and
+          comorbidities) in "question".
+        - Use "top_k" between 3 and 7 in most TB case discussions.
+        - Optionally set "scope" to focus on a subset of the corpus:
+          "diagnosis", "treatment", "drug-safety", "pediatrics", or "programmatic".
+
+        HOW TO USE THE RESPONSE:
+        - Review the "results" array in order.
+        - Cite doc_id, guideline_title (if present), year (if present), and
+          section_path when explaining your answer.
+        - Quote or paraphrase key lines from "text" before providing your
+          own clinical reasoning.
       requestBody:
         required: true
         content:
@@ -51,19 +70,26 @@ paths:
                   value:
                     question: What are the recommended monitoring steps for a patient on bedaquiline?
                     top_k: 3
+                    scope: "drug-safety"
                     results:
                       - doc_id: tb_handbook_v3
+                        guideline_title: WHO operational handbook on tuberculosis, Module 4: treatment
+                        year: 2022
                         chunk_id: chunk-01752
                         section_path: Chapter 4 > Drug-Resistant TB > Monitoring
                         text: >
                           For patients receiving bedaquiline, monitor liver function tests weekly for
                           the first month, then monthly thereafter. Electrocardiograms should be
-                          obtained ....
+                          obtained ...
                         attachment_id: bedaquiline-monitoring.pdf
                         attachment_path: attachments/bedaquiline-monitoring.pdf
                         score: 0.8123
         "400":
-          description: Missing or malformed question. The response includes an "error" string.
+          description: >
+            Missing or malformed question (for example, empty or non-string
+            "question" field). The response includes an "error" string. The
+            assistant should apologize and attempt to answer based on its
+            internal TB knowledge without calling the action again.
           content:
             application/json:
               schema:
@@ -77,7 +103,9 @@ paths:
         "500":
           description: >
             Unexpected retrieval or embedding failure. The "error" string will
-            include details suitable for logs.
+            include details suitable for logs. The assistant should apologize
+            and either try again later or answer based on its internal TB
+            knowledge without calling the action again.
           content:
             application/json:
               schema:
@@ -94,7 +122,9 @@ components:
           type: string
           description: >
             Free-form clinician question about a TB patient. This text is embedded
-            and compared against the stored TB guideline passages.
+            and compared against the stored TB guideline passages. Include enough
+            clinical context (age, HIV status, comorbidities, prior treatment) to
+            retrieve relevant guidance.
           minLength: 1
           examples:
             - How should I adjust the regimen for a TB/HIV co-infected patient with renal impairment?
@@ -108,8 +138,23 @@ components:
           default: 5
           examples:
             - 5
+        scope:
+          type: string
+          description: >
+            Optional hint to focus retrieval on a subset of the TB corpus.
+            Suggested values:
+            - "diagnosis" for smear-negative/Xpert/CXR algorithms and diagnostic
+              pathways.
+            - "treatment" for regimen selection, dosing, and duration.
+            - "drug-safety" for ECG, laboratory monitoring, and adverse effects.
+            - "pediatrics" for child and adolescent TB guidance.
+            - "programmatic" for health system / implementation guidance.
+          enum: [diagnosis, treatment, drug-safety, pediatrics, programmatic]
+          examples:
+            - diagnosis
     QueryResponse:
       type: object
+      additionalProperties: false
       required:
         - question
         - top_k
@@ -120,7 +165,7 @@ components:
           description: Echo of the received clinician question.
         top_k:
           type: integer
-          description: Number of passages returned in "results".
+          description: Number of passages requested / returned in "results".
         results:
           type: array
           description: Relevant TB guidance passages ordered by similarity.
@@ -128,6 +173,7 @@ components:
             $ref: '#/components/schemas/QueryResult'
     QueryResult:
       type: object
+      additionalProperties: false
       required:
         - doc_id
         - chunk_id
@@ -138,6 +184,17 @@ components:
         doc_id:
           type: string
           description: Identifier of the source document within the RAG corpus.
+        guideline_title:
+          type:
+            - string
+            - "null"
+          description: >
+            Human-readable title of the guideline or handbook, if available.
+        year:
+          type:
+            - integer
+            - "null"
+          description: Publication year of the guideline module, if available.
         chunk_id:
           type: string
           description: Unique identifier of the chunk within the document.
@@ -150,12 +207,12 @@ components:
         attachment_id:
           type:
             - string
-            - 'null'
+            - "null"
           description: Optional attachment identifier if files are associated with the passage.
         attachment_path:
           type:
             - string
-            - 'null'
+            - "null"
           description: Optional relative path to download the associated attachment.
         score:
           type: number
@@ -163,12 +220,16 @@ components:
           description: Cosine similarity score where higher values mean a closer match.
     ErrorResponse:
       type: object
+      additionalProperties: false
       required:
         - error
       properties:
         error:
           type: string
-          description: Human-readable error message.
+          description: >
+            Human-readable error message. The assistant should apologize and,
+            when appropriate, answer based on its internal TB knowledge instead
+            of repeatedly calling the action.
 `;
 
 module.exports = (req, res) => {
@@ -176,7 +237,9 @@ module.exports = (req, res) => {
     res.statusCode = 405;
     res.setHeader("Allow", "GET");
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ error: "Use GET to retrieve the OpenAPI schema" }));
+    res.end(
+      JSON.stringify({ error: "Use GET to retrieve the OpenAPI schema for this API." })
+    );
     return;
   }
 
