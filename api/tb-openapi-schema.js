@@ -17,7 +17,7 @@ const openApiDocument = {
   },
   servers: [
     {
-      url: "https://rag-two-rouge.vercel.app/",
+      url: "https://rag-two-rouge.vercel.app",
       description:
         "This is the production domain that hosts this API.",
     },
