@@ -358,6 +358,10 @@ module.exports = async (req, res) => {
 
     const qEmbedding = await embedQuestion(question);
 
+    console.log("Query embedding length:", qEmbedding.length);
+console.log("First chunk embedding length:", embeddings[0].length);
+console.log("Total chunks:", embeddings.length);
+
     // Start from all indices, then filter by scope if requested.
     const fullIndices = embeddings.map((_, idx) => idx);
     let scopedIndices = filterIndicesByScope(fullIndices, chunks, scope);
