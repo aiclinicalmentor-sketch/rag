@@ -972,7 +972,6 @@ module.exports = async (req, res) => {
         section_path: c.section_path,
         text: c.text,
         content_type: c.content_type ?? null,
-        has_attachment: c.has_attachment ?? null,
         attachment_id: c.attachment_id ?? null,
         attachment_path: c.attachment_path ?? null,
         table_subtype: c.table_subtype ?? null,

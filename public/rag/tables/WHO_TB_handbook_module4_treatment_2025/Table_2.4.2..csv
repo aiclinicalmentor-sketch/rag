@@ -1,6 +1,6 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,unit,note
-WHO_TB_handbook_module4_treatment_2025,Table 2.4.2.,1,Timing,Modifications,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.4.2.,2,1–9 weeks of treatment,"600 mg daily, ideally continued throughout the regimen duration. If linezolid is permanently discontinued during the initial 9 weeks of treatment, the entire regimen should be discontinued.",,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.4.2.,3,>9–18 weeks of treatment,"If not tolerated, linezolid may be reduced to 300 mg daily until the end of the treatment, or resumed anytime to 600 mg daily, as tolerated, but ideally it should not be omitted.",,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.4.2.,4,>18–26 weeks of treatment,"If necessary, linezolid may be omitted until the end of treatment with bedaquiline, pretomanid and moxifloxacin remaining to complete the regimen; or linezolid may be restarted anytime at either 600 mg or 300 mg daily, as tolerated",,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.4.2.,5,>26–39 weeks,"The BPaL regimen can be extended, if needed. The BPaLM regimen completes at 26 weeks.",,,
+doc_id,table_id,row_index,ColumnA,ColumnB,unit,note
+WHO_TB_handbook_module4_treatment_2025,Table 2.4.2.,1,Timing,Modifications,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.4.2.,2,1–9 weeks of treatment,"600 mg daily, ideally continued throughout the regimen duration. If linezolid is permanently discontinued during the initial 9 weeks of treatment, the entire regimen should be discontinued.",,
+WHO_TB_handbook_module4_treatment_2025,Table 2.4.2.,3,>9–18 weeks of treatment,"If not tolerated, linezolid may be reduced to 300 mg daily until the end of the treatment, or resumed anytime to 600 mg daily, as tolerated, but ideally it should not be omitted.",,
+WHO_TB_handbook_module4_treatment_2025,Table 2.4.2.,4,>18–26 weeks of treatment,"If necessary, linezolid may be omitted until the end of treatment with bedaquiline, pretomanid and moxifloxacin remaining to complete the regimen; or linezolid may be restarted anytime at either 600 mg or 300 mg daily, as tolerated",,
+WHO_TB_handbook_module4_treatment_2025,Table 2.4.2.,5,>26–39 weeks,"The BPaL regimen can be extended, if needed. The BPaLM regimen completes at 26 weeks.",,
