@@ -2,10 +2,13 @@
 //
 // Vercel Node function that powers the TB Clinical Mentor RAG Action.
 // Loads precomputed embeddings + chunks from public/rag and returns the
-// top-K passages for a clinician question.
+// top-K passages for a clinician question. Now table-aware: it can load
+// CSV tables from public/rag/tables and enrich table chunks with
+// GPT-ready summaries and raw rows.
 
 const fs = require("fs");
 const path = require("path");
+const Papa = require("papaparse");
 
 let RAG_STORE = null;
 
@@ -237,7 +240,15 @@ function inferScopeFromQuestion(question) {
     "side effects",
   ]);
 
-  const pediScore = keywordScore(q, ["child", "children", "paediatric", "pediatric", "adolescent", "infant", "neonate"]);
+  const pediScore = keywordScore(q, [
+    "child",
+    "children",
+    "paediatric",
+    "pediatric",
+    "adolescent",
+    "infant",
+    "neonate",
+  ]);
 
   const programScore = keywordScore(q, [
     "program",
@@ -290,7 +301,6 @@ const DOC_HINT_ALIASES = [
   },
 ];
 
-
 function extractSectionKeys(sectionPath) {
   if (!sectionPath) return [];
   const s = String(sectionPath).toLowerCase();
@@ -301,7 +311,7 @@ function extractSectionKeys(sectionPath) {
   keys.add(s.trim());
 
   // Individual segments split by '|'
-  const segments = s.split("|").map(seg => seg.trim()).filter(Boolean);
+  const segments = s.split("|").map((seg) => seg.trim()).filter(Boolean);
   for (const seg of segments) {
     keys.add(seg);
   }
@@ -316,7 +326,6 @@ function extractSectionKeys(sectionPath) {
 
   return Array.from(keys);
 }
-
 
 function inferDocHintFromQuestion(question) {
   const q = (question || "").toLowerCase();
@@ -333,6 +342,471 @@ function inferDocHintFromQuestion(question) {
 
   return null;
 }
+
+// ---------- Table loading + subtype detection + rendering ----------
+
+// Resolve an attachment_path from chunk metadata to an absolute CSV path
+// Deployed CSVs live under: public/rag/tables/<guideline>/Table_X.csv
+function resolveTablePath(attachmentPathFromMeta) {
+  if (!attachmentPathFromMeta) return null;
+
+  // Normalize slashes
+  let cleaned = String(attachmentPathFromMeta).replace(/\\\\/g, "/").replace(/\\/g, "/");
+
+  // Remove leading ./ or ../ if present
+  cleaned = cleaned.replace(/^\.\/+/, "");
+  cleaned = cleaned.replace(/^\.\.\//, "");
+
+  // If it doesn't already start with "public/", prepend it
+  if (!cleaned.startsWith("public/")) {
+    cleaned = path.posix.join("public", cleaned);
+  }
+
+  const absolutePath = path.join(process.cwd(), cleaned);
+  return absolutePath;
+}
+
+function loadTableRows(attachmentPathFromMeta) {
+  const absPath = resolveTablePath(attachmentPathFromMeta);
+  if (!absPath) {
+    throw new Error("Cannot resolve table path from attachment_path");
+  }
+
+  const csv = fs.readFileSync(absPath, "utf8");
+  const parsed = Papa.parse(csv, {
+    header: true,
+    skipEmptyLines: true,
+  });
+
+  if (parsed.errors && parsed.errors.length) {
+    console.warn("CSV parse errors for table:", absPath, parsed.errors);
+  }
+
+  return parsed.data || [];
+}
+
+function detectTableSubtype(chunk, rows) {
+  const caption = (chunk.caption || "").toLowerCase();
+  const section = (chunk.section_path || "").toLowerCase();
+  const headers = rows.length ? Object.keys(rows[0]).map((h) => h.toLowerCase()) : [];
+
+  const hasHeader = (pattern) => headers.some((h) => pattern.test(h));
+
+  // 1) Dosing tables (adult + pediatric)
+  if (
+    /dose|dosing|mg\/kg|weight-based|weight band|weight-band/.test(caption) ||
+    hasHeader(/dose|mg\/kg|weight|kg|tablet/)
+  ) {
+    // Distinguish peds formulations if obviously pediatric
+    if (
+      /child|paediatric|pediatric|infant|neonate/.test(caption) ||
+      section.includes("child") ||
+      hasHeader(/dispersible|fdc|rh?z/)
+    ) {
+      return "peds_dosing";
+    }
+    return "dosing";
+  }
+
+  // 2) Regimen composition tables
+  if (
+    /regimen|composition|components|backbone/.test(caption) ||
+    hasHeader(/regimen|drugs?|medicine/)
+  ) {
+    return "regimen";
+  }
+
+  // 3) Eligibility / decision / IF-THEN tables
+  if (
+    /eligib|criteria|if.*then|decision|indication|when to/.test(caption) ||
+    hasHeader(/criteria|if|then|recommendation|option/)
+  ) {
+    return "decision";
+  }
+
+  // 4) Timeline / monitoring tables
+  if (
+    /monitoring|follow-up|follow up|timeline|schedule/.test(caption) ||
+    hasHeader(/month|week|visit|timepoint|baseline/)
+  ) {
+    return "timeline";
+  }
+
+  // 5) Drug-drug interaction tables
+  if (
+    /interaction|drug-drug|drug drug|qt|contraindication/.test(caption) ||
+    hasHeader(/drug_a|drug_b|drug1|drug2|interaction|effect/)
+  ) {
+    return "interaction";
+  }
+
+  // 6) Toxicity / adverse event management
+  if (
+    /toxicity|adverse event|side effect|hepatotox|neuropathy|ae management/.test(caption) ||
+    hasHeader(/grade|toxicity|ctcae/)
+  ) {
+    return "toxicity";
+  }
+
+  return "generic";
+}
+
+// ---- Renderers for high-value table types ----
+
+function renderDosingTable(chunk, rows) {
+  const caption = chunk.caption || "Dosing table";
+  const lines = [];
+  lines.push(`${caption}. Weight- or age-based dosing:`);
+
+  for (const row of rows) {
+    const weightBand =
+      row["weight_band"] ||
+      row["Weight_band"] ||
+      row["Weight band"] ||
+      row["Weight (kg)"] ||
+      row["weight"] ||
+      "";
+    const ageBand = row["Age_band"] || row["Age band"] || row["Age"] || "";
+    const drug = row["drug"] || row["Drug"] || row["medicine"] || row["Medicine"] || "";
+    const dose = row["dose"] || row["Dose"] || row["dose_mg"] || row["Dose (mg)"] || "";
+    const freq =
+      row["frequency"] ||
+      row["Frequency"] ||
+      row["freq"] ||
+      row["Freq"] ||
+      "";
+    const notes = row["notes"] || row["Notes"] || row["comment"] || row["Comment"] || "";
+
+    if (!drug && !dose) continue;
+
+    let subject = weightBand
+      ? `For weight band ${weightBand}`
+      : ageBand
+      ? `For age band ${ageBand}`
+      : "Recommended dose";
+
+    let line = `${subject}: ${drug ? drug + " " : ""}${dose || ""}`;
+    if (freq) line += `, ${freq}`;
+    if (notes) line += ` — ${notes}`;
+
+    lines.push(line.trim());
+  }
+
+  return lines.join("\n");
+}
+
+function renderPedsDosingTable(chunk, rows) {
+  const caption = chunk.caption || "Paediatric dosing table";
+  const lines = [];
+  lines.push(`${caption}. Paediatric weight-band dosing with formulations:`);
+
+  for (const row of rows) {
+    const weightBand =
+      row["weight_band"] ||
+      row["Weight_band"] ||
+      row["Weight band"] ||
+      row["Weight (kg)"] ||
+      row["weight"] ||
+      "";
+    const formulation =
+      row["formulation"] ||
+      row["Formulation"] ||
+      row["product"] ||
+      row["Product"] ||
+      "";
+    const tablets =
+      row["tablets"] ||
+      row["Tablets"] ||
+      row["tabs"] ||
+      row["Tabs"] ||
+      row["No. of tablets"] ||
+      "";
+    const totalDose =
+      row["total_dose"] ||
+      row["Total dose"] ||
+      row["Total (mg)"] ||
+      row["total_mg"] ||
+      "";
+    const notes = row["notes"] || row["Notes"] || "";
+
+    if (!weightBand && !formulation && !totalDose && !tablets) continue;
+
+    let line = `For weight band ${weightBand || "—"}:`;
+    if (formulation) line += ` ${formulation}`;
+    if (tablets) line += ` — ${tablets} tablet(s)`;
+    if (totalDose) line += ` (total ${totalDose})`;
+    if (notes) line += ` — ${notes}`;
+
+    lines.push(line.trim());
+  }
+
+  return lines.join("\n");
+}
+
+function renderRegimenTable(chunk, rows) {
+  const caption = chunk.caption || "Regimen composition table";
+  const lines = [];
+  lines.push(`${caption}. Regimen components and options:`);
+
+  for (const row of rows) {
+    const regimen =
+      row["regimen"] ||
+      row["Regimen"] ||
+      row["Regimen name"] ||
+      row["Name"] ||
+      "";
+    const components =
+      row["components"] ||
+      row["Components"] ||
+      row["drugs"] ||
+      row["Drugs"] ||
+      row["backbone"] ||
+      row["Backbone"] ||
+      "";
+    const duration =
+      row["duration"] ||
+      row["Duration"] ||
+      row["phase_duration"] ||
+      row["Phase duration"] ||
+      "";
+    const notes = row["notes"] || row["Notes"] || "";
+
+    if (!regimen && !components) continue;
+
+    let line = regimen ? `${regimen}: ` : "";
+    if (components) line += `${components}`;
+    if (duration) line += ` (duration: ${duration})`;
+    if (notes) line += ` — ${notes}`;
+
+    lines.push(line.trim());
+  }
+
+  return lines.join("\n");
+}
+
+function renderDecisionTable(chunk, rows) {
+  const caption = chunk.caption || "Decision table";
+  const lines = [];
+  lines.push(`${caption}. IF–THEN decision rules:`);
+
+  for (const row of rows) {
+    const condition =
+      row["if"] ||
+      row["If"] ||
+      row["criteria"] ||
+      row["Criteria"] ||
+      row["Condition"] ||
+      "";
+    const thenVal =
+      row["then"] ||
+      row["Then"] ||
+      row["recommendation"] ||
+      row["Recommendation"] ||
+      row["Action"] ||
+      "";
+    const notes = row["notes"] || row["Notes"] || "";
+
+    if (!condition && !thenVal) continue;
+
+    let line = "IF ";
+    line += condition || "the criteria in this row are met";
+    line += " THEN ";
+    line += thenVal || "see notes";
+    if (notes) line += ` — Notes: ${notes}`;
+
+    lines.push(line.trim());
+  }
+
+  return lines.join("\n");
+}
+
+function renderTimelineTable(chunk, rows) {
+  const caption = chunk.caption || "Monitoring schedule";
+  const lines = [];
+  lines.push(`${caption}. Follow-up schedule over time:`);
+
+  for (const row of rows) {
+    const when =
+      row["time_point"] ||
+      row["Timepoint"] ||
+      row["Time point"] ||
+      row["Visit"] ||
+      row["Month"] ||
+      row["Week"] ||
+      "";
+    const tests =
+      row["tests"] ||
+      row["Tests"] ||
+      row["investigations"] ||
+      row["Investigations"] ||
+      row["Monitoring"] ||
+      "";
+    const notes = row["notes"] || row["Notes"] || "";
+
+    if (!when && !tests) continue;
+
+    let line = `${when || "Time"}: ${tests || "—"}`;
+    if (notes) line += ` — Notes: ${notes}`;
+
+    lines.push(line.trim());
+  }
+
+  return lines.join("\n");
+}
+
+function renderInteractionTable(chunk, rows) {
+  const caption = chunk.caption || "Drug–drug interaction table";
+  const lines = [];
+  lines.push(`${caption}. Drug combinations and recommendations:`);
+
+  for (const row of rows) {
+    const drugA =
+      row["drug_a"] ||
+      row["Drug_A"] ||
+      row["Drug A"] ||
+      row["Drug1"] ||
+      row["drug1"] ||
+      "";
+    const drugB =
+      row["drug_b"] ||
+      row["Drug_B"] ||
+      row["Drug B"] ||
+      row["Drug2"] ||
+      row["drug2"] ||
+      "";
+    const effect = row["effect"] || row["Effect"] || "";
+    const recommendation =
+      row["recommendation"] || row["Recommendation"] || row["Action"] || "";
+    const notes = row["notes"] || row["Notes"] || "";
+
+    if (!drugA && !drugB) continue;
+
+    let line = `${drugA || "Drug A"} + ${drugB || "Drug B"}: `;
+    if (effect) line += `${effect}. `;
+    if (recommendation) line += `Recommendation: ${recommendation}. `;
+    if (notes) line += `Notes: ${notes}.`;
+
+    lines.push(line.trim());
+  }
+
+  return lines.join("\n");
+}
+
+function renderToxicityTable(chunk, rows) {
+  const caption = chunk.caption || "Toxicity / adverse event table";
+  const lines = [];
+  lines.push(`${caption}. Toxicity grades and management:`);
+
+  for (const row of rows) {
+    const grade =
+      row["grade"] ||
+      row["Grade"] ||
+      row["severity"] ||
+      row["Severity"] ||
+      "";
+    const finding =
+      row["finding"] ||
+      row["Finding"] ||
+      row["toxicity"] ||
+      row["Toxicity"] ||
+      row["Description"] ||
+      "";
+    const management =
+      row["management"] ||
+      row["Management"] ||
+      row["action"] ||
+      row["Action"] ||
+      "";
+    const notes = row["notes"] || row["Notes"] || "";
+
+    if (!grade && !finding && !management) continue;
+
+    let line = "";
+    if (grade) line += `Grade ${grade}: `;
+    if (finding) line += `${finding}. `;
+    if (management) line += `Management: ${management}. `;
+    if (notes) line += `Notes: ${notes}.`;
+
+    lines.push(line.trim());
+  }
+
+  return lines.join("\n");
+}
+
+function renderGenericTable(chunk, rows) {
+  const caption = chunk.caption || "Table";
+  if (!rows || rows.length === 0) {
+    return `${caption}. (No rows found in CSV.)`;
+  }
+
+  const headers = Object.keys(rows[0] || {});
+  const lines = [];
+  lines.push(`${caption}. Columns: ${headers.join(", ")}`);
+
+  rows.forEach((row, idx) => {
+    const cells = headers
+      .map((h) => `${h}: ${row[h] ?? ""}`)
+      .join("; ");
+    lines.push(`Row ${idx + 1}: ${cells}`);
+  });
+
+  return lines.join("\n");
+}
+
+function renderTable(chunk, rows) {
+  const subtype = detectTableSubtype(chunk, rows) || "generic";
+
+  switch (subtype) {
+    case "dosing":
+      return { subtype, tableText: renderDosingTable(chunk, rows) };
+    case "peds_dosing":
+      return { subtype, tableText: renderPedsDosingTable(chunk, rows) };
+    case "regimen":
+      return { subtype, tableText: renderRegimenTable(chunk, rows) };
+    case "decision":
+      return { subtype, tableText: renderDecisionTable(chunk, rows) };
+    case "timeline":
+      return { subtype, tableText: renderTimelineTable(chunk, rows) };
+    case "interaction":
+      return { subtype, tableText: renderInteractionTable(chunk, rows) };
+    case "toxicity":
+      return { subtype, tableText: renderToxicityTable(chunk, rows) };
+    default:
+      return { subtype: "generic", tableText: renderGenericTable(chunk, rows) };
+  }
+}
+
+function enrichChunkWithTable(chunk) {
+  const ct = (chunk.content_type || "").toLowerCase();
+  const attachmentPath = chunk.attachment_path;
+
+  if (ct !== "table" || !attachmentPath) {
+    return chunk;
+  }
+
+  try {
+    const rows = loadTableRows(attachmentPath);
+    const { subtype, tableText } = renderTable(chunk, rows);
+
+    return {
+      ...chunk,
+      table_subtype: subtype,
+      table_text: tableText,
+      table_rows: rows,
+    };
+  } catch (err) {
+    console.error(
+      "Failed to load or render table for chunk",
+      chunk.chunk_id,
+      "path:",
+      attachmentPath,
+      err
+    );
+    return chunk;
+  }
+}
+
+// ---------- End of table helpers ----------
 
 // Vercel Node function entry point
 module.exports = async (req, res) => {
@@ -387,8 +861,8 @@ module.exports = async (req, res) => {
     const qEmbedding = await embedQuestion(question);
 
     console.log("Query embedding length:", qEmbedding.length);
-console.log("First chunk embedding length:", embeddings[0].length);
-console.log("Total chunks:", embeddings.length);
+    console.log("First chunk embedding length:", embeddings[0].length);
+    console.log("Total chunks:", embeddings.length);
 
     // Start from all indices, then filter by scope if requested.
     const fullIndices = embeddings.map((_, idx) => idx);
@@ -410,19 +884,17 @@ console.log("Total chunks:", embeddings.length);
     // --- Table-aware boosting based on section proximity ---
     // 1. Take the top text-like chunks as "anchors"
     const anchorCount = Math.min(10, scored.length);
-    const anchors = scored
-      .slice(0, anchorCount)
-      .map(({ index, score }) => {
-        const c = chunks[index] || {};
-        return {
-          index,
-          score,
-          doc_id: c.doc_id || null,
-          section_path: c.section_path || "",
-          content_type: (c.content_type || "").toLowerCase(),
-          sectionKeys: extractSectionKeys(c.section_path || ""),
-        };
-      });
+    const anchors = scored.slice(0, anchorCount).map(({ index, score }) => {
+      const c = chunks[index] || {};
+      return {
+        index,
+        score,
+        doc_id: c.doc_id || null,
+        section_path: c.section_path || "",
+        content_type: (c.content_type || "").toLowerCase(),
+        sectionKeys: extractSectionKeys(c.section_path || ""),
+      };
+    });
 
     const anchorDocSectionMap = [];
     for (const a of anchors) {
@@ -489,7 +961,9 @@ console.log("Total chunks:", embeddings.length);
     const top = deduped.slice(0, topK);
 
     const results = top.map(({ index, score }) => {
-      const c = chunks[index] || {};
+      const baseChunk = chunks[index] || {};
+      const c = enrichChunkWithTable(baseChunk);
+
       return {
         doc_id: c.doc_id,
         guideline_title: c.guideline_title ?? null,
@@ -501,6 +975,9 @@ console.log("Total chunks:", embeddings.length);
         has_attachment: c.has_attachment ?? null,
         attachment_id: c.attachment_id ?? null,
         attachment_path: c.attachment_path ?? null,
+        table_subtype: c.table_subtype ?? null,
+        table_text: c.table_text ?? null,
+        table_rows: c.table_rows ?? null,
         score,
       };
     });

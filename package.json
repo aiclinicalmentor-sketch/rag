@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "npyjs": "^1.0.4"
+    "npyjs": "^1.0.4",
+    "papaparse": "^5.5.3"
   }
 }
