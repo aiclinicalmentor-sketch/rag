@@ -1266,7 +1266,7 @@ module.exports = async (req, res) => {
       typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
 
     const question = body.question;
-    let topK = typeof body.top_k === "number" ? body.top_k : 5;
+    let finalTopK = typeof body.top_k === "number" ? body.top_k : 8;
     let scope = body.scope || null;
     let documentHint =
       typeof body.document_hint === "string" ? body.document_hint : null;
@@ -1289,7 +1289,7 @@ module.exports = async (req, res) => {
       return;
     }
 
-    topK = Math.max(1, Math.min(topK, 10));
+    finalTopK = Math.max(1, Math.min(finalTopK, 8));
 
     const { chunks, embeddings } = loadRagStore();
 
@@ -1297,7 +1297,7 @@ module.exports = async (req, res) => {
       throw new Error("RAG store is empty or failed to load.");
     }
 
-    topK = Math.min(topK, embeddings.length);
+    finalTopK = Math.min(finalTopK, embeddings.length);
 
     const qEmbedding = await embedQuestion(question);
 
@@ -1316,14 +1316,32 @@ module.exports = async (req, res) => {
       indices = scopedIndices;
     }
 
-    let scored = indices.map((idx) => ({
+    // Dual-channel retrieval: text/prose vs tables
+    const textIndices = indices.filter((i) => {
+      const ct = (chunks[i].content_type || "").toLowerCase();
+      return ct !== "table";
+    });
+
+    const tableIndices = indices.filter((i) => {
+      const ct = (chunks[i].content_type || "").toLowerCase();
+      return ct === "table";
+    });
+
+    let scoredText = textIndices.map((idx) => ({
       index: idx,
       score: cosineSim(qEmbedding, embeddings[idx])
     }));
+    scoredText.sort((a, b) => b.score - a.score);
 
-    // --- Table-aware boosting based on section proximity ---
-    const anchorCount = Math.min(10, scored.length);
-    const anchors = scored.slice(0, anchorCount).map(({ index, score }) => {
+    let scoredTables = tableIndices.map((idx) => ({
+      index: idx,
+      score: cosineSim(qEmbedding, embeddings[idx])
+    }));
+    scoredTables.sort((a, b) => b.score - a.score);
+
+    // --- Optional table-aware boosting based on section proximity ---
+    const anchorCount = Math.min(10, scoredText.length);
+    const anchors = scoredText.slice(0, anchorCount).map(({ index, score }) => {
       const c = chunks[index] || {};
       return {
         index,
@@ -1341,19 +1359,15 @@ module.exports = async (req, res) => {
       anchorDocSectionMap.push(a);
     }
 
-    const maxScore = scored.length ? scored[0].score : 1.0;
-    const additionalTableEntries = [];
+    const maxTextScore = scoredText.length ? scoredText[0].score : 1.0;
 
-    for (let i = 0; i < chunks.length; i++) {
-      const c = chunks[i] || {};
-      const ct = (c.content_type || "").toLowerCase();
-      if (ct !== "table") continue;
-
+    // Boost table chunks that share a doc + section key with top text anchors
+    for (const entry of scoredTables) {
+      const c = chunks[entry.index] || {};
       const tableDoc = c.doc_id || null;
       if (!tableDoc) continue;
 
       const tableKeys = extractSectionKeys(c.section_path || "");
-
       let isNeighbor = false;
       for (const a of anchorDocSectionMap) {
         if (a.doc_id !== tableDoc) continue;
@@ -1364,35 +1378,40 @@ module.exports = async (req, res) => {
       }
 
       if (!isNeighbor) continue;
-
-      const existing = scored.find((entry) => entry.index === i);
-      if (existing) {
-        existing.score = Math.max(existing.score, maxScore * 0.98);
-      } else {
-        additionalTableEntries.push({
-          index: i,
-          score: maxScore * 0.97
-        });
-      }
+      entry.score = Math.max(entry.score, maxTextScore * 0.98);
     }
 
-    if (additionalTableEntries.length) {
-      scored = scored.concat(additionalTableEntries);
-    }
+    scoredTables.sort((a, b) => b.score - a.score);
     // --- End table-aware boosting ---
 
-    scored.sort((a, b) => b.score - a.score);
+    // Take top-N from each channel before merging
+    const TEXT_LIMIT = 10;
+    const TABLE_LIMIT = 5;
+
+    const topText = scoredText.slice(
+      0,
+      Math.min(TEXT_LIMIT, scoredText.length)
+    );
+    const topTables = scoredTables.slice(
+      0,
+      Math.min(TABLE_LIMIT, scoredTables.length)
+    );
+
+    let combined = topText.concat(topTables);
+    combined.sort((a, b) => b.score - a.score);
+
     const seen = new Set();
     const deduped = [];
-    for (const entry of scored) {
+    for (const entry of combined) {
       const c = chunks[entry.index] || {};
       const id = c.chunk_id;
       if (!id || seen.has(id)) continue;
       seen.add(id);
       deduped.push(entry);
     }
+    }
 
-    const top = deduped.slice(0, topK);
+    const top = deduped.slice(0, finalTopK);
 
     const results = top.map(({ index, score }) => {
       const baseChunk = chunks[index] || {};
@@ -1420,7 +1439,7 @@ module.exports = async (req, res) => {
     res.end(
       JSON.stringify({
         question,
-        top_k: topK,
+        top_k: finalTopK,
         scope: scope || null,
         document_hint: documentHint || null,
         results
