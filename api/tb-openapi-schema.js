@@ -5,7 +5,7 @@
 const openApiYaml = `openapi: 3.1.0
 info:
   title: TB Clinical Mentor Actions API
-  version: 1.2.0
+  version: 1.2.1
   description: >
     Action surface for the TB Clinical Mentor GPT. Clinicians supply a free-form
     question about a tuberculosis case, and the action returns the most relevant
@@ -40,7 +40,10 @@ paths:
         HOW TO CALL:
         - Put the full clinician question (including patient details and
           comorbidities) in "question".
-        - Use "top_k" between 3 and 7 in most TB case discussions.
+        - Use "top_k" between 3 and 8 to control how many final passages are
+          returned. If omitted, it defaults to 8. Internally, the action may
+          retrieve a larger candidate set (for example, ~15 chunks) and then
+          return the best-scoring passages.
         - Optionally set "scope" to focus on a subset of the corpus:
           "diagnosis", "treatment", "drug-safety", "pediatrics", or "programmatic".
         - Use "document_hint" if you need to anchor retrieval on a particular
@@ -71,7 +74,7 @@ paths:
                   summary: Example response
                   value:
                     question: What are the recommended monitoring steps for a patient on bedaquiline?
-                    top_k: 3
+                    top_k: 8
                     scope: "drug-safety"
                     document_hint: module4_treatment
                     results:
@@ -110,7 +113,7 @@ paths:
             and either try again later or answer based on its internal TB
             knowledge without calling the action again.
           content:
-            application/json:
+            application/json":
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
@@ -134,13 +137,15 @@ components:
         top_k:
           type: integer
           description: >
-            Maximum number of passages to return. Defaults to 5 and supports up to
-            10 results for GPT Actions.
+            Desired number of passages to return (final top-K). Defaults to 8 and
+            supports between 1 and 8 results. Internally, the service may
+            retrieve more candidates (for example, ~15 text/table chunks) and
+            then return the best ones.
           minimum: 1
-          maximum: 10
-          default: 5
+          maximum: 8
+          default: 8
           examples:
-            - 5
+            - 8
         scope:
           type: string
           description: >
@@ -176,7 +181,9 @@ components:
           description: Echo of the received clinician question.
         top_k:
           type: integer
-          description: Number of passages requested / returned in "results".
+          description: >
+            Number of passages requested (after capping to the supported range)
+            and returned in "results".
         document_hint:
           type:
             - string
