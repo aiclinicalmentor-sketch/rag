@@ -1409,7 +1409,6 @@ module.exports = async (req, res) => {
       seen.add(id);
       deduped.push(entry);
     }
-    }
 
     const top = deduped.slice(0, finalTopK);
 
