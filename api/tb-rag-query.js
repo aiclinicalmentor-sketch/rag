@@ -290,6 +290,34 @@ const DOC_HINT_ALIASES = [
   },
 ];
 
+
+function extractSectionKeys(sectionPath) {
+  if (!sectionPath) return [];
+  const s = String(sectionPath).toLowerCase();
+
+  const keys = new Set();
+
+  // Whole string as a coarse key
+  keys.add(s.trim());
+
+  // Individual segments split by '|'
+  const segments = s.split("|").map(seg => seg.trim()).filter(Boolean);
+  for (const seg of segments) {
+    keys.add(seg);
+  }
+
+  // Extract numeric section patterns like "5.2", "2.5.2", etc.
+  const numMatches = s.match(/\b\d+(?:\.\d+)*\b/g);
+  if (numMatches) {
+    for (const m of numMatches) {
+      keys.add(m);
+    }
+  }
+
+  return Array.from(keys);
+}
+
+
 function inferDocHintFromQuestion(question) {
   const q = (question || "").toLowerCase();
   if (!q) return null;
@@ -378,33 +406,87 @@ console.log("Total chunks:", embeddings.length);
       index: idx,
       score: cosineSim(qEmbedding, embeddings[idx]),
     }));
-    // Dual-channel retrieval: general chunks + table-only channel
-    const tableIndices = indices.filter((idx) => {
-      const c = chunks[idx] || {};
-      return (c.content_type || "").toLowerCase() === "table";
-    });
 
-    const tableScored = tableIndices.map((idx) => ({
-      index: idx,
-      score: cosineSim(qEmbedding, embeddings[idx]),
-    }));
+    // --- Table-aware boosting based on section proximity ---
+    // 1. Take the top text-like chunks as "anchors"
+    const anchorCount = Math.min(10, scored.length);
+    const anchors = scored
+      .slice(0, anchorCount)
+      .map(({ index, score }) => {
+        const c = chunks[index] || {};
+        return {
+          index,
+          score,
+          doc_id: c.doc_id || null,
+          section_path: c.section_path || "",
+          content_type: (c.content_type || "").toLowerCase(),
+          sectionKeys: extractSectionKeys(c.section_path || ""),
+        };
+      });
 
-    // Merge the two channels and de-duplicate by chunk_id so tables
-    // always have a fair chance to appear among top results.
-    let combined = [...scored, ...tableScored];
-    combined.sort((a, b) => b.score - a.score);
+    const anchorDocSectionMap = [];
+    for (const a of anchors) {
+      if (!a.doc_id) continue;
+      anchorDocSectionMap.push(a);
+    }
 
-    const seen = new Set();
-    scored = combined.filter(({ index }) => {
-      const id = chunks[index]?.chunk_id;
-      if (!id || seen.has(id)) return false;
-      seen.add(id);
-      return true;
-    });
+    // 2. For each table in the same doc + overlapping section keys, add/boost it
+    const maxScore = scored.length ? scored[0].score : 1.0;
 
+    const additionalTableEntries = [];
+    for (let i = 0; i < chunks.length; i++) {
+      const c = chunks[i] || {};
+      const ct = (c.content_type || "").toLowerCase();
+      if (ct !== "table") continue;
 
+      const tableDoc = c.doc_id || null;
+      if (!tableDoc) continue;
+
+      const tableKeys = extractSectionKeys(c.section_path || "");
+
+      let isNeighbor = false;
+      for (const a of anchorDocSectionMap) {
+        if (a.doc_id !== tableDoc) continue;
+        // Check overlap in section keys
+        if (a.sectionKeys.some((key) => tableKeys.includes(key))) {
+          isNeighbor = true;
+          break;
+        }
+      }
+
+      if (!isNeighbor) continue;
+
+      // See if this table is already in scored
+      const existing = scored.find((entry) => entry.index === i);
+      if (existing) {
+        // Boost its score but keep relative ordering reasonable
+        existing.score = Math.max(existing.score, maxScore * 0.98);
+      } else {
+        additionalTableEntries.push({
+          index: i,
+          score: maxScore * 0.97,
+        });
+      }
+    }
+
+    if (additionalTableEntries.length) {
+      scored = scored.concat(additionalTableEntries);
+    }
+    // --- End table-aware boosting ---
+
+    // Sort and dedupe by chunk_id
     scored.sort((a, b) => b.score - a.score);
-    const top = scored.slice(0, topK);
+    const seen = new Set();
+    const deduped = [];
+    for (const entry of scored) {
+      const c = chunks[entry.index] || {};
+      const id = c.chunk_id;
+      if (!id || seen.has(id)) continue;
+      seen.add(id);
+      deduped.push(entry);
+    }
+
+    const top = deduped.slice(0, topK);
 
     const results = top.map(({ index, score }) => {
       const c = chunks[index] || {};
@@ -415,6 +497,8 @@ console.log("Total chunks:", embeddings.length);
         chunk_id: c.chunk_id,
         section_path: c.section_path,
         text: c.text,
+        content_type: c.content_type ?? null,
+        has_attachment: c.has_attachment ?? null,
         attachment_id: c.attachment_id ?? null,
         attachment_path: c.attachment_path ?? null,
         score,
