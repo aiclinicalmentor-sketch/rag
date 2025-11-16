@@ -374,10 +374,34 @@ console.log("Total chunks:", embeddings.length);
       indices = scopedIndices;
     }
 
-    const scored = indices.map((idx) => ({
+    let scored = indices.map((idx) => ({
       index: idx,
       score: cosineSim(qEmbedding, embeddings[idx]),
     }));
+    // Dual-channel retrieval: general chunks + table-only channel
+    const tableIndices = indices.filter((idx) => {
+      const c = chunks[idx] || {};
+      return (c.content_type || "").toLowerCase() === "table";
+    });
+
+    const tableScored = tableIndices.map((idx) => ({
+      index: idx,
+      score: cosineSim(qEmbedding, embeddings[idx]),
+    }));
+
+    // Merge the two channels and de-duplicate by chunk_id so tables
+    // always have a fair chance to appear among top results.
+    let combined = [...scored, ...tableScored];
+    combined.sort((a, b) => b.score - a.score);
+
+    const seen = new Set();
+    scored = combined.filter(({ index }) => {
+      const id = chunks[index]?.chunk_id;
+      if (!id || seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+
 
     scored.sort((a, b) => b.score - a.score);
     const top = scored.slice(0, topK);
