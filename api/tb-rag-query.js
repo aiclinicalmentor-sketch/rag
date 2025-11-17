@@ -340,8 +340,16 @@ function resolveTablePath(attachmentPathFromMeta) {
   cleaned = cleaned.replace(/^\.\/+/, "");
   cleaned = cleaned.replace(/^\.\.\//, "");
 
-  if (!cleaned.startsWith("public/")) {
+  if (cleaned.startsWith("public/rag/")) {
+    // already rooted correctly
+  } else if (cleaned.startsWith("public/")) {
+    // has public prefix but missing rag
+    cleaned = cleaned.replace(/^public\//, "public/rag/");
+  } else if (cleaned.startsWith("rag/")) {
     cleaned = path.posix.join("public", cleaned);
+  } else {
+    // default: assume chunker paths are relative to public/rag
+    cleaned = path.posix.join("public", "rag", cleaned);
   }
 
   const absolutePath = path.join(process.cwd(), cleaned);
@@ -557,14 +565,10 @@ function renderDosingTable(chunk, logicalRows, headerRow) {
 
   // If we couldn't confidently find weight-band columns, just fall back to generic.
   if (!weightBandKeys.length) {
+    const generic = renderGenericTable(chunk, logicalRows, headerRow);
     return {
-      text: renderGenericTable(chunk, logicalRows, headerRow),
-      debug: {
-        renderer: "dosing",
-        header_keys: headers,
-        row_count: logicalRows.length,
-        note: "fallback_generic_no_weight_bands"
-      }
+      text: generic.text,
+      debug: { ...generic.debug, renderer: "dosing", note: "fallback_generic_no_weight_bands" }
     };
   }
 
@@ -636,14 +640,10 @@ function renderPedsDosingTable(chunk, logicalRows, headerRow) {
   );
 
   if (!weightBandKeys.length) {
+    const generic = renderGenericTable(chunk, logicalRows, headerRow);
     return {
-      text: renderGenericTable(chunk, logicalRows, headerRow),
-      debug: {
-        renderer: "peds_dosing",
-        header_keys: headers,
-        row_count: logicalRows.length,
-        note: "fallback_generic_no_weight_bands"
-      }
+      text: generic.text,
+      debug: { ...generic.debug, renderer: "peds_dosing", note: "fallback_generic_no_weight_bands" }
     };
   }
 
@@ -845,9 +845,10 @@ function renderDecisionTable(chunk, logicalRows, headerRow) {
   };
 
   if (rowsWithIfThen === 0) {
+    const generic = renderGenericTable(chunk, logicalRows, headerRow);
     return {
-      text: renderGenericTable(chunk, logicalRows, headerRow),
-      debug: { ...debug, note: "fallback_generic_no_if_then_rows" }
+      text: generic.text,
+      debug: { ...generic.debug, renderer: "decision", note: "fallback_generic_no_if_then_rows" }
     };
   }
 
@@ -941,13 +942,12 @@ function renderTimelineTable(chunk, logicalRows, headerRow) {
   }
 
   // C) Unknown pattern → generic safe summary
+  const generic = renderGenericTable(chunk, logicalRows, headerRow);
   return {
-    text: renderGenericTable(chunk, logicalRows, headerRow),
+    text: generic.text,
     debug: {
+      ...generic.debug,
       renderer: "timeline",
-      header_keys: headers,
-      row_count: logicalRows.length,
-      orientation: orientationInfo.orientation,
       note: "fallback_generic_unknown_orientation"
     }
   };
@@ -983,14 +983,10 @@ function renderInteractionTable(chunk, logicalRows, headerRow) {
   const drugHeaders = headers.filter(isDrugHeader);
 
   if (!drugHeaders.length) {
+    const generic = renderGenericTable(chunk, logicalRows, headerRow);
     return {
-      text: renderGenericTable(chunk, logicalRows, headerRow),
-      debug: {
-        renderer: "interaction",
-        header_keys: headers,
-        row_count: logicalRows.length,
-        note: "fallback_generic_no_drug_headers"
-      }
+      text: generic.text,
+      debug: { ...generic.debug, renderer: "interaction", note: "fallback_generic_no_drug_headers" }
     };
   }
 
@@ -1045,9 +1041,10 @@ function renderInteractionTable(chunk, logicalRows, headerRow) {
   };
 
   if (rowsWithCombos === 0) {
+    const generic = renderGenericTable(chunk, logicalRows, headerRow);
     return {
-      text: renderGenericTable(chunk, logicalRows, headerRow),
-      debug: { ...debug, note: "fallback_generic_no_combos" }
+      text: generic.text,
+      debug: { ...generic.debug, renderer: "interaction", note: "fallback_generic_no_combos" }
     };
   }
 
@@ -1128,9 +1125,10 @@ function renderToxicityTable(chunk, logicalRows, headerRow) {
   };
 
   if (rowsWithGrades === 0) {
+    const generic = renderGenericTable(chunk, logicalRows, headerRow);
     return {
-      text: renderGenericTable(chunk, logicalRows, headerRow),
-      debug: { ...debug, note: "fallback_generic_no_grades" }
+      text: generic.text,
+      debug: { ...generic.debug, renderer: "toxicity", note: "fallback_generic_no_grades" }
     };
   }
 
