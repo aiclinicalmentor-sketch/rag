@@ -7,6 +7,338 @@ const Papa = require("papaparse");
 
 let RAG_STORE = null;
 
+const TB_CONCEPT_MAP = {
+  "Module 1: Prevention": {
+    "concepts": [
+      {
+        "canonical": "TB infection",
+        "aliases": [
+          "latent TB",
+          "LTBI",
+          "latent tuberculosis infection"
+        ]
+      },
+      {
+        "canonical": "TB preventive therapy",
+        "aliases": [
+          "TPT",
+          "preventive treatment",
+          "IPT",
+          "isoniazid preventive therapy"
+        ]
+      },
+      {
+        "canonical": "household contacts",
+        "aliases": [
+          "close contacts",
+          "contact screening",
+          "index case contacts"
+        ]
+      },
+      {
+        "canonical": "HIV and TB prevention",
+        "aliases": [
+          "PLHIV prevention",
+          "HIV-positive TB prevention"
+        ]
+      }
+    ]
+  },
+  "Module 2: Screening": {
+    "concepts": [
+      {
+        "canonical": "systematic screening",
+        "aliases": [
+          "TB screening",
+          "active case finding",
+          "ACF"
+        ]
+      },
+      {
+        "canonical": "TB symptoms",
+        "aliases": [
+          "cough",
+          "chronic cough",
+          "weight loss",
+          "night sweats"
+        ]
+      },
+      {
+        "canonical": "triage tools",
+        "aliases": [
+          "screening assays",
+          "symptom screen",
+          "screening algorithms"
+        ]
+      }
+    ]
+  },
+  "Module 3: Diagnosis": {
+    "concepts": [
+      {
+        "canonical": "bacteriological confirmation",
+        "aliases": [
+          "positive test",
+          "microbiological confirmation"
+        ]
+      },
+      {
+        "canonical": "Xpert MTB/RIF",
+        "aliases": [
+          "GeneXpert",
+          "Xpert",
+          "MTB/RIF",
+          "Xpert Ultra"
+        ]
+      },
+      {
+        "canonical": "imaging abnormalities",
+        "aliases": [
+          "CXR abnormal",
+          "radiographic signs"
+        ]
+      },
+      {
+        "canonical": "sample collection",
+        "aliases": [
+          "sputum collection",
+          "gastric aspirate",
+          "stool sample"
+        ]
+      },
+      {
+        "canonical": "diagnostic algorithms",
+        "aliases": [
+          "diagnosis pathway",
+          "testing algorithm"
+        ]
+      }
+    ]
+  },
+  "Module 4: DR-TB Treatment": {
+    "concepts": [
+      {
+        "canonical": "BPaLM regimen",
+        "aliases": [
+          "bedaquiline pretomanid linezolid moxifloxacin",
+          "BPaL",
+          "6-month regimen"
+        ]
+      },
+      {
+        "canonical": "modified 9-month regimen",
+        "aliases": [
+          "9-month MDR regimen",
+          "BLMZ",
+          "BLLfxCZ",
+          "BDLLfxZ"
+        ]
+      },
+      {
+        "canonical": "longer regimen",
+        "aliases": [
+          "18-month regimen",
+          "long MDR regimen"
+        ]
+      },
+      {
+        "canonical": "culture conversion",
+        "aliases": [
+          "bacteriological conversion",
+          "culture negative"
+        ]
+      },
+      {
+        "canonical": "culture reversion",
+        "aliases": [
+          "bacteriological reversion",
+          "reversion to positive culture"
+        ]
+      },
+      {
+        "canonical": "FQ resistance",
+        "aliases": [
+          "fluoroquinolone resistance",
+          "Mfx resistance",
+          "Lfx resistance"
+        ]
+      },
+      {
+        "canonical": "Bdq resistance",
+        "aliases": [
+          "bedaquiline resistance"
+        ]
+      },
+      {
+        "canonical": "pre-XDR",
+        "aliases": [
+          "MDR/RR-TB with FQ resistance"
+        ]
+      },
+      {
+        "canonical": "XDR-TB",
+        "aliases": [
+          "MDR/RR-TB with FQ and Group A resistance"
+        ]
+      }
+    ]
+  },
+  "Module 5: Pediatrics": {
+    "description": "TB in children and adolescents (Module 5 pediatrics guidelines and handbook).",
+    "concepts": [
+      {
+        "canonical": "pediatric tuberculosis",
+        "aliases": [
+          "paediatric TB",
+          "TB in children",
+          "childhood TB",
+          "adolescent TB",
+          "children and adolescents with TB"
+        ]
+      },
+      {
+        "canonical": "pediatric TB infection",
+        "aliases": [
+          "latent TB infection in children",
+          "LTBI in children",
+          "TB infection in children",
+          "TPT in children",
+          "TB preventive treatment in children"
+        ]
+      },
+      {
+        "canonical": "pediatric TB diagnosis",
+        "aliases": [
+          "diagnosis of TB in children",
+          "child TB diagnostic algorithm",
+          "pediatric TB diagnostic algorithm",
+          "probable TB in children"
+        ]
+      },
+      {
+        "canonical": "pediatric TB treatment regimens",
+        "aliases": [
+          "child TB treatment",
+          "paediatric TB regimens",
+          "pediatric dosing",
+          "weight-band dosing in children",
+          "child-friendly formulations"
+        ]
+      },
+      {
+        "canonical": "severe pediatric TB",
+        "aliases": [
+          "TB meningitis in children",
+          "miliary TB in children",
+          "disseminated TB in children",
+          "severe forms of TB in children"
+        ]
+      },
+      {
+        "canonical": "HIV and pediatric TB",
+        "aliases": [
+          "HIV-infected child with TB",
+          "children living with HIV and TB",
+          "CLHIV with TB",
+          "ART in children with TB"
+        ]
+      },
+      {
+        "canonical": "pediatric contact management",
+        "aliases": [
+          "child household contacts",
+          "screening child contacts",
+          "pediatric TB contact investigation",
+          "child contact TPT"
+        ]
+      }
+    ]
+  },
+  "Module 6: Comorbidities": {
+    "description": "TB and comorbidities or vulnerable conditions (Module 6 comorbidities guidelines and handbook).",
+    "concepts": [
+      {
+        "canonical": "TB and HIV coinfection",
+        "aliases": [
+          "HIV-associated TB",
+          "PLHIV with TB",
+          "TB/HIV coinfection",
+          "TB in people living with HIV",
+          "TLD regimen with TB treatment"
+        ]
+      },
+      {
+        "canonical": "TB and diabetes",
+        "aliases": [
+          "TB in people with diabetes",
+          "diabetes mellitus and TB",
+          "DM-TB comorbidity",
+          "poor glycaemic control and TB"
+        ]
+      },
+      {
+        "canonical": "TB and undernutrition",
+        "aliases": [
+          "undernutrition and TB",
+          "malnutrition and TB",
+          "low BMI and TB",
+          "nutritional support for TB patients"
+        ]
+      },
+      {
+        "canonical": "TB and smoking",
+        "aliases": [
+          "tobacco use and TB",
+          "smoker with TB",
+          "smoking as TB risk factor"
+        ]
+      },
+      {
+        "canonical": "TB and alcohol use",
+        "aliases": [
+          "harmful alcohol use and TB",
+          "alcohol dependence and TB",
+          "alcohol use disorder with TB"
+        ]
+      },
+      {
+        "canonical": "TB and substance use",
+        "aliases": [
+          "drug use and TB",
+          "people who use drugs and TB",
+          "opioid use disorder and TB"
+        ]
+      },
+      {
+        "canonical": "TB and mental health",
+        "aliases": [
+          "depression and TB",
+          "mental health conditions in TB patients",
+          "psychosocial support in TB care"
+        ]
+      },
+      {
+        "canonical": "TB and chronic lung disease",
+        "aliases": [
+          "COPD and TB",
+          "post-TB lung disease",
+          "silicosis and TB",
+          "chronic respiratory disease with TB"
+        ]
+      },
+      {
+        "canonical": "TB and other medical comorbidities",
+        "aliases": [
+          "renal disease and TB",
+          "chronic liver disease and TB",
+          "immunosuppression and TB",
+          "non-communicable diseases and TB"
+        ]
+      }
+    ]
+  }
+};
+
 // ---------- Embedding + RAG store helpers ----------
 
 function normalize(vec) {
@@ -1273,6 +1605,241 @@ function formatRetrievalEntry(chunk, score) {
   };
 }
 
+
+function buildQueryProfile(question) {
+  const q = (question || "").toLowerCase();
+  const conceptHitsByCanonical = {};
+  for (const [moduleName, moduleData] of Object.entries(TB_CONCEPT_MAP || {})) {
+    const concepts = (moduleData && moduleData.concepts) || [];
+    for (const concept of concepts) {
+      const canonical = (concept.canonical || "").toLowerCase();
+      const aliases = (concept.aliases || []).map((a) => (a || "").toLowerCase());
+      let matchedAlias = null;
+      if (canonical && q.includes(canonical)) {
+        matchedAlias = canonical;
+      } else {
+        for (const al of aliases) {
+          if (al && q.includes(al)) {
+            matchedAlias = al;
+            break;
+          }
+        }
+      }
+      if (!matchedAlias) continue;
+      if (!conceptHitsByCanonical[canonical]) {
+        conceptHitsByCanonical[canonical] = {
+          canonical: concept.canonical || canonical,
+          modules: new Set(),
+          aliasesMatched: new Set()
+        };
+      }
+      conceptHitsByCanonical[canonical].modules.add(moduleName);
+      conceptHitsByCanonical[canonical].aliasesMatched.add(matchedAlias);
+    }
+  }
+  const concepts = Object.values(conceptHitsByCanonical).map((c) => ({
+    canonical: c.canonical,
+    modules: Array.from(c.modules),
+    aliasesMatched: Array.from(c.aliasesMatched)
+  }));
+  const flags = {
+    hasResistance: /resist|pre-xdr|xdr/.test(q),
+    hasPeds: /child|children|paediatric|pediatric|adolescent|infant|neonate/.test(q),
+    hasHIV: /\bhiv\b|plhiv|\bart\b|\barv\b|tld|dtg|efv/.test(q),
+    hasCulture: /culture|conversion|reversion/.test(q),
+    hasRegimenChoice: /regimen|option|choose|selection|algorithm/.test(q),
+    hasMonitoring: /monitor|follow[- ]?up|baseline|month|week|schedule/.test(q),
+    hasToxicity: /toxicity|adverse event|side effect|neuropathy|hepatotox|qt prolongation/.test(q)
+  };
+  return {
+    question_lower: q,
+    concepts,
+    flags
+  };
+}
+
+function applyBoostsToScores(scoredText, scoredTables, chunks, profile, addLog) {
+  const all = [...scoredText, ...scoredTables];
+  if (!all.length || !profile) return;
+
+  let minScore = Infinity;
+  let maxScore = -Infinity;
+  let sumScore = 0;
+  for (const e of all) {
+    if (typeof e.score !== "number") continue;
+    if (e.score < minScore) minScore = e.score;
+    if (e.score > maxScore) maxScore = e.score;
+    sumScore += e.score;
+  }
+  const meanScore = all.length ? sumScore / all.length : 0;
+
+  const boostsDebug = [];
+
+  function applyForEntry(entry) {
+    const chunk = chunks[entry.index] || {};
+    const meta = (
+      (chunk.doc_id || "") +
+      " " +
+      (chunk.section_path || "") +
+      " " +
+      (chunk.caption || "") +
+      " " +
+      (chunk.text || "")
+    ).toLowerCase();
+
+    let boost = 0;
+    const applied = [];
+
+    // Concept-based boosting: small nudges when canonical concept text appears in chunk metadata
+    for (const c of profile.concepts || []) {
+      const canonLower = (c.canonical || "").toLowerCase();
+      const aliasesLower = (c.aliasesMatched || []).map((a) =>
+        (a || "").toLowerCase()
+      );
+      let hit = false;
+      if (canonLower && meta.includes(canonLower)) {
+        hit = true;
+      } else {
+        for (const al of aliasesLower) {
+          if (al && meta.includes(al)) {
+            hit = true;
+            break;
+          }
+        }
+      }
+      if (hit) {
+        boost += 0.01;
+        applied.push(`concept:${c.canonical}`);
+      }
+    }
+
+    const section = (chunk.section_path || "").toLowerCase();
+    const docId = (chunk.doc_id || "").toLowerCase();
+    const ct = (chunk.content_type || "").toLowerCase();
+    const subtype = (chunk.table_subtype || "").toLowerCase();
+    const q = profile.question_lower || "";
+
+    // Flag-based boosts using section_path/docId
+    if (profile.flags.hasPeds &&
+        (section.includes("child") ||
+         section.includes("adolescent") ||
+         docId.includes("pediatric") ||
+         docId.includes("child"))) {
+      boost += 0.03;
+      applied.push("flag:peds_section");
+    }
+
+    if (profile.flags.hasHIV &&
+        (section.includes("hiv") ||
+         section.includes("art") ||
+         section.includes("antiretroviral") ||
+         section.includes("arv"))) {
+      boost += 0.03;
+      applied.push("flag:hiv_section");
+    }
+
+    if (profile.flags.hasResistance &&
+        (section.includes("resist") ||
+         section.includes("pre-xdr") ||
+         section.includes("xdr"))) {
+      boost += 0.03;
+      applied.push("flag:resistance_section");
+    }
+
+    if (profile.flags.hasCulture &&
+        (section.includes("monitor") ||
+         section.includes("response") ||
+         section.includes("culture"))) {
+      boost += 0.02;
+      applied.push("flag:culture_monitor");
+    }
+
+    if (profile.flags.hasRegimenChoice &&
+        (section.includes("regimen options") ||
+         section.includes("regimen selection") ||
+         section.includes("algorithm"))) {
+      boost += 0.03;
+      applied.push("flag:regimen_options");
+    }
+
+    if (profile.flags.hasMonitoring &&
+        (section.includes("monitor") ||
+         section.includes("follow-up") ||
+         section.includes("baseline") ||
+         section.includes("month") ||
+         section.includes("week"))) {
+      boost += 0.015;
+      applied.push("flag:monitoring_section");
+    }
+
+    // Table subtype preferences
+    if (ct === "table") {
+      if (subtype === "regimen" && profile.flags.hasRegimenChoice) {
+        boost += 0.02;
+        applied.push("table:regimen");
+      }
+      if (subtype === "decision" && profile.flags.hasRegimenChoice) {
+        boost += 0.02;
+        applied.push("table:decision");
+      }
+      if (subtype === "timeline" && profile.flags.hasMonitoring) {
+        boost += 0.02;
+        applied.push("table:timeline");
+      }
+      if (subtype === "toxicity" && profile.flags.hasToxicity) {
+        boost += 0.02;
+        applied.push("table:toxicity");
+      }
+      if (subtype === "peds_dosing" && profile.flags.hasPeds) {
+        boost += 0.025;
+        applied.push("table:peds_dosing");
+      }
+      if (subtype === "interaction" && profile.flags.hasHIV) {
+        boost += 0.015;
+        applied.push("table:interaction_hiv");
+      }
+    }
+
+    if (!boost) return;
+
+    const base = entry.score;
+    const finalScore = base + boost;
+    entry.score = finalScore;
+
+    boostsDebug.push({
+      chunk_id: chunk.chunk_id || null,
+      section_path: chunk.section_path || null,
+      content_type: chunk.content_type || null,
+      table_subtype: chunk.table_subtype || null,
+      base_score: Number((base != null ? base : 0).toFixed(4)),
+      final_score: Number(finalScore.toFixed(4)),
+      applied
+    });
+  }
+
+  for (const e of all) {
+    applyForEntry(e);
+  }
+
+  // Sort by final score and keep top debug entries
+  all.sort((a, b) => (b.score || 0) - (a.score || 0));
+  const topDebug = boostsDebug.slice(0, 15);
+
+  if (typeof addLog === "function") {
+    addLog("boosting", {
+      base_min_score: Number(
+        (Number.isFinite(minScore) ? minScore : 0).toFixed(4)
+      ),
+      base_max_score: Number(
+        (Number.isFinite(maxScore) ? maxScore : 0).toFixed(4)
+      ),
+      base_mean_score: Number(meanScore.toFixed(4)),
+      concepts_matched: (profile.concepts || []).map((c) => c.canonical),
+      boosted_entries: topDebug
+    });
+  }
+}
+
 // ---------- Main handler ----------
 
 module.exports = async (req, res) => {
@@ -1436,6 +2003,11 @@ module.exports = async (req, res) => {
 
     scoredTables.sort((a, b) => b.score - a.score);
     // --- End table-aware boosting ---
+
+    // Concept + section-path boosting stage (applies across all modules)
+    const queryProfile = buildQueryProfile(question);
+    applyBoostsToScores(scoredText, scoredTables, chunks, queryProfile, addLog);
+
 
     // Take top-N from each channel before merging
     const TEXT_LIMIT = 10;
