@@ -1248,6 +1248,31 @@ function enrichChunkWithTable(chunk) {
   }
 }
 
+function formatRetrievalEntry(chunk, score) {
+  if (!chunk) return null;
+
+  const previewSource =
+    typeof chunk.text === "string" && chunk.text.trim()
+      ? chunk.text
+      : typeof chunk.table_text === "string" && chunk.table_text.trim()
+        ? chunk.table_text
+        : "";
+  const preview = previewSource
+    ? previewSource.replace(/\s+/g, " ").slice(0, 240)
+    : null;
+
+  return {
+    chunk_id: chunk.chunk_id ?? null,
+    doc_id: chunk.doc_id ?? null,
+    guideline_title: chunk.guideline_title ?? null,
+    section_path: chunk.section_path ?? null,
+    content_type: chunk.content_type ?? null,
+    table_subtype: chunk.table_subtype ?? null,
+    score: typeof score === "number" ? Number(score.toFixed(4)) : null,
+    preview
+  };
+}
+
 // ---------- Main handler ----------
 
 module.exports = async (req, res) => {
@@ -1268,6 +1293,10 @@ module.exports = async (req, res) => {
     let scope = body.scope || null;
     let documentHint =
       typeof body.document_hint === "string" ? body.document_hint : null;
+    const retrievalLog = [];
+    const addLog = (stage, payload) => {
+      retrievalLog.push({ stage, ...(payload || {}) });
+    };
 
     if (!scope) {
       scope = inferScopeFromQuestion(question);
@@ -1275,6 +1304,14 @@ module.exports = async (req, res) => {
     if (!documentHint) {
       documentHint = inferDocHintFromQuestion(question);
     }
+
+    addLog("request", {
+      question_preview:
+        typeof question === "string" ? question.slice(0, 200) : null,
+      requested_top_k: body.top_k ?? null,
+      scope_used: scope || null,
+      document_hint_used: documentHint || null
+    });
 
     if (!question || typeof question !== "string" || !question.trim()) {
       res.statusCode = 400;
@@ -1295,6 +1332,12 @@ module.exports = async (req, res) => {
       throw new Error("RAG store is empty or failed to load.");
     }
 
+    addLog("store_loaded", {
+      chunk_count: chunks.length,
+      embedding_count: embeddings.length,
+      embedding_dimensions: embeddings[0]?.length || null
+    });
+
     finalTopK = Math.min(finalTopK, embeddings.length);
 
     const qEmbedding = await embedQuestion(question);
@@ -1314,6 +1357,13 @@ module.exports = async (req, res) => {
       indices = scopedIndices;
     }
 
+    addLog("filtering", {
+      scope_used: scope || null,
+      scope_match_count: scopedIndices.length,
+      document_hint_used: documentHint || null,
+      doc_hint_match_count: indices.length
+    });
+
     // Dual-channel retrieval: text/prose vs tables
     const textIndices = indices.filter((i) => {
       const ct = (chunks[i].content_type || "").toLowerCase();
@@ -1323,6 +1373,11 @@ module.exports = async (req, res) => {
     const tableIndices = indices.filter((i) => {
       const ct = (chunks[i].content_type || "").toLowerCase();
       return ct === "table";
+    });
+
+    addLog("channels", {
+      text_candidates: textIndices.length,
+      table_candidates: tableIndices.length
     });
 
     let scoredText = textIndices.map((idx) => ({
@@ -1395,6 +1450,18 @@ module.exports = async (req, res) => {
       Math.min(TABLE_LIMIT, scoredTables.length)
     );
 
+    const textLog = topText
+      .map(({ index, score }) => formatRetrievalEntry(chunks[index], score))
+      .filter(Boolean);
+    const tableLog = topTables
+      .map(({ index, score }) => formatRetrievalEntry(chunks[index], score))
+      .filter(Boolean);
+
+    addLog("top_candidates", {
+      text: textLog,
+      tables: tableLog
+    });
+
     let combined = topText.concat(topTables);
     combined.sort((a, b) => b.score - a.score);
 
@@ -1431,6 +1498,27 @@ module.exports = async (req, res) => {
       };
     });
 
+    addLog("final_results", {
+      top_k: finalTopK,
+      results: results
+        .map((r) => formatRetrievalEntry(r, r.score))
+        .filter(Boolean)
+    });
+
+    // Emit retrieval log to server logs for observability.
+    console.log(
+      "retrieval_log",
+      JSON.stringify(
+        {
+          question_preview:
+            typeof question === "string" ? question.slice(0, 120) : null,
+          entries: retrievalLog
+        },
+        null,
+        2
+      )
+    );
+
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.end(
@@ -1439,7 +1527,8 @@ module.exports = async (req, res) => {
         top_k: finalTopK,
         scope: scope || null,
         document_hint: documentHint || null,
-        results
+        results,
+        retrieval_log: retrievalLog
       })
     );
   } catch (err) {
