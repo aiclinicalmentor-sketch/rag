@@ -1,20 +1,20 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,unit,note
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,1,Group,Medicine,Abbreviation,Löwenstein–Jensen (µg/mL),Middlebrook 7H10 (µg/mL),Middlebrook 7H11 (µg/mL),BACTEC MGIT liquid culture ( µg /mL),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,2,Group A,Levofloxacin (CC),LFX a,2.0,1.0,–,1.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,3,,Moxifloxacin (CC),MFX a,1.0,0.5,0.5,0.25,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,4,,Moxifloxacin (CB) b,–,–,2.0,–,1.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,5,,Bedaquiline,BDQ,–,–,0.25,1.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,6,,Linezolid,LZD,–,1.0,1.0,1.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,7,Group B,Clofazimine,CFZ,–,–,–,1.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,8,,Cycloserine / terizidone,CS/TRD,–,–,–,16.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,9,Group C,Ethambutol d,EMB,2.0,5.0,7.5,5.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,10,,Delamanid e,DLM,–,–,0.016,0.06,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,11,,Pyrazinamide f,PZA,–,–,–,100.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,12,,Imipenem- cilastatin,IMP/CLN,–,–,–,–,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,13,,Meropenem,MPM,–,–,–,–,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,14,,Amikacin,AMK,30.0,2.0,–,1.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,15,,(streptomycin) g,(STR),4.0,2.0,2.0,1.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,16,,Ethionamide,ETO,40.0,5.0,,5.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,17,,Prothionamide,PTO,40.0,–,–,2.5,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,18,,Para - aminosalicylic acid,PAS,–,–,–,–,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,19,Other,Pretomanid,Pa,–,–,–,0.5 h 2.0 h,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,1,Group,Medicine,Abbreviation,Löwenstein–Jensen (µg/mL),Middlebrook 7H10 (µg/mL),Middlebrook 7H11 (µg/mL),BACTEC MGIT liquid culture ( µg /mL)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,2,Group A,Levofloxacin (CC),LFX a,2.0,1.0,–,1.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,3,,Moxifloxacin (CC),MFX a,1.0,0.5,0.5,0.25
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,4,,Moxifloxacin (CB) b,–,–,2.0,–,1.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,5,,Bedaquiline,BDQ,–,–,0.25,1.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,6,,Linezolid,LZD,–,1.0,1.0,1.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,7,Group B,Clofazimine,CFZ,–,–,–,1.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,8,,Cycloserine / terizidone,CS/TRD,–,–,–,16.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,9,Group C,Ethambutol d,EMB,2.0,5.0,7.5,5.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,10,,Delamanid e,DLM,–,–,0.016,0.06
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,11,,Pyrazinamide f,PZA,–,–,–,100.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,12,,Imipenem- cilastatin,IMP/CLN,–,–,–,–
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,13,,Meropenem,MPM,–,–,–,–
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,14,,Amikacin,AMK,30.0,2.0,–,1.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,15,,(streptomycin) g,(STR),4.0,2.0,2.0,1.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,16,,Ethionamide,ETO,40.0,5.0,,5.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,17,,Prothionamide,PTO,40.0,–,–,2.5
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,18,,Para - aminosalicylic acid,PAS,–,–,–,–
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.10.,19,Other,Pretomanid,Pa,–,–,–,0.5 h 2.0 h

@@ -1,13 +1,13 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI,unit,note
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,1,Medicine,Weight-based dose,Formulation (mg),Formulation type,25 to <30 kg,30 to <35 kg,35 to <50 kg,50 to <65 kg,> 65 kg,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,2,FDC (HR),,75/150,FDC,2 tablets,3 tablets,4 tablets,4 tablets,5 tablets,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,3,FDC (HRE),,75/150/275,FDC,2 tablets,3 tablets,4 tablets,4 tablets,5 tablets,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,4,FDC (HRZE),,75/150/500/275,FDC,2 tablets,3 tablets,4 tablets,4 tablets,5 tablets,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,5,Isoniazid (H),4–6 mg/kg,300,Loose,0.5 tablets,1 tablets,1 tablets,1 tablets,1.25 tablets,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,6,Rifampicin (R),8–12 mg/kg,300,Loose,1 tablets,1.5 tablets,2 tablets,2 tablets,2.5 tablets,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,7,Ethambutol (E),15–25 mg/kg,400,Loose,1.5 tablets,2 tablets,3 tablets,3 tablets,4 tablets,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,8,Pyrazinamide (Z),20–30 mg/kg,400,Loose,2 tablets,3 tablets,4 tablets,4 tablets,5 tablets,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,9,Pyrazinamide (Z),20–30 mg/kg,500,Loose,1.5 tablets,2.5 tablets,3 tablets,3 tablets,4 tablets,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,10,Rifapentine (P),Fixed,150,Loose,,,8 tablets,8 tablets,8 tablets,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,11,Rifapentine (P),Fixed,300,Loose,,,4 tablets,4 tablets,4 tablets,,
-WHO_TB_handbook_module4_treatment_2025,Table A4.1.,12,Moxifloxacin (M),Fixed,400,Loose,,,1 tablets,1 tablets,1 tablets,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,1,Medicine,Weight-based dose,Formulation (mg),Formulation type,25 to <30 kg,30 to <35 kg,35 to <50 kg,50 to <65 kg,> 65 kg
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,2,FDC (HR),,75/150,FDC,2 tablets,3 tablets,4 tablets,4 tablets,5 tablets
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,3,FDC (HRE),,75/150/275,FDC,2 tablets,3 tablets,4 tablets,4 tablets,5 tablets
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,4,FDC (HRZE),,75/150/500/275,FDC,2 tablets,3 tablets,4 tablets,4 tablets,5 tablets
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,5,Isoniazid (H),4–6 mg/kg,300,Loose,0.5 tablets,1 tablets,1 tablets,1 tablets,1.25 tablets
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,6,Rifampicin (R),8–12 mg/kg,300,Loose,1 tablets,1.5 tablets,2 tablets,2 tablets,2.5 tablets
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,7,Ethambutol (E),15–25 mg/kg,400,Loose,1.5 tablets,2 tablets,3 tablets,3 tablets,4 tablets
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,8,Pyrazinamide (Z),20–30 mg/kg,400,Loose,2 tablets,3 tablets,4 tablets,4 tablets,5 tablets
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,9,Pyrazinamide (Z),20–30 mg/kg,500,Loose,1.5 tablets,2.5 tablets,3 tablets,3 tablets,4 tablets
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,10,Rifapentine (P),Fixed,150,Loose,,,8 tablets,8 tablets,8 tablets
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,11,Rifapentine (P),Fixed,300,Loose,,,4 tablets,4 tablets,4 tablets
+WHO_TB_handbook_module4_treatment_2025,Table A4.1.,12,Moxifloxacin (M),Fixed,400,Loose,,,1 tablets,1 tablets,1 tablets

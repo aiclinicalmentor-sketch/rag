@@ -1,26 +1,26 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,unit,note
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,1,Examination,Baseline,2nd week from start of treatment (for Lzd containing regimens),Monthly,End of treatment,6 and 12 months posttreatment,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,2,Clinical evaluation by physician including weight/BMI,✓,✓,✓,✓,✓,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,3,Bacteriological tests,,,,,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,4,Smear microscopy,✓,,✓,✓,✓,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,5,TB culture,✓,,✓,✓,✓,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,6,Xpert MTB/XDR or First- and second-line LPA,✓,,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,7,Phenotypic DST,✓,,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,8,Diagnostic tests,,,,,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,9,Chest X-ray (Conduct every 6 months while on treatment),✓,,,✓,✓,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,10,"ECG (If regimen contains Bdq , Dlm , Pa, Mfx , Lfx or Cfz )",✓,,"In patients with preexisting cardiac disease and if the patient has any symptoms e.g. palpitations, dizziness or syncope",✓,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,11,Visual acuity and colour vision tests (If regimen contains Lzd or E),✓,✓,✓,✓,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,12,"Brief peripheral neuropathy screening (If regimen contains Lzd , H, Cs, Trd , Lfx , Mfx , or Am)",✓,✓,✓,✓,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,13,Mental health screening (PHQ-9),✓,,✓ (If Cs or Hh containing),✓,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,14,Blood chemistry / Haematological / Immunological tests,,,,,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,15,"Alanine aminotransferase (ALT) and aspartate aminotransferase (AST) (If regimen contains Z, H, Pa, Bdq , Eto/ Pto , Cs/ Trd , and PAS)",✓,,✓,✓,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,16,"CBC with platelet count (If regimen contains Lzd , Mpm , H and Pa)",✓,✓,✓,✓,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,17,Fasting blood sugar and/or glycosylated Hb (HbA1C),✓,,,,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,18,Serum potassium,✓,,,,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,19,Creatinine,✓,,✓ (If Am or S containing),,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,20,Thyroid-stimulating hormone,✓( If Pto / Eto or PAS containing and 3 monthly),,,,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,21,Albumin (If regimen contains Dlm ),✓,,,,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,22,Pregnancy test (For women of reproductive age),✓,,,,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,23,HIV screening,✓,,,,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,24,CD4 count (latest test if PLHIV),✓,,,,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,25,HBsAg and anti-HCV,✓,,,,,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,1,Examination,Baseline,2nd week from start of treatment (for Lzd containing regimens),Monthly,End of treatment,6 and 12 months posttreatment
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,2,Clinical evaluation by physician including weight/BMI,✓,✓,✓,✓,✓
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,3,Bacteriological tests,,,,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,4,Smear microscopy,✓,,✓,✓,✓
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,5,TB culture,✓,,✓,✓,✓
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,6,Xpert MTB/XDR or First- and second-line LPA,✓,,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,7,Phenotypic DST,✓,,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up,If culture remains positive at month 4 of treatment in cases of culture reversion or culture positivity during post-treatment follow-up
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,8,Diagnostic tests,,,,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,9,Chest X-ray (Conduct every 6 months while on treatment),✓,,,✓,✓
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,10,"ECG (If regimen contains Bdq , Dlm , Pa, Mfx , Lfx or Cfz )",✓,,"In patients with preexisting cardiac disease and if the patient has any symptoms e.g. palpitations, dizziness or syncope",✓,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,11,Visual acuity and colour vision tests (If regimen contains Lzd or E),✓,✓,✓,✓,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,12,"Brief peripheral neuropathy screening (If regimen contains Lzd , H, Cs, Trd , Lfx , Mfx , or Am)",✓,✓,✓,✓,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,13,Mental health screening (PHQ-9),✓,,✓ (If Cs or Hh containing),✓,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,14,Blood chemistry / Haematological / Immunological tests,,,,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,15,"Alanine aminotransferase (ALT) and aspartate aminotransferase (AST) (If regimen contains Z, H, Pa, Bdq , Eto/ Pto , Cs/ Trd , and PAS)",✓,,✓,✓,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,16,"CBC with platelet count (If regimen contains Lzd , Mpm , H and Pa)",✓,✓,✓,✓,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,17,Fasting blood sugar and/or glycosylated Hb (HbA1C),✓,,,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,18,Serum potassium,✓,,,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,19,Creatinine,✓,,✓ (If Am or S containing),,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,20,Thyroid-stimulating hormone,✓( If Pto / Eto or PAS containing and 3 monthly),,,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,21,Albumin (If regimen contains Dlm ),✓,,,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,22,Pregnancy test (For women of reproductive age),✓,,,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,23,HIV screening,✓,,,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,24,CD4 count (latest test if PLHIV),✓,,,,
+WHO_TB_handbook_module4_treatment_2025,Table 2.9.2.,25,HBsAg and anti-HCV,✓,,,,

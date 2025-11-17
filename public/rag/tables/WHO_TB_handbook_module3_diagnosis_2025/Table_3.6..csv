@@ -1,22 +1,22 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,unit,note
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,1,Drug,Resistance prevalence,Test accuracy % (95% CI) a,Studies (participants),Certainty of evidence,Lower prevalence cut off,Middle prevalence cut off,Higher prevalence cut off,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,2,Isoniazid,"60,75,90%",Se: 96.5 (93.8– 99.2),12 ( 1440 ),High,TP: 576 / FN: 24,TP: 720 / FN: 30,TP: 864 / FN: 36,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,3,,,Sp : 95.8 (91.8– 99.8),12 ( 517 ),High,TN: 384 / FP: 16,TN: 240 / FP: 10,TN: 96 / FP: 4,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,4,Levofloxacin,"10,30,50%",Se: 95.8 (90.4– 100),6 ( 654 ),Moderate,TP: 96 / FN: 4,TP: 288 / FN: 12,TP: 480 / FN: 20,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,5,,,Sp : 96.0 (93.1– 98.9),7 ( 913 ),High,TN: 864 / FP: 36,TN: 672 / FP: 28,TN: 480 / FP: 20,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,6,Moxifloxacin,"10,30,50%",Se: 96.5 (93.6– 99.5),6 ( 652 ),High,TP: 97 / FN: 3,TP: 291 / FN: 9,TP: 485 / FN: 15,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,7,,,Sp : 95.2 (91.0– 99.4),8 ( 921 ),High,TN: 855 / FP: 45,TN: 665 / FP: 35,TN: 475 / FP: 25,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,8,Pyrazinamide,"30,50,90%",Se: 90.0 (86.8– 93.2),3 ( 346 ),High,TP: 270 / FN: 30,TP: 450 / FN: 50,TP: 810 / FN: 90,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,9,,,Sp : 98.6 (96.8– 100),3 ( 269 ),High,TN: 693 / FP: 7,TN: 495 / FP: 5,TN: 99 / FP: 1,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,10,Bedaquiline,"1,3,5%",Se: 67.9 (42.6– 93.2),3 ( 31 ),Low,TP: 7 / FN: 3,TP: 20 / FN: 10,TP: 34 / FN: 16,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,11,,,Sp : 97.0 (94.3– 99.7),4 ( 519 ),High,TN: 960 / FP: 30,TN: 941 / FP: 29,TN: 922 / FP: 28,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,12,Linezolid,"1,3,5%",Se: 68.9 (38.7– 99.1),4 ( 31 ),Low,TP: 7 / FN: 3,TP: 21 / FN: 9,TP: 34 / FN: 16,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,13,,,Sp : 99.8 (99.6– 100),6 ( 1093 ),High,TN: 990 / FP: 0,TN: 970 / FP: 0,TN: 950 / FP: 0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,14,Clofazimine,"1,3,5%",Se: 70.4 (34.6– 100),4 ( 36 ),Low,TP: 7 / FN: 3,TP: 21 / FN: 9,TP: 35 / FN: 15,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,15,,,Sp : 96.3 (93.2– 99.3),6 ( 789 ),High,TN: 950 / FP: 40,TN: 931 / FP: 39,TN: 912 / FP: 38,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,16,Amikacin,"5,10,15%",Se: 87.4 (74.5– 100),5 ( 115 ),Very low,TP: 44 / FN: 6,TP: 87 / FN: 13,TP: 131 / FN: 19,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,17,,,Sp : 99.0 (98.4– 99.6),8 ( 1003 ),Moderate,TN: 941 / FP: 9,TN: 891 / FP: 9,TN: 842 / FP: 8,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,18,Ethambutol,"10,30,50%",Se: 96.7 (95.0– 98.4),4 ( 431 ),Moderate,TP: 97 / FN: 3,TP: 291 / FN: 9,TP: 485 / FN: 15,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,19,,,Sp : 98.4 (96.1– 100),4 ( 123 ),Moderate,TN: 882 / FP: 18,TN: 686 / FP: 14,TN: 490 / FP: 10,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,20,Streptomycin,"10,30,50%",Se: 98.1 (96.1– 100),5 ( 493 ),High,TP: 98 / FN: 2,TP: 294 / FN: 6,TP: 490 / FN: 10,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,21,,,Sp : 75.0 (59.5– 90.5),5 ( 250 ),Low,TN: 675 / FP: 225,TN: 525 / FP: 175,TN: 375 / FP: 125,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,1,Drug,Resistance prevalence,Test accuracy % (95% CI) a,Studies (participants),Certainty of evidence,Lower prevalence cut off,Middle prevalence cut off,Higher prevalence cut off
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,2,Isoniazid,"60,75,90%",Se: 96.5 (93.8– 99.2),12 ( 1440 ),High,TP: 576 / FN: 24,TP: 720 / FN: 30,TP: 864 / FN: 36
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,3,,,Sp : 95.8 (91.8– 99.8),12 ( 517 ),High,TN: 384 / FP: 16,TN: 240 / FP: 10,TN: 96 / FP: 4
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,4,Levofloxacin,"10,30,50%",Se: 95.8 (90.4– 100),6 ( 654 ),Moderate,TP: 96 / FN: 4,TP: 288 / FN: 12,TP: 480 / FN: 20
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,5,,,Sp : 96.0 (93.1– 98.9),7 ( 913 ),High,TN: 864 / FP: 36,TN: 672 / FP: 28,TN: 480 / FP: 20
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,6,Moxifloxacin,"10,30,50%",Se: 96.5 (93.6– 99.5),6 ( 652 ),High,TP: 97 / FN: 3,TP: 291 / FN: 9,TP: 485 / FN: 15
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,7,,,Sp : 95.2 (91.0– 99.4),8 ( 921 ),High,TN: 855 / FP: 45,TN: 665 / FP: 35,TN: 475 / FP: 25
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,8,Pyrazinamide,"30,50,90%",Se: 90.0 (86.8– 93.2),3 ( 346 ),High,TP: 270 / FN: 30,TP: 450 / FN: 50,TP: 810 / FN: 90
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,9,,,Sp : 98.6 (96.8– 100),3 ( 269 ),High,TN: 693 / FP: 7,TN: 495 / FP: 5,TN: 99 / FP: 1
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,10,Bedaquiline,"1,3,5%",Se: 67.9 (42.6– 93.2),3 ( 31 ),Low,TP: 7 / FN: 3,TP: 20 / FN: 10,TP: 34 / FN: 16
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,11,,,Sp : 97.0 (94.3– 99.7),4 ( 519 ),High,TN: 960 / FP: 30,TN: 941 / FP: 29,TN: 922 / FP: 28
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,12,Linezolid,"1,3,5%",Se: 68.9 (38.7– 99.1),4 ( 31 ),Low,TP: 7 / FN: 3,TP: 21 / FN: 9,TP: 34 / FN: 16
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,13,,,Sp : 99.8 (99.6– 100),6 ( 1093 ),High,TN: 990 / FP: 0,TN: 970 / FP: 0,TN: 950 / FP: 0
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,14,Clofazimine,"1,3,5%",Se: 70.4 (34.6– 100),4 ( 36 ),Low,TP: 7 / FN: 3,TP: 21 / FN: 9,TP: 35 / FN: 15
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,15,,,Sp : 96.3 (93.2– 99.3),6 ( 789 ),High,TN: 950 / FP: 40,TN: 931 / FP: 39,TN: 912 / FP: 38
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,16,Amikacin,"5,10,15%",Se: 87.4 (74.5– 100),5 ( 115 ),Very low,TP: 44 / FN: 6,TP: 87 / FN: 13,TP: 131 / FN: 19
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,17,,,Sp : 99.0 (98.4– 99.6),8 ( 1003 ),Moderate,TN: 941 / FP: 9,TN: 891 / FP: 9,TN: 842 / FP: 8
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,18,Ethambutol,"10,30,50%",Se: 96.7 (95.0– 98.4),4 ( 431 ),Moderate,TP: 97 / FN: 3,TP: 291 / FN: 9,TP: 485 / FN: 15
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,19,,,Sp : 98.4 (96.1– 100),4 ( 123 ),Moderate,TN: 882 / FP: 18,TN: 686 / FP: 14,TN: 490 / FP: 10
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,20,Streptomycin,"10,30,50%",Se: 98.1 (96.1– 100),5 ( 493 ),High,TP: 98 / FN: 2,TP: 294 / FN: 6,TP: 490 / FN: 10
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.6.,21,,,Sp : 75.0 (59.5– 90.5),5 ( 250 ),Low,TN: 675 / FP: 225,TN: 525 / FP: 175,TN: 375 / FP: 125

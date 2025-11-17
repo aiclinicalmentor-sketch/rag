@@ -1,5 +1,5 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,unit,note
-WHO_TB_handbook_module4_treatment_2025,Table 2.5.2.,1,Regimen name,Three-letter drug abbreviations,Composition with full drug names,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.5.2.,2,BLMZ,9Bdq-Lzd-Mfx-PZA,Bedaquiline-linezolid-moxifloxacin-pyrazinamide,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.5.2.,3,BLLfxCZ,9Bdq-Lzd-Lfx-Cfz-PZA,Bedaquiline-linezolid-levofloxacin-clofazimine - pyrazinamide,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.5.2.,4,BDLLfxZ,9Bdq-Dlm-Lzd-Lfx-PZA,Bedaquiline-delamanid-linezolid-levofloxacin - pyrazinamide,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module4_treatment_2025,Table 2.5.2.,1,Regimen name,Three-letter drug abbreviations,Composition with full drug names
+WHO_TB_handbook_module4_treatment_2025,Table 2.5.2.,2,BLMZ,9Bdq-Lzd-Mfx-PZA,Bedaquiline-linezolid-moxifloxacin-pyrazinamide
+WHO_TB_handbook_module4_treatment_2025,Table 2.5.2.,3,BLLfxCZ,9Bdq-Lzd-Lfx-Cfz-PZA,Bedaquiline-linezolid-levofloxacin-clofazimine - pyrazinamide
+WHO_TB_handbook_module4_treatment_2025,Table 2.5.2.,4,BDLLfxZ,9Bdq-Dlm-Lzd-Lfx-PZA,Bedaquiline-delamanid-linezolid-levofloxacin - pyrazinamide

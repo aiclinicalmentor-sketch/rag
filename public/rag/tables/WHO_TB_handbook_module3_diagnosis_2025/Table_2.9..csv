@@ -1,7 +1,7 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,unit,note
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,1,Medicine,Abbreviation,Löwenstein–Jensen (µg/mL),Middlebrook 7H10 (µg/mL),Middlebrook 7H11 (µg/mL),BACTEC MGIT liquid culture ( µg /mL),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,2,Rifampicin,RIF,40.0,0.5,1.0,0.5 b,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,3,Isoniazid c,INH,0.2,0.2,0.2,0.1,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,4,Ethambutol d,EMB,2.0,5.0,7.5,5.0,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,5,Pyrazinamide e,PZA,–,–,–,100,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,6,Moxifloxacin,MFX (CC),1.0,0.5,0.5,0.25,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,1,Medicine,Abbreviation,Löwenstein–Jensen (µg/mL),Middlebrook 7H10 (µg/mL),Middlebrook 7H11 (µg/mL),BACTEC MGIT liquid culture ( µg /mL)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,2,Rifampicin,RIF,40.0,0.5,1.0,0.5 b
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,3,Isoniazid c,INH,0.2,0.2,0.2,0.1
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,4,Ethambutol d,EMB,2.0,5.0,7.5,5.0
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,5,Pyrazinamide e,PZA,–,–,–,100
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.9.,6,Moxifloxacin,MFX (CC),1.0,0.5,0.5,0.25

@@ -1,9 +1,9 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,unit,note
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,1,Purpose,,Detection of resistance to first-line and/or second-line TB drugs,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,2,Principle of action,,"DNA-based reverse hybridization, or line probe, assays",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,3,Complexity,Reagents,Reagents are available within standardized kits and may have temperature requirements for storage,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,4,,Skills,"Advanced technical skills (i.e. multiple sample or reagent handling steps, precision pipetting, molecular workflows may be required)",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,5,,Pipetting,Multiple precision pipetting steps required by the procedure,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,6,,Testing procedure,May require multiple specimen treatment steps before transferring the specimen into a sealed container for multistep testing Manual or automated DNA extraction Manual or automated real-time PCR Instrument-based reverse hybridization,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,7,Type of test result reporting,,Manual,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,8,Setting of use,,Molecular laboratory (special infrastructure and separate spaces for different parts of the testing procedure are required),,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,1,Purpose,,Detection of resistance to first-line and/or second-line TB drugs
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,2,Principle of action,,"DNA-based reverse hybridization, or line probe, assays"
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,3,Complexity,Reagents,Reagents are available within standardized kits and may have temperature requirements for storage
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,4,,Skills,"Advanced technical skills (i.e. multiple sample or reagent handling steps, precision pipetting, molecular workflows may be required)"
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,5,,Pipetting,Multiple precision pipetting steps required by the procedure
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,6,,Testing procedure,May require multiple specimen treatment steps before transferring the specimen into a sealed container for multistep testing Manual or automated DNA extraction Manual or automated real-time PCR Instrument-based reverse hybridization
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,7,Type of test result reporting,,Manual
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.7.,8,Setting of use,,Molecular laboratory (special infrastructure and separate spaces for different parts of the testing procedure are required)

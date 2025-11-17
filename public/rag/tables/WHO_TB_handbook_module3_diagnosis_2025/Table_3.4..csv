@@ -1,10 +1,10 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,unit,note
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,1,Intervention,Test accuracy % (95% CI),Studies (participants),Certainty of evidence,1% prevalence,5% prevalence,10% prevalence,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,2,LC- aNAAT,Se: 93 (88– 96),3 ( 384 ),High,TP: 9 / FN: 1,TP: 47 / FN: 3,TP: 93 / FN: 7,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,3,,Sp : 98 (94– 99),3 ( 953 ),Moderate,TN: 973 / FP: 17,TN: 934 / FP: 16,TN: 885 / FP: 15,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,4,Targeted NGS (MFX),Se: 96 (92– 99),6 ( 652 ),Moderate,TP: 10 / FN: 0,TP: 48 / FN: 2,TP: 96 / FN: 4,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,5,,Sp : 96 (93– 99),8 ( 921 ),Moderate,TN: 950 / FP: 40,TN: 912 / FP: 38,TN: 864 / FP: 36,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,6,Targeted NGS (LFX),Se: 94 (88– 99),6 ( 654 ),Low,TP: 9 / FN: 1,TP: 47 / FN: 3,TP: 94 / FN: 6,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,7,,Sp : 96 (93– 99),7 ( 913 ),Moderate,TN: 950 / FP: 40,TN: 912 / FP: 38,TN: 864 / FP: 36,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,8,SL- LPA by direct testing of SS+ samples,Se: 86 (75– 93),9 ( 519 ),Moderate,TP: 9 / FN: 1,TP: 43 / FN: 7,TP: 86 / FN: 14,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,9,,Sp : 99 (97– 99),9 ( 1252 ),High,TN: 980 / FP: 10,TN: 937 / FP: 13,TN: 887 / FP: 13,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,1,Intervention,Test accuracy % (95% CI),Studies (participants),Certainty of evidence,1% prevalence,5% prevalence,10% prevalence
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,2,LC- aNAAT,Se: 93 (88– 96),3 ( 384 ),High,TP: 9 / FN: 1,TP: 47 / FN: 3,TP: 93 / FN: 7
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,3,,Sp : 98 (94– 99),3 ( 953 ),Moderate,TN: 973 / FP: 17,TN: 934 / FP: 16,TN: 885 / FP: 15
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,4,Targeted NGS (MFX),Se: 96 (92– 99),6 ( 652 ),Moderate,TP: 10 / FN: 0,TP: 48 / FN: 2,TP: 96 / FN: 4
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,5,,Sp : 96 (93– 99),8 ( 921 ),Moderate,TN: 950 / FP: 40,TN: 912 / FP: 38,TN: 864 / FP: 36
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,6,Targeted NGS (LFX),Se: 94 (88– 99),6 ( 654 ),Low,TP: 9 / FN: 1,TP: 47 / FN: 3,TP: 94 / FN: 6
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,7,,Sp : 96 (93– 99),7 ( 913 ),Moderate,TN: 950 / FP: 40,TN: 912 / FP: 38,TN: 864 / FP: 36
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,8,SL- LPA by direct testing of SS+ samples,Se: 86 (75– 93),9 ( 519 ),Moderate,TP: 9 / FN: 1,TP: 43 / FN: 7,TP: 86 / FN: 14
+WHO_TB_handbook_module3_diagnosis_2025,Table 3.4.,9,,Sp : 99 (97– 99),9 ( 1252 ),High,TN: 980 / FP: 10,TN: 937 / FP: 13,TN: 887 / FP: 13

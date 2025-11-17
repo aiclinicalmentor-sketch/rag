@@ -1,5 +1,5 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI,ColumnJ,ColumnK,unit,note
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.8.,1,Targeted NGS end-to-end solution,RIF,INH,PZA,EMB,FQ,BDQ,LZD,CFZ,AMK,STR,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.8.,2,Deeplex Myc -TB ( GenoScreen ),,,,,,,,,,,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.8.,3,AmPORE -TB (ONT),,,,,,,,,,,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.8.,4,TBSeq ( Shengting Medical Technology Co Ltd),,,,,,,,,,,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI,ColumnJ,ColumnK
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.8.,1,Targeted NGS end-to-end solution,RIF,INH,PZA,EMB,FQ,BDQ,LZD,CFZ,AMK,STR
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.8.,2,Deeplex Myc -TB ( GenoScreen ),,,,,,,,,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.8.,3,AmPORE -TB (ONT),,,,,,,,,,
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.8.,4,TBSeq ( Shengting Medical Technology Co Ltd),,,,,,,,,,

@@ -1,27 +1,27 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,unit,note
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,1,Purpose of classes,Technology class,Included products a,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,2,Initial tests for TB diagnosis with drug - resistance detection,NEW: Low-complexity automated nucleic acid amplification tests (LC- aNAATs ) for detection of TB and resistance to RIF,Xpert® MTB/RIF Ultra (Cepheid),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,3,,,Truenat ® MTB Plus and Truenat MTB-RIF Dx ( Molbio ),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,4,,"Moderate-complexity automated nucleic acid amplification tests (MC- aNAATs ) for detection of TB, and resistance to RIF and INH",RealTi m e® MTB and RealTi m e MTB RIF/INH (Abbott),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,5,,,BD MAX™ MDR-TB (Becton Dickinson),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,6,,,cobas ® MTB and cobas MTB-RIF/INH (Roche),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,7,,,FluoroType ® MTB and FluoroType MTBDR (Bruker-Hain),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,8,Initial tests for TB diagnosis without drug - resistance detection,NEW: Low-complexity manual nucleic acid amplification tests (LC- mNAATs ) for detection of TB,Loopamp TM MTBC Detection Kit (TB-LAMP) (Eiken Chemical),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,9,,Antigen detection in a lateral flow format (biomarker-based detection; LF-LAM) for detection of TB,Determine™ TB LAM Ag (Alere/Abbott),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,10,Follow-on tests for detection of TB drug resistance,Low-complexity automated nucleic acid amplification tests (LC- aNAATs ) for detection of resistance to INH and second-line anti-TB agents,Xpert® MTB/XDR (Cepheid),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,11,,Line probe assays (LPAs) – for detection of TB drug resistance,GenoType ® MTBDRplus v2 (Bruker-Hain),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,12,,,GenoType MTBDRsl (Bruker-Hain),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,13,,,Genoscholar ™ NTM+MDRTB II ( Nipro ),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,14,,High complexity reverse hybridization based NAATs (HC- rhNAAT ),Genoscholar PZA-TB II ( Nipro ),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,15,,Targeted next-generation sequencing (NGS) for detection of resistance to first-line and second-line anti-TB agents b,Deeplex ® Myc -TB ( GenoScreen /Illumina),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,16,,,**UPDATED AmPORE -TB® (Oxford Nanopore Technologies),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,17,,,TBseq ® ( Shengting Medical Technology Co),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,18,Tests for TB infection,Mycobacterium tuberculosis ( Mtb ) antigen-based skin tests (TBSTs),Diaskintest ® ( Generium ),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,19,,,SIILTIBCY® (Serum Institute of India),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,20,,,C-TST (Anhui Zhifei Longcom,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,21,,Interferon-gamma release assays (IGRAs),QuantiFERON-TB® Gold Plus (QFT-Plus) (QIAGEN),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,22,,,T-SPOT®.TB (T-Spot) (Oxford Immunotec ) Revvity ),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,23,,,TB-IGRA ( Wantai BioPharm ),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,24,,,**NEW STANDARD E TB-Feron (ELISA) (SD Biosensor),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,25,,,**NEW LIAISON® QFT-PLUS (CLIA) (QIAGEN/ Diasorin ),,
-WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,26,,Tuberculin skin tests,Tuberculin purified protein derivative (PPD) products,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,1,Purpose of classes,Technology class,Included products a
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,2,Initial tests for TB diagnosis with drug - resistance detection,NEW: Low-complexity automated nucleic acid amplification tests (LC- aNAATs ) for detection of TB and resistance to RIF,Xpert® MTB/RIF Ultra (Cepheid)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,3,,,Truenat ® MTB Plus and Truenat MTB-RIF Dx ( Molbio )
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,4,,"Moderate-complexity automated nucleic acid amplification tests (MC- aNAATs ) for detection of TB, and resistance to RIF and INH",RealTi m e® MTB and RealTi m e MTB RIF/INH (Abbott)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,5,,,BD MAX™ MDR-TB (Becton Dickinson)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,6,,,cobas ® MTB and cobas MTB-RIF/INH (Roche)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,7,,,FluoroType ® MTB and FluoroType MTBDR (Bruker-Hain)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,8,Initial tests for TB diagnosis without drug - resistance detection,NEW: Low-complexity manual nucleic acid amplification tests (LC- mNAATs ) for detection of TB,Loopamp TM MTBC Detection Kit (TB-LAMP) (Eiken Chemical)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,9,,Antigen detection in a lateral flow format (biomarker-based detection; LF-LAM) for detection of TB,Determine™ TB LAM Ag (Alere/Abbott)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,10,Follow-on tests for detection of TB drug resistance,Low-complexity automated nucleic acid amplification tests (LC- aNAATs ) for detection of resistance to INH and second-line anti-TB agents,Xpert® MTB/XDR (Cepheid)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,11,,Line probe assays (LPAs) – for detection of TB drug resistance,GenoType ® MTBDRplus v2 (Bruker-Hain)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,12,,,GenoType MTBDRsl (Bruker-Hain)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,13,,,Genoscholar ™ NTM+MDRTB II ( Nipro )
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,14,,High complexity reverse hybridization based NAATs (HC- rhNAAT ),Genoscholar PZA-TB II ( Nipro )
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,15,,Targeted next-generation sequencing (NGS) for detection of resistance to first-line and second-line anti-TB agents b,Deeplex ® Myc -TB ( GenoScreen /Illumina)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,16,,,**UPDATED AmPORE -TB® (Oxford Nanopore Technologies)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,17,,,TBseq ® ( Shengting Medical Technology Co)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,18,Tests for TB infection,Mycobacterium tuberculosis ( Mtb ) antigen-based skin tests (TBSTs),Diaskintest ® ( Generium )
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,19,,,SIILTIBCY® (Serum Institute of India)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,20,,,C-TST (Anhui Zhifei Longcom
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,21,,Interferon-gamma release assays (IGRAs),QuantiFERON-TB® Gold Plus (QFT-Plus) (QIAGEN)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,22,,,T-SPOT®.TB (T-Spot) (Oxford Immunotec ) Revvity )
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,23,,,TB-IGRA ( Wantai BioPharm )
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,24,,,**NEW STANDARD E TB-Feron (ELISA) (SD Biosensor)
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,25,,,**NEW LIAISON® QFT-PLUS (CLIA) (QIAGEN/ Diasorin )
+WHO_TB_handbook_module3_diagnosis_2025,Table 2.1.,26,,Tuberculin skin tests,Tuberculin purified protein derivative (PPD) products

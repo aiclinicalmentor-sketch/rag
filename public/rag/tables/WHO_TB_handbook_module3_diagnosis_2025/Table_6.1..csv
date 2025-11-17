@@ -1,12 +1,12 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,unit,note
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,1,Drug,Targeted NGS result,Is phenotypic DST to a specific drug required?,Action: treatment modification,,
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,2,RIF,Resistant,No,"Change to MDR/RR-TB regimen, taking into account any resistances detected to other medicines – see Algorithm 2a",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,3,,Susceptible,No,"Continue with the first-line regimen, including RIF if no other resistance is detected; otherwise, use an individualized regimen",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,4,INH,Resistant,No,"Change to an Hr -TB regimen if no other resistance is detected If resistant to FQs or PZA is detected, change to an individualized treatment",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,5,,Susceptible,Yes,"Continue with the first-line regimen if no other resistance is detected; otherwise, individualize the regimen",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,6,EMB,Resistant,No,"If resistance is detected during the continuation phase, continue RH If resistance is detected during the intensive phase, clinically assess (considering other results) and closely monitor",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,7,,Susceptible,No,"Continue with the first-line regimen if no other resistance is detected; otherwise, individualize the regimen",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,8,PZA,Resistant,No,"If resistance is detected during the continuation phase, continue RH If resistance is detected during the intensive phase, clinically assess (considering other results) and closely monitor",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,9,,Susceptible,No,"Continue with the first-line regimen if no other resistance is detected; otherwise, individualize the regimen",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,10,FQ,Resistant,No,"If the person is on an FQ- containing 4-month regimen (e.g. HPMZ), change to HRZE if no other resistance is detected; otherwise, individualize the regimen If the person is on an Hr -TB regimen, discontinue the FQ and individualize treatment based on clinical assessment",,
-WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,11,,Susceptible,No,FQs should be used only when appropriate (4-month first-line regimen or Hr -TB regimen),,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,1,Drug,Targeted NGS result,Is phenotypic DST to a specific drug required?,Action: treatment modification
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,2,RIF,Resistant,No,"Change to MDR/RR-TB regimen, taking into account any resistances detected to other medicines – see Algorithm 2a"
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,3,,Susceptible,No,"Continue with the first-line regimen, including RIF if no other resistance is detected; otherwise, use an individualized regimen"
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,4,INH,Resistant,No,"Change to an Hr -TB regimen if no other resistance is detected If resistant to FQs or PZA is detected, change to an individualized treatment"
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,5,,Susceptible,Yes,"Continue with the first-line regimen if no other resistance is detected; otherwise, individualize the regimen"
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,6,EMB,Resistant,No,"If resistance is detected during the continuation phase, continue RH If resistance is detected during the intensive phase, clinically assess (considering other results) and closely monitor"
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,7,,Susceptible,No,"Continue with the first-line regimen if no other resistance is detected; otherwise, individualize the regimen"
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,8,PZA,Resistant,No,"If resistance is detected during the continuation phase, continue RH If resistance is detected during the intensive phase, clinically assess (considering other results) and closely monitor"
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,9,,Susceptible,No,"Continue with the first-line regimen if no other resistance is detected; otherwise, individualize the regimen"
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,10,FQ,Resistant,No,"If the person is on an FQ- containing 4-month regimen (e.g. HPMZ), change to HRZE if no other resistance is detected; otherwise, individualize the regimen If the person is on an Hr -TB regimen, discontinue the FQ and individualize treatment based on clinical assessment"
+WHO_TB_handbook_module3_diagnosis_2025,Table 6.1.,11,,Susceptible,No,FQs should be used only when appropriate (4-month first-line regimen or Hr -TB regimen)

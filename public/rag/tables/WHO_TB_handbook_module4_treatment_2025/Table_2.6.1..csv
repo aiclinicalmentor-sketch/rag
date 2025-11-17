@@ -1,14 +1,14 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,unit,note
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,1,Groups and steps,Medicine and abbreviation,,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,2,Group A: Include all three medicines,Levofloxacin or moxifloxacin,Lfx Mfx,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,3,,"Bedaquiline [b, c]",Bdq,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,4,,Linezolid [d],Lzd,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,5,Group B: Add one or both medicines,Clofazimine,Cfz,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,6,,Cycloserine or terizidone,Cs Trd,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,7,"Group C: Add to complete the regimen, and when medicines from Groups A and B cannot be used",Ethambutol,E,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,8,,"Delamanid [c, e]",Dlm,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,9,,Pyrazinamide [f],Z,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,10,,Imipenem– cilastatin or meropenem [g],Ipm – Cln Mpm,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,11,,Amikacin or streptomycin [h],Am S,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,12,,Ethionamide or prothionamide [ i ],Eto Pto,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,13,,P - aminosalicylic acid [ i ],PAS,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,1,Groups and steps,Medicine and abbreviation,
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,2,Group A: Include all three medicines,Levofloxacin or moxifloxacin,Lfx Mfx
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,3,,"Bedaquiline [b, c]",Bdq
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,4,,Linezolid [d],Lzd
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,5,Group B: Add one or both medicines,Clofazimine,Cfz
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,6,,Cycloserine or terizidone,Cs Trd
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,7,"Group C: Add to complete the regimen, and when medicines from Groups A and B cannot be used",Ethambutol,E
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,8,,"Delamanid [c, e]",Dlm
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,9,,Pyrazinamide [f],Z
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,10,,Imipenem– cilastatin or meropenem [g],Ipm – Cln Mpm
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,11,,Amikacin or streptomycin [h],Am S
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,12,,Ethionamide or prothionamide [ i ],Eto Pto
+WHO_TB_handbook_module4_treatment_2025,Table 2.6.1.,13,,P - aminosalicylic acid [ i ],PAS

@@ -1,14 +1,14 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,unit,note
-WHO_TB_handbook_module4_treatment_2025,Table 3.,1,About the treatment,The treatment setting,"Where will the treatment start? If at a hospital, estimate the approximate length of stay and other important things the patient should know about when being in the hospital. If at home, involve the treatment supporter (preferably a community health volunteer) and discuss any changes in the home environment, if needed.",,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,2,,Length of treatment,Explain how it may differ according to the regimen selected – often 4–6 months for TB without drug resistance.,,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,3,,Adherence to treatment,Point out the complications of interrupting or not completing treatment.,,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,4,About the pharmacological treatment,Medicines,"Give basic information about different anti-TB medicines used in the treatment regimen, formulations (e.g. tablet or capsule, single dose or fixed-dose combination), preferably by showing each medicine and formulation.",,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,5,,Side-effects,Give details about potential side-effects (including those that can be serious) and the need and how to report these immediately.,,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,6,,Monitoring,"Explain requirements for treatment monitoring by clinical examinations, radiology, smear, culture or other tests for early detection of side-effects.",,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,7,Follow-up plan,Routine,Outline the process of routine follow-up and how to make an appointment when needed.,,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,8,,Emergency,Explain how patients can contact their health care providers urgently. Explain what to do in case of an emergency (such as severe shortness of breath).,,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,9,,Referral to other medical services,Show how to make a referral plan and/or organize integrated care at the early stage for comorbid medical (including mental health or substance use) conditions.,,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,10,Infection control,Principles of transmission,"In transmission of TB, when is the highest risk of infectivity?",,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,11,,Household infection control measures,Note precautions to be taken at home. Note precautions to be taken in the community.,,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,12,Support mechanisms,Social support and social protection options,"Draw attention to existing services and laws in the country, including disability grants etc.",,
-WHO_TB_handbook_module4_treatment_2025,Table 3.,13,Palliative and end-of-life care,,"Describe services, laws, mechanisms etc.",,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module4_treatment_2025,Table 3.,1,About the treatment,The treatment setting,"Where will the treatment start? If at a hospital, estimate the approximate length of stay and other important things the patient should know about when being in the hospital. If at home, involve the treatment supporter (preferably a community health volunteer) and discuss any changes in the home environment, if needed."
+WHO_TB_handbook_module4_treatment_2025,Table 3.,2,,Length of treatment,Explain how it may differ according to the regimen selected – often 4–6 months for TB without drug resistance.
+WHO_TB_handbook_module4_treatment_2025,Table 3.,3,,Adherence to treatment,Point out the complications of interrupting or not completing treatment.
+WHO_TB_handbook_module4_treatment_2025,Table 3.,4,About the pharmacological treatment,Medicines,"Give basic information about different anti-TB medicines used in the treatment regimen, formulations (e.g. tablet or capsule, single dose or fixed-dose combination), preferably by showing each medicine and formulation."
+WHO_TB_handbook_module4_treatment_2025,Table 3.,5,,Side-effects,Give details about potential side-effects (including those that can be serious) and the need and how to report these immediately.
+WHO_TB_handbook_module4_treatment_2025,Table 3.,6,,Monitoring,"Explain requirements for treatment monitoring by clinical examinations, radiology, smear, culture or other tests for early detection of side-effects."
+WHO_TB_handbook_module4_treatment_2025,Table 3.,7,Follow-up plan,Routine,Outline the process of routine follow-up and how to make an appointment when needed.
+WHO_TB_handbook_module4_treatment_2025,Table 3.,8,,Emergency,Explain how patients can contact their health care providers urgently. Explain what to do in case of an emergency (such as severe shortness of breath).
+WHO_TB_handbook_module4_treatment_2025,Table 3.,9,,Referral to other medical services,Show how to make a referral plan and/or organize integrated care at the early stage for comorbid medical (including mental health or substance use) conditions.
+WHO_TB_handbook_module4_treatment_2025,Table 3.,10,Infection control,Principles of transmission,"In transmission of TB, when is the highest risk of infectivity?"
+WHO_TB_handbook_module4_treatment_2025,Table 3.,11,,Household infection control measures,Note precautions to be taken at home. Note precautions to be taken in the community.
+WHO_TB_handbook_module4_treatment_2025,Table 3.,12,Support mechanisms,Social support and social protection options,"Draw attention to existing services and laws in the country, including disability grants etc."
+WHO_TB_handbook_module4_treatment_2025,Table 3.,13,Palliative and end-of-life care,,"Describe services, laws, mechanisms etc."

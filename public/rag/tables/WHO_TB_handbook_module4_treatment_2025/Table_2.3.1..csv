@@ -1,7 +1,7 @@
-doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI,unit,note
-WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,1,Regimen,MDR/RR-TB FQ-susceptible,MDR/RR-TB FQ susceptibility not known,Pre-XDR-TB,XDR-TB,Extensive pulmonary TB disease,Extra-pulmonary TB,Age below 14,Pregnant & breastfeeding woman,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,2,6-month regimens: BPaLM / BPaL,BPaLM,BPaLM,BPaL,No,Yes,"Yes ( except for CNS TB, osteoarticular TB & disseminated TB with multi-organ involvement)",No,No,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,3,6-month regimens: BDLLfxC / BDLLfx /BDLC,BDLLfx,BDLLfxC,BDLC,No,Yes,"Yes ( except for CNS TB, osteoarticular TB & disseminated TB with multi-organ involvement)",Yes,Yes,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,4,"9-month regimens : BLMZ, BLLfxCZ , BDLLfxZ",Yes,No,No,No,Yes,"Yes ( except for CNS TB, osteoarticular TB & disseminated TB with multi-organ involvement)",Yes,Yes,,
-WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,5,9-month regimens: 4-6 Bdq (6m)- Lfx / Mfx - Cfz -Z-E- Hh -Eto or Lzd (2m) / 5 Lfx / Mfx - Cfz -Z-E),Yes,No,No,No,No,Yes,Yes,Yes (Only Lzd variation: 4–6 Bdq (6m) - Lfx / Mfx - Cfz -Z-E- Hh - Lzd (2m) / 5 Lfx / Mfx - Cfz -Z-E)),,
-WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,6,Individualized 18-month regimen ( should not be used unless shorter regimen options are not available),No,No,No,Yes,No,No,No,No,,
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI
+WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,1,Regimen,MDR/RR-TB FQ-susceptible,MDR/RR-TB FQ susceptibility not known,Pre-XDR-TB,XDR-TB,Extensive pulmonary TB disease,Extra-pulmonary TB,Age below 14,Pregnant & breastfeeding woman
+WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,2,6-month regimens: BPaLM / BPaL,BPaLM,BPaLM,BPaL,No,Yes,"Yes ( except for CNS TB, osteoarticular TB & disseminated TB with multi-organ involvement)",No,No
+WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,3,6-month regimens: BDLLfxC / BDLLfx /BDLC,BDLLfx,BDLLfxC,BDLC,No,Yes,"Yes ( except for CNS TB, osteoarticular TB & disseminated TB with multi-organ involvement)",Yes,Yes
+WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,4,"9-month regimens : BLMZ, BLLfxCZ , BDLLfxZ",Yes,No,No,No,Yes,"Yes ( except for CNS TB, osteoarticular TB & disseminated TB with multi-organ involvement)",Yes,Yes
+WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,5,9-month regimens: 4-6 Bdq (6m)- Lfx / Mfx - Cfz -Z-E- Hh -Eto or Lzd (2m) / 5 Lfx / Mfx - Cfz -Z-E),Yes,No,No,No,No,Yes,Yes,Yes (Only Lzd variation: 4–6 Bdq (6m) - Lfx / Mfx - Cfz -Z-E- Hh - Lzd (2m) / 5 Lfx / Mfx - Cfz -Z-E))
+WHO_TB_handbook_module4_treatment_2025,Table 2.3.1.,6,Individualized 18-month regimen ( should not be used unless shorter regimen options are not available),No,No,No,Yes,No,No,No,No
