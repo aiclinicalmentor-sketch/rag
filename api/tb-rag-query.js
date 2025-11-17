@@ -466,8 +466,8 @@ function detectTableSubtype(chunk, logicalRows, headerRow) {
 
   // 5) Drug-drug interaction tables
   if (
-    /interaction|drug-drug|drug drug|qt|contraindication/.test(caption) ||
-    headers.some((h) => /interaction|effect|recommendation/.test(h))
+    /interaction|drug-drug|drug drug|ddi|qt|contraindication/.test(caption) ||
+    headers.some((h) => /interaction|effect|recommendation|ddi/.test(h))
   ) {
     return "interaction";
   }
