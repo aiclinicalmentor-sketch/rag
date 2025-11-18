@@ -17,12 +17,63 @@ function normalize(vec) {
   return vec.map((v) => v / norm);
 }
 
-function loadRagStore() {
+async function loadEmbeddings(ragDir) {
+  const embeddingsJsonPath = path.join(ragDir, "embeddings.json");
+  const embeddingsNpyPath = path.join(ragDir, "embeddings.npy");
+
+  if (fs.existsSync(embeddingsJsonPath)) {
+    const raw = fs.readFileSync(embeddingsJsonPath, "utf-8");
+    const trimmed = raw.trimStart();
+    const isLfsPointer = trimmed.startsWith(
+      "version https://git-lfs.github.com/spec/v1"
+    );
+
+    if (!isLfsPointer) {
+      try {
+        return JSON.parse(raw);
+      } catch (err) {
+        console.warn(
+          "Failed to parse embeddings.json; will try .npy fallback",
+          err
+        );
+      }
+    } else {
+      console.warn(
+        "embeddings.json appears to be a Git LFS pointer; falling back to embeddings.npy"
+      );
+    }
+  }
+
+  if (fs.existsSync(embeddingsNpyPath)) {
+    const { default: Npyjs } = require("npyjs");
+    const npy = new Npyjs();
+    const buf = fs.readFileSync(embeddingsNpyPath);
+    const ab = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+    const arr = await npy.load(ab);
+    const [rows, cols] = arr.shape || [];
+    if (!rows || !cols) {
+      throw new Error("Invalid shape from embeddings.npy");
+    }
+
+    const embeddings = [];
+    for (let i = 0; i < rows; i++) {
+      const start = i * cols;
+      const end = start + cols;
+      embeddings.push(Array.from(arr.data.slice(start, end)));
+    }
+    return embeddings;
+  }
+
+  throw new Error(
+    `No embeddings found. Expected at ${embeddingsJsonPath} (JSON) or ${embeddingsNpyPath} (.npy).`
+  );
+}
+
+async function loadRagStore() {
   if (RAG_STORE) return RAG_STORE;
 
   const ragDir = path.join(process.cwd(), "public", "rag");
   const chunksPath = path.join(ragDir, "chunks.jsonl");
-  const embeddingsPath = path.join(ragDir, "embeddings.json");
 
   const chunksLines = fs
     .readFileSync(chunksPath, "utf-8")
@@ -31,7 +82,7 @@ function loadRagStore() {
 
   const chunks = chunksLines.map((line) => JSON.parse(line));
 
-  const rawEmbeddings = JSON.parse(fs.readFileSync(embeddingsPath, "utf-8"));
+  const rawEmbeddings = await loadEmbeddings(ragDir);
   const embeddings = rawEmbeddings.map((vec) => normalize(vec));
 
   if (embeddings.length !== chunks.length) {
@@ -1543,7 +1594,7 @@ module.exports = async (req, res) => {
 
     finalTopK = Math.max(1, Math.min(finalTopK, 8));
 
-    const { chunks, embeddings } = loadRagStore();
+    const { chunks, embeddings } = await loadRagStore();
 
     if (!embeddings.length || !chunks.length) {
       throw new Error("RAG store is empty or failed to load.");
