@@ -4,6 +4,3 @@ node_modules/
 # Common local environment overrides
 .env
 .env.local
-
-# Large generated embedding data
-public/rag/embeddings.json
