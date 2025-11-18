@@ -1,0 +1,7 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.4.,1,Test,Acceptable specimen types,Rifampicin resistance detection
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.4.,2,Xpert MTB/RIF,Sputum Gastric fluid NPA Stool Cerebrospinal fluid (CSF) Lymph node aspirate or biopsy Pleural fluid Peritoneal fluid Pericardial fluid Synovial fluid Urine Blood [a],Yes
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.4.,3,Xpert Ultra,Sputum Gastric fluid NPA Stool CSF Lymph node aspirate or biopsy,Yes
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.4.,4,"Truenat MTB and MTB Plus (Molbio Diagnostics, Goa, India)",Sputum,Yes
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.4.,5,TB-LAMP,Sputum,No
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.4.,6,LF-LAM,Urine [b],No

@@ -1,0 +1,11 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.10.,1,Treatment phase of interruption,Details of interruption,Management
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.10.,2,Intensive phase: applies to 4- and 6-month regimens,Interruption <14 days,Continue treatment and complete all intensive phase doses
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.10.,3,Intensive phase: applies to 4- and 6-month regimens,Interruption ≥ 14 days,Restart intensive phase
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.10.,4,Continuation phase (4-month 2HRZ(E)/2HR regimen),Completed ≥80% of doses within 8 weeks,Further treatment not necessary
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.10.,5,Continuation phase (4-month 2HRZ(E)/2HR regimen),Completed <80% of doses and cumulative interruption <1 month,Complete remaining doses of treatment
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.10.,6,Continuation phase (4-month 2HRZ(E)/2HR regimen),Completed <80% of doses and cumulative interruption >1 month,Restart treatment from beginning of intensive phase
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.10.,7,Continuation phase (6-month 2HRZE/4HR regimen) and bacteriologically negative at initiation,Completed ≥80% of doses within 16 weeks,Further treatment not necessary
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.10.,8,Continuation phase (6-month 2HRZE/4HR regimen) and bacteriologically positive at initiation,Completed ≥80% of doses within 16 weeks,"Complete remaining doses of treatment If consecutive lapse is >2 months, use clinical judgement"
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.10.,9,Continuation phase (6-month 2HRZE/4 HR regimen ),Completed <80% of doses and cumulative interruption <2 months,Complete remaining doses of treatment
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.10.,10,Continuation phase (6-month 2HRZE/4HR regimen),Completed <80% of doses and cumulative interruption ≥2 months,"Restart treatment from beginning of intensive phase, particularly if interruption was consecutive"

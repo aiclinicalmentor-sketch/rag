@@ -1,0 +1,10 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.1.,1,Age,Type of TB,Intensive phase,Continuation phase
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.1.,2,Infants aged <3 months or weighing <3 kg,PTB of any severity,2HRZ or 2HRZE [b],4HR
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.1.,3,Children and adolescents aged 3 months to <12 years,Non-severe PTB,2HRZ or 2HRZE [b],2HR [c]
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.1.,4,Children and adolescents aged 3 months to <12 years,Severe PTB,2HRZE [c],4HR
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.1.,5,Adolescents aged 12–<16 years,Non-severe PTB,2HRZ or 2HRZE [b],2HR
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.1.,6,Adolescents aged 12–<16 years,Severe PTB,2HRZE [d],4HR
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.1.,7,Adolescents aged 12–<16 years,PTB of any severity,2HPZM,2HPM
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.1.,8,Adolescents aged 16–<20 years,PTB of any severity,2HRZE [e],4HR
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.1.,9,Adolescents aged 16–<20 years,PTB of any severity,2HPZM [f],2HPM

@@ -1,0 +1,11 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.2.,1,Specimen type (population),Sensitivity,Specificity,Certainty of evidence
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.2.,2,Sputum Xpert MTB/RIF,0.65,0.99,Moderate
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.2.,3,Gastric aspirate Xpert MTB/RIF,0.73,0.98,Very low (se) to low (sp)
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.2.,4,NPA Xpert MTB/RIF,0.46,1.00,Moderate (se) to high (sp)
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.2.,5,Stool Xpert MTB/RIF,0.61,0.98,Low (se) to moderate (sp)
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.2.,6,Stool (HIV-positive) Xpert MTB/RIF,0.70,0.98,Low (se) to high (sp)
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.2.,7,Sputum Xpert Ultra,0.73,0.97,Low (se) to high (sp)
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.2.,8,Gastric aspirate Xpert Ultra,0.64,0.95,Moderate
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.2.,9,NPA Xpert Ultra,0.46,0.98,Very low (se) to low (sp)
+WHO_TB_handbook_module5_pediatrics_2022,Table 4.2.,10,Stool Xpert Ultra,0.53,0.98,Moderate

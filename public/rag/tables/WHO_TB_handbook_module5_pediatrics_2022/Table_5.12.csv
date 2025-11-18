@@ -1,0 +1,5 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.12,1,Fluoroquinolone susceptibility,Regimen a,Additional medicines
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.12,2,Fluoroquinolone-susceptible,Bdq–Lfx–Lzd–Cfz-(Cs),"Cs, Dlm , PAS, Eto [ b,c ] (E, Z) [d]"
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.12,3,Fluoroquinolone-resistant,Bdq–Lzd–Cfz–Cs– (Dlm) [e],"Dlm [e] , PAS, Eto [ b,c ] (E, Z) [d]"
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.12,4,Fluoroquinolone-resistant and bedaquiline (±clofazimine)-resistant,Lzd –Cs– Dlm [e] –E–Z [d],"Mpm / Clav , Eto [ b,c ] , PAS [c]"

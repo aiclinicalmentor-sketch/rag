@@ -1,0 +1,6 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.3,1,Medicine,Dose (mg/kg body weight),Range (mg/kg body weight)
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.3,2,Isoniazid (H),10,7–15 [a]
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.3,3,Rifampicin (R),15,10-20
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.3,4,Pyrazinamide (Z),35,30–40
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.3,5,Ethambutol (E),20,15–25

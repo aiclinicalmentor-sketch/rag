@@ -1,0 +1,5 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD
+WHO_TB_handbook_module5_pediatrics_2022,Table 7.1.,1,Age,"Preferred first-line regimen, including initiation while on TB treatment",Alternative first-line regimen,Special circumstances a
+WHO_TB_handbook_module5_pediatrics_2022,Table 7.1.,2,Neonates,AZT + 3TC + RAL b,AZT + 3TC + NVP,AZT + 3TC + LPV/r c
+WHO_TB_handbook_module5_pediatrics_2022,Table 7.1.,3,Children,ABC + 3TC + DTG d,ABC + 3TC + LPV/r TAF + 3TC (or FTC) + DTG e,ABC + 3TC + EFV (or NVP) ABC + 3TC + RAL f AZT + 3TC + EFV g (or NVP) AZT + 3TC + LPV/r (or RAL)
+WHO_TB_handbook_module5_pediatrics_2022,Table 7.1.,4,Adolescents,TDF + 3TC (or FTC) + DTG h,TDF + 3TC + EFV 400 mg i,TDF + 3TC (or FTC) + EFV 600 mg i AZT + 3TC + EFV 600 mg i TDF + 3TC (or FTC) + PI/r i TDF + 3TC (or FTC) + RAL TAF j + 3TC (or FTC) + DTG ABC + 3TC + DTG h

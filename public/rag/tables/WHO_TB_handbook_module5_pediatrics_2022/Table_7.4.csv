@@ -1,0 +1,6 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module5_pediatrics_2022,Table 7.4,1,Diagnostic accuracy compared with culture reference standard,Sensitivity,Specificity
+WHO_TB_handbook_module5_pediatrics_2022,Table 7.4,2,W4SS,61%,58%
+WHO_TB_handbook_module5_pediatrics_2022,Table 7.4,3,CRP (cut-off value >5 mg/L),70%,41%
+WHO_TB_handbook_module5_pediatrics_2022,Table 7.4,4,W4SS combined with CXR (any abnormality),75%,56%
+WHO_TB_handbook_module5_pediatrics_2022,Table 7.4,5,mWRDs,55%,99%

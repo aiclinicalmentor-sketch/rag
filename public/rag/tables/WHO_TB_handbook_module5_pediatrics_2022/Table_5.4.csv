@@ -1,0 +1,6 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.4,1,Medicine,Recommended dose range in the interim dosing strategy (mg/kg body weight),
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.4,2,Isoniazid (H),15–20 [a],
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.4,3,Rifampicin (R),22.5–30,
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.4,4,Pyrazinamide (Z),35–45,
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.4,5,Ethionamide (Eto),17.5–22.5,

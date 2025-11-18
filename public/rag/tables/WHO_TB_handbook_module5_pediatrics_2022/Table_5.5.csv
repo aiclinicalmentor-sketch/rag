@@ -1,0 +1,7 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.5,1,Weight (kg),Intensive phase: HRZ 50/75/150 mg,Intensive phase: E 100 mg [b],Continuation phase: HR 50/75 mg
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.5,2,4–<8,1 tablet,1 tablet,1 tablet
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.5,3,8–<12,2 tablets,2 tablets,2 tablets
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.5,4,12–<16,3 tablets,3 tablets,3 tablets
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.5,5,16–<25,4 tablets,4 tablets,4 tablets
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.5,6,≥25,Adult dosages recommended,Adult dosages recommended,Adult dosages recommended

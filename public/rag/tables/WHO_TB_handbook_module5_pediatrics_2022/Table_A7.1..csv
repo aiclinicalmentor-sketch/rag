@@ -1,0 +1,6 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module5_pediatrics_2022,Table A7.1.,1,Outcome,Measure,Timing
+WHO_TB_handbook_module5_pediatrics_2022,Table A7.1.,2,Neurodevelopmental,"Minimal: Ages and Stages Questionnaire (age range 0–5 years) a Optimal: Bailey Scale of Infant Development, 3rd edition (age range 1–42 months) b Mullen Scale Early Learning (age range 0–68 months) c","Post-acute: 6–9 months, 2 years, 4 years"
+WHO_TB_handbook_module5_pediatrics_2022,Table A7.1.,3,Neurocognitive,"Wechsler Intelligence Scales for Children (age range 6–16 years) d Kauffman Assessment Battery for Children, 2nd edition (age range 3–8 years) e",Post-acute: 6–9 months Long-term throughout schooling (2 and 5 years minimum)
+WHO_TB_handbook_module5_pediatrics_2022,Table A7.1.,4,Functional,Minimal: • Modified Rankin Scale (age range 1 year–adult) WHO Disability Assessment Schedule 2.0 (age range 12 years–adult) f Optimal: Vineland Adaptive Behaviour Scale (age range birth to adult) g,Post-acute: 6–9 months Long-term throughout schooling (2 and 5 years minimum)
+WHO_TB_handbook_module5_pediatrics_2022,Table A7.1.,5,Neurobehavioural,"Minimal: Strengths and Difficulties Questionnaire (age range 4–17 years) Child, parent, teachers forms",Post-acute: 6–9 months Long-term throughout schooling (2 and 5 years minimum)

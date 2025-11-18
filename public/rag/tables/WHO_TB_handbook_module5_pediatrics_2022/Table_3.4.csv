@@ -1,0 +1,7 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE
+WHO_TB_handbook_module5_pediatrics_2022,Table 3.4,1,Regimen,Total duration (months),Expected number of doses,80% of recommended doses,Extended time for treatment completion (days): original treatment duration +33% additional time
+WHO_TB_handbook_module5_pediatrics_2022,Table 3.4,2,6H (daily),6,182,146,239
+WHO_TB_handbook_module5_pediatrics_2022,Table 3.4,3,3HR (daily),3,84,68,120
+WHO_TB_handbook_module5_pediatrics_2022,Table 3.4,4,3HP (weekly),3,12,11 [a],120
+WHO_TB_handbook_module5_pediatrics_2022,Table 3.4,5,1HP (daily),1,28,23,38
+WHO_TB_handbook_module5_pediatrics_2022,Table 3.4,6,4R (daily),4,120,96,160

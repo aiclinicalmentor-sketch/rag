@@ -1,0 +1,6 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.16.,1,,Non-severe PTB,Severe PTB
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.16.,2,Clinical assessment and symptom/sign screen,"Yes If there are any residual symptoms, further investigations should be performed.",Yes
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.16.,3,Imaging (CXR),,Yes
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.16.,4,Lung function (spirometry),,Yes
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.16.,5,Health-related quality of life,,Yes

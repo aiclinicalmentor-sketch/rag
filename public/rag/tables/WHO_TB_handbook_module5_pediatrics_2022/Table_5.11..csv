@@ -1,0 +1,15 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,1,Group,Drug,Abbreviation
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,2,A,Levofloxacin or moxifloxacin,Lfx or Mfx (or M)
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,3,A,Bedaquiline,Bdq (or B)
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,4,A,Linezolid,Lzd (or L)
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,5,B,Clofazimine,Cfz
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,6,B,Cycloserine or terizidone,Cs or Trd
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,7,C,Ethambutol,E
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,8,C,Delamanid,Dlm
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,9,C,Pyrazinamide,Z
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,10,C,Imipenem-cilastatin in combination with clavulanic acid (amoxiclav),Ipm-Cln
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,11,C,Meropenem in combination with clavulanic acid (amoxiclav),Mpm
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,12,C,Amikacin or streptomycin [a],Am or S
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,13,C,Ethionamide or prothionamide,Eto or Pto
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.11.,14,C,P-aminosalicylic acid,PAS
