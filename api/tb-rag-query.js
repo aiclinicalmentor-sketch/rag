@@ -5,14 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const Papa = require("papaparse");
 
-/**
- * In-memory cache of per-module RAG stores.
- * Keys are module directory names under public/rag/, for example:
- *   "module1_prevention", "module2_screening", "module3_diagnosis",
- *   "module4_treatment", "module5_pediatrics", "module6_comorbidities".
- */
-const MODULE_STORE_CACHE = Object.create(null);
-
+let RAG_STORE = null;
 
 // ---------- Embedding + RAG store helpers ----------
 
@@ -76,19 +69,11 @@ async function loadEmbeddings(ragDir) {
   );
 }
 
-async function loadRagStoreForModule(moduleId) {
-  if (MODULE_STORE_CACHE[moduleId]) {
-    return MODULE_STORE_CACHE[moduleId];
-  }
+async function loadRagStore() {
+  if (RAG_STORE) return RAG_STORE;
 
-  const ragDir = path.join(process.cwd(), "public", "rag", moduleId);
+  const ragDir = path.join(process.cwd(), "public", "rag");
   const chunksPath = path.join(ragDir, "chunks.jsonl");
-
-  if (!fs.existsSync(chunksPath)) {
-    throw new Error(
-      `chunks.jsonl not found for module "${moduleId}". Expected at ${chunksPath}`
-    );
-  }
 
   const chunksLines = fs
     .readFileSync(chunksPath, "utf-8")
@@ -102,159 +87,16 @@ async function loadRagStoreForModule(moduleId) {
 
   if (embeddings.length !== chunks.length) {
     console.warn(
-      "WARNING: embeddings count != chunks count for module",
-      moduleId,
+      "WARNING: embeddings count != chunks count",
       embeddings.length,
       chunks.length
     );
   }
 
-  const store = { moduleId, chunks, embeddings };
-  MODULE_STORE_CACHE[moduleId] = store;
-  return store;
+  RAG_STORE = { chunks, embeddings };
+  return RAG_STORE;
 }
 
-/**
- * Decide which module directories to consult for this query,
- * based on high-level scope (module 1–6) and inferred intent flags.
- *
- * You should ensure that each returned moduleId corresponds to a directory
- * under public/rag/<moduleId>/ containing chunks.jsonl + embeddings.json/embeddings.npy.
- *
- * Example mapping used here:
- *   module1_prevention    → Module 1 (TB infection & TPT, prevention)
- *   module2_screening     → Module 2 (systematic screening)
- *   module3_diagnosis     → Module 3 (diagnosis of TB & DR-TB)
- *   module4_treatment     → Module 4 (treatment of TB & DR-TB)
- *   module5_pediatrics    → Module 5 (child & adolescent TB)
- *   module6_comorbidities → Module 6 (TB with comorbidities)
- */
-function pickCandidateModules(scope, intentFlags) {
-  const modules = new Set();
-  const s = scope ? String(scope).toLowerCase() : null;
-  const flags = Array.isArray(intentFlags) ? intentFlags : [];
-  const hasFlag = (name) => flags.includes(name);
-
-  const add = (id) => {
-    if (id) modules.add(id);
-  };
-
-  // Scope-driven base modules
-  if (s === "prevention") add("module1_prevention");
-  if (s === "screening") add("module2_screening");
-  if (s === "diagnosis") add("module3_diagnosis");
-  if (s === "treatment") add("module4_treatment");
-  if (s === "pediatrics") add("module5_pediatrics");
-  if (s === "comorbidities") add("module6_comorbidities");
-
-  // Intent-driven additions
-  if (hasFlag("diagnostic_workup")) {
-    add("module3_diagnosis");
-  }
-
-  if (
-    hasFlag("regimen_selection") ||
-    hasFlag("regimen_modification") ||
-    hasFlag("toxicity_management") ||
-    hasFlag("monitoring_schedule") ||
-    hasFlag("treatment_failure_or_reversion")
-  ) {
-    add("module4_treatment");
-  }
-
-  if (hasFlag("special_populations")) {
-    add("module5_pediatrics");
-  }
-
-  if (hasFlag("comorbidities")) {
-    add("module6_comorbidities");
-  }
-
-  // Cross-cutting behaviour: pediatric queries usually touch diagnosis + treatment.
-  if (s === "pediatrics") {
-    add("module3_diagnosis");
-    add("module4_treatment");
-  }
-
-  // Fallback: if no modules were inferred, load core clinical modules.
-  if (!modules.size) {
-    add("module3_diagnosis");
-    add("module4_treatment");
-  }
-
-  return Array.from(modules);
-}
-
-/**
- * Load and merge RAG stores from all candidate modules for this query.
- * Returns combined chunks + embeddings arrays plus logging metadata.
- */
-async function loadCombinedRagStore(scope, intentFlags, addLog) {
-  const requestedModules = pickCandidateModules(scope, intentFlags);
-  const combinedChunks = [];
-  const combinedEmbeddings = [];
-  const perModuleCounts = {};
-  const loadedModules = [];
-
-  for (const moduleId of requestedModules) {
-    try {
-      const store = await loadRagStoreForModule(moduleId);
-      combinedChunks.push(...store.chunks);
-      combinedEmbeddings.push(...store.embeddings);
-      perModuleCounts[moduleId] = {
-        chunks: store.chunks.length,
-        embeddings: store.embeddings.length
-      };
-      loadedModules.push(moduleId);
-    } catch (err) {
-      console.error(
-        "Failed to load RAG store for module",
-        moduleId,
-        err
-      );
-      if (typeof addLog === "function") {
-        addLog("module_load_error", {
-          module: moduleId,
-          error: String(err.message || err)
-        });
-      }
-    }
-  }
-
-  if (!combinedChunks.length || !combinedEmbeddings.length) {
-    throw new Error(
-      `Failed to load any RAG modules. Checked modules: ${requestedModules.join(
-        ", "
-      )}`
-    );
-  }
-
-  if (combinedEmbeddings.length !== combinedChunks.length) {
-    console.warn(
-      "WARNING: combined embeddings count != chunks count",
-      combinedEmbeddings.length,
-      combinedChunks.length
-    );
-  }
-
-  if (typeof addLog === "function") {
-    addLog("modules_loaded", {
-      requested_modules: requestedModules,
-      loaded_modules: loadedModules,
-      per_module_counts: perModuleCounts
-    });
-  }
-
-  return {
-    chunks: combinedChunks,
-    embeddings: combinedEmbeddings,
-    modulesLoaded: loadedModules,
-    perModuleCounts
-  };
-}
-
-
-// For normalized vectors, cosine similarity is just their dot product.
 // For normalized vectors, cosine similarity is just their dot product.
 function cosineSim(a, b) {
   const len = Math.min(a.length, b.length);
@@ -1752,7 +1594,7 @@ module.exports = async (req, res) => {
 
     finalTopK = Math.max(1, Math.min(finalTopK, 8));
 
-    const { chunks, embeddings, modulesLoaded, perModuleCounts } = await loadCombinedRagStore(scope, intentFlags, addLog);
+    const { chunks, embeddings } = await loadRagStore();
 
     if (!embeddings.length || !chunks.length) {
       throw new Error("RAG store is empty or failed to load.");
@@ -1761,9 +1603,7 @@ module.exports = async (req, res) => {
     addLog("store_loaded", {
       chunk_count: chunks.length,
       embedding_count: embeddings.length,
-      embedding_dimensions: embeddings[0]?.length || null,
-      modules_loaded: modulesLoaded || null,
-      per_module_counts: perModuleCounts || null
+      embedding_dimensions: embeddings[0]?.length || null
     });
 
     finalTopK = Math.min(finalTopK, embeddings.length);
