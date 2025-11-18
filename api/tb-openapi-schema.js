@@ -45,9 +45,7 @@ paths:
           retrieve a larger candidate set (for example, ~15 chunks) and then
           return the best-scoring passages.
         - Optionally set "scope" to focus on a subset of the corpus:
-          "diagnosis", "treatment", "drug-safety", "pediatrics", or "programmatic".
-        - Use "document_hint" if you need to anchor retrieval on a particular
-          WHO guideline/module (e.g. "module3_diagnosis" or the full doc_id).
+          "prevention", "screening", "diagnosis", "treatment", "pediatrics", or "comorbidities".
 
         HOW TO USE THE RESPONSE:
         - Review the "results" array in order.
@@ -75,8 +73,7 @@ paths:
                   value:
                     question: What are the recommended monitoring steps for a patient on bedaquiline?
                     top_k: 8
-                    scope: "drug-safety"
-                    document_hint: module4_treatment
+                    scope: "treatment"
                     results:
                       - doc_id: tb_handbook_v3
                         guideline_title: WHO operational handbook on tuberculosis, Module 4: treatment
@@ -151,23 +148,17 @@ components:
           description: >
             Optional hint to focus retrieval on a subset of the TB corpus.
             Suggested values:
+            - "prevention" for TB infection, TPT, and contact management.
+            - "screening" for systematic screening and triage.
             - "diagnosis" for smear-negative/Xpert/CXR algorithms and diagnostic
               pathways.
             - "treatment" for regimen selection, dosing, and duration.
-            - "drug-safety" for ECG, laboratory monitoring, and adverse effects.
             - "pediatrics" for child and adolescent TB guidance.
-            - "programmatic" for health system / implementation guidance.
-          enum: [diagnosis, treatment, drug-safety, pediatrics, programmatic]
+            - "comorbidities" for TB/HIV, diabetes, and other comorbid conditions.
+          enum: [prevention, screening, diagnosis, treatment, pediatrics, comorbidities]
           examples:
             - diagnosis
-        document_hint:
-          type: string
-          description: >
-            Optional substring or friendly alias for the WHO guideline module that
-            should be prioritized (e.g. "module3_diagnosis",
-            "WHO_TB_handbook_module4_treatment_2025").
-          examples:
-            - module3_diagnosis
+
     QueryResponse:
       type: object
       additionalProperties: false
@@ -184,12 +175,6 @@ components:
           description: >
             Number of passages requested (after capping to the supported range)
             and returned in "results".
-        document_hint:
-          type:
-            - string
-            - "null"
-          description: >
-            Echo of the resolved document hint used to bias retrieval (if any).
         results:
           type: array
           description: Relevant TB guidance passages ordered by similarity.
