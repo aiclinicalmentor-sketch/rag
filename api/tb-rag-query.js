@@ -719,8 +719,8 @@ function detectTableSubtype(chunk, logicalRows, headerRow) {
 
   // 3) Regimen composition tables (need regimen + drug-ish header)
   if (
-    hasHeader(/regimen/) &&
-    hasHeader(/drug|component|medicine|combination/)
+    /regimen/.test(caption) ||
+    (hasHeader(/regimen/) && hasHeader(/drug|component|medicine|combination/))
   ) {
     return "regimen";
   }
