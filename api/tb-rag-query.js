@@ -693,10 +693,10 @@ function detectTableSubtype(chunk, logicalRows, headerRow) {
 
   // 1) Dosing tables (adult + pediatric)
   if (
-    /dose|dosage|mg\/kg|mg\/ day|mg per kg|weight band|weight-band/.test(
+    /dose|dosage|dosing|mg\/kg|mg\/ day|mg per kg|weight band|weight-band/.test(
       caption
     ) ||
-    headers.some((h) => /kg/.test(h))
+    headers.some((h) => /kg|dose|weight band|weight-band/.test(h))
   ) {
     if (
       /child|paediatric|pediatric|infant|neonate/.test(caption) ||
@@ -709,7 +709,9 @@ function detectTableSubtype(chunk, logicalRows, headerRow) {
 
   // 2) Eligibility / decision / IF-THEN tables
   if (
-    /eligib|criteria|if.*then|decision|indication|when to/.test(caption) ||
+    /eligib|criteria|if.*then|decision|indication|when to|option(s)?/.test(
+      caption
+    ) ||
     hasHeader(/criteria|recommendation|option|action/)
   ) {
     return "decision";
