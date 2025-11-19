@@ -905,8 +905,13 @@ function renderPedsDosingTable(chunk, logicalRows, headerRow) {
     ) || null;
 
   const weightBandKeys = headers.filter((h) =>
-    /(kg|weight band|weight-band|weight range| to <| to ≤|≥|<=|>=)/i.test(h)
+    /(kg|weight band|weight-band|weight range| to <|<=|>=)/i.test(h)
   );
+  const otherKeys = headers.filter(
+    (h) => h !== medKey && h !== formKey && !weightBandKeys.includes(h)
+  );
+  const medIsWeight = weightBandKeys.includes(medKey);
+  const extraWeightKeys = medIsWeight ? weightBandKeys.filter((k) => k !== medKey) : [];
 
   if (!weightBandKeys.length) {
     const generic = renderGenericTable(chunk, logicalRows, headerRow);
@@ -932,8 +937,16 @@ function renderPedsDosingTable(chunk, logicalRows, headerRow) {
         return `${k}: ${String(v).trim()}`;
       })
       .filter(Boolean);
+    const doseParts = otherKeys
+      .concat(extraWeightKeys)
+      .map((k) => {
+        const v = row[k];
+        if (!nonEmpty(v)) return null;
+        return `${k}: ${String(v).trim()}`;
+      })
+      .filter(Boolean);
 
-    if (!bandParts.length) {
+    if (!bandParts.length && !doseParts.length) {
       const cells = headers
         .map((h) => {
           const v = row[h];
@@ -944,14 +957,21 @@ function renderPedsDosingTable(chunk, logicalRows, headerRow) {
       if (!cells.length) return;
       let line = `${med}`;
       if (form) line += ` (${form})`;
-      line += ` — ${cells.join("; ")}`;
+      line += ` � ${cells.join("; ")}`;
       lines.push(line);
       return;
     }
 
     let line = `${med}`;
     if (form) line += ` (${form})`;
-    line += ` — ${bandParts.join("; ")}`;
+    const parts = [];
+    if (medIsWeight) {
+      parts.push(`${medKey}: ${String(med).trim()}`);
+    } else {
+      parts.push(...bandParts);
+    }
+    parts.push(...doseParts);
+    line += ` � ${parts.join("; ")}`;
     lines.push(line);
   });
 
