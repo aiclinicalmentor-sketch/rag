@@ -1,11 +1,12 @@
-// api/tb-openapi-schema.js
+// api/tb-openapi-schema.OptionB.js
 //
-// Serves the OpenAPI schema (in YAML) for the TB Clinical Mentor GPT Action.
+// Serves the OpenAPI schema (in YAML) for the TB Clinical Mentor GPT Action,
+// updated for the Option B topic-vs-population taxonomy.
 
 const openApiYaml = `openapi: 3.1.0
 info:
   title: TB Clinical Mentor Actions API
-  version: 1.2.1
+  version: 1.3.0
   description: >
     Action surface for the TB Clinical Mentor GPT. Clinicians supply a free-form
     question about a tuberculosis case, and the action returns the most relevant
@@ -32,27 +33,29 @@ paths:
 
         WHEN TO USE:
         - Use this action whenever the user is asking about tuberculosis
-          diagnosis, treatment, monitoring, adverse effects, or programmatic
-          management of a patient.
+          prevention (TB infection/TPT), screening, diagnosis, or treatment,
+          including monitoring, adverse effects, and treatment failure.
         - Call this action BEFORE giving specific clinical advice so you can
           base your reasoning on up-to-date WHO TB guidance.
 
         HOW TO CALL:
-        - Put the full clinician question (including patient details and
-          comorbidities) in "question".
+        - Put the full clinician question (including patient details, comorbidities,
+          and setting) in "question".
         - Use "top_k" between 3 and 8 to control how many final passages are
           returned. If omitted, it defaults to 8. Internally, the action may
-          retrieve a larger candidate set (for example, ~15 chunks) and then
-          return the best-scoring passages.
-        - Optionally set "scope" to focus on a subset of the corpus:
-          "prevention", "screening", "diagnosis", "treatment", "pediatrics", or "comorbidities".
+          retrieve a larger candidate set and then return the best-scoring passages.
+        - Optionally set "scope" to hint at the main clinical topic:
+          "prevention", "screening", "diagnosis", or "treatment".
+          Pediatrics, pregnancy, HIV, diabetes, and other comorbidities should
+          be described in the natural-language question and are handled as
+          population/context, not as scopes.
 
         HOW TO USE THE RESPONSE:
         - Review the "results" array in order.
         - Cite doc_id, guideline_title (if present), year (if present), and
           section_path when explaining your answer.
-        - Quote or paraphrase key lines from "text" before providing your
-          own clinical reasoning.
+        - Quote or paraphrase key lines from "text" (and table_text for tables)
+          before providing your own clinical reasoning.
       requestBody:
         required: true
         content:
@@ -110,7 +113,7 @@ paths:
             and either try again later or answer based on its internal TB
             knowledge without calling the action again.
           content:
-            application/json:
+            application/json":
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
@@ -126,8 +129,8 @@ components:
           description: >
             Free-form clinician question about a TB patient. This text is embedded
             and compared against the stored TB guideline passages. Include enough
-            clinical context (age, HIV status, comorbidities, prior treatment) to
-            retrieve relevant guidance.
+            clinical context (age, HIV status, comorbidities, prior treatment,
+            and resource setting) to retrieve relevant guidance.
           minLength: 1
           examples:
             - How should I adjust the regimen for a TB/HIV co-infected patient with renal impairment?
@@ -136,8 +139,7 @@ components:
           description: >
             Desired number of passages to return (final top-K). Defaults to 8 and
             supports between 1 and 8 results. Internally, the service may
-            retrieve more candidates (for example, ~15 text/table chunks) and
-            then return the best ones.
+            retrieve more candidates and then return the best ones.
           minimum: 1
           maximum: 8
           default: 8
@@ -147,15 +149,16 @@ components:
           type: string
           description: >
             Optional hint to focus retrieval on a subset of the TB corpus.
-            Suggested values:
-            - "prevention" for TB infection, TPT, and contact management.
+            Supported topic values:
+            - "prevention" for TB infection, TPT, contact management, and IPC.
             - "screening" for systematic screening and triage.
             - "diagnosis" for smear-negative/Xpert/CXR algorithms and diagnostic
               pathways.
-            - "treatment" for regimen selection, dosing, and duration.
-            - "pediatrics" for child and adolescent TB guidance.
-            - "comorbidities" for TB/HIV, diabetes, and other comorbid conditions.
-          enum: [prevention, screening, diagnosis, treatment, pediatrics, comorbidities]
+            - "treatment" for regimen selection, dosing, duration, monitoring,
+              toxicity management, and treatment failure.
+            Pediatrics, pregnancy, HIV, diabetes, and other comorbid conditions
+            should be expressed in the question text, not as scope values.
+          enum: [prevention, screening, diagnosis, treatment]
           examples:
             - diagnosis
 
