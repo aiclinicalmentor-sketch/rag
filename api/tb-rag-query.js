@@ -145,8 +145,52 @@ function keywordScore(text, keywords) {
   return score;
 }
 
-function inferScopeFromQuestion(question) {
+function inferScopeFromQuestion(question, intentFlags) {
   const q = (question || "").toLowerCase();
+  const flags = Array.isArray(intentFlags) ? intentFlags : [];
+
+  // 1) Prefer topic-level intent flags to choose a high-level scope.
+  //    We intentionally do NOT allow population/context flags
+  //    (special_populations, comorbidities) to become scope.
+  const hasFlag = (name) => flags.includes(name);
+
+  const topicCandidates = new Set();
+
+  // Module 1: TB infection, preventive treatment, IPC
+  if (hasFlag("prevention_and_ltbi") || hasFlag("infection_prevention_and_control")) {
+    topicCandidates.add("prevention");
+  }
+
+  // Module 2: systematic screening / triage
+  if (hasFlag("screening")) {
+    topicCandidates.add("screening");
+  }
+
+  // Module 3: diagnosis / diagnostic workup
+  if (hasFlag("diagnostic_workup")) {
+    topicCandidates.add("diagnosis");
+  }
+
+  // Module 4: treatment-related questions (any treatment subtask)
+  if (
+    hasFlag("regimen_selection") ||
+    hasFlag("regimen_modification") ||
+    hasFlag("toxicity_management") ||
+    hasFlag("monitoring_schedule") ||
+    hasFlag("treatment_failure_or_reversion")
+  ) {
+    topicCandidates.add("treatment");
+  }
+
+  // Priority order if multiple topic candidates are present.
+  const topicPriority = ["treatment", "diagnosis", "prevention", "screening"];
+  for (const t of topicPriority) {
+    if (topicCandidates.has(t)) {
+      return t;
+    }
+  }
+
+  // 2) Fallback: keyword-based heuristic (no population/comorbidity scopes).
   if (!q) return null;
 
   const preventionScore = keywordScore(q, [
@@ -201,36 +245,6 @@ function inferScopeFromQuestion(question) {
     "drug-resistant"
   ]);
 
-  const pediScore = keywordScore(q, [
-    "child",
-    "children",
-    "paediatric",
-    "pediatric",
-    "adolescent",
-    "infant",
-    "neonate"
-  ]);
-
-  const comorbidScore = keywordScore(q, [
-    "comorbid",
-    "hiv",
-    "plhiv",
-    "coinfection",
-    "diabetes",
-    "substance use",
-    "alcohol use",
-    "harmful use",
-    "mental health",
-    "depression",
-    "anxiety",
-    "hcv",
-    "hepatitis"
-  ]);
-
-  // Prioritize pediatrics when clearly indicated
-  if (pediScore >= 2 || q.includes("module 5")) {
-    return "pediatrics";
-  }
   if (preventionScore >= 2 || q.includes("module 1")) {
     return "prevention";
   }
@@ -243,14 +257,11 @@ function inferScopeFromQuestion(question) {
   if (treatmentScore >= 2 || q.includes("module 4")) {
     return "treatment";
   }
-  if (comorbidScore >= 2 || q.includes("module 6")) {
-    return "comorbidities";
-  }
 
   return null;
 }
 
-
+function inferIntentFlags(question) {
 function inferIntentFlags(question) {
   const q = (question || "").toLowerCase();
   if (!q) return [];
@@ -482,6 +493,21 @@ function inferIntentFlags(question) {
 
   return Array.from(new Set(flags));
 }
+
+function inferPopulationContext(question, intentFlags) {
+  const q = (question || "").toLowerCase();
+  const flags = Array.isArray(intentFlags) ? intentFlags : [];
+
+  // Population/context-level signals. These are NOT used to choose scope,
+  // but can be logged and later used for boosting.
+  const context = {
+    special_populations: flags.includes("special_populations") || false,
+    comorbidities: flags.includes("comorbidities") || false
+  };
+
+  return context;
+}
+
 
 function filterIndicesByScope(indices, chunks, scope) {
   if (!scope) return indices;
@@ -1586,9 +1612,10 @@ module.exports = async (req, res) => {
     };
 
     const intentFlags = inferIntentFlags(question || "");
+    const populationContext = inferPopulationContext(question || "", intentFlags);
 
     if (!scope) {
-      scope = inferScopeFromQuestion(question);
+      scope = inferScopeFromQuestion(question, intentFlags);
     }
 
     addLog("request", {
@@ -1599,7 +1626,9 @@ module.exports = async (req, res) => {
     });
 
     addLog("intent", {
-      intent_flags: intentFlags
+      intent_flags: intentFlags,
+      topic_scope: scope || null,
+      population_context: populationContext
     });
 
 
