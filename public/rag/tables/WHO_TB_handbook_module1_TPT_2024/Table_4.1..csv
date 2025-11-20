@@ -1,0 +1,10 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI,ColumnJ,ColumnK
+WHO_TB_handbook_module1_TPT_2024,Table 4.1.,1,TPT regimens,Drug formulations,4–7.9 kg,8–11.9 kg,12–15.9 kg,16–24.9 kg,25–29.9 kg,30–34.9 kg,35–49.9 kg,50–64.9 kg,≥ 65 kg
+WHO_TB_handbook_module1_TPT_2024,Table 4.1.,2,Six or nine months of daily isoniazid monotherapy (6H or 9H),Isoniazid 100 mg dt [a],0.5 (0.5 mL [ a] ),1,1.5,2,–,–,–,–,–
+WHO_TB_handbook_module1_TPT_2024,Table 4.1.,3,Six or nine months of daily isoniazid monotherapy (6H or 9H),Isoniazid 300 mg tab [b],–,–,–,–,0.5,1,1,1,1.25
+WHO_TB_handbook_module1_TPT_2024,Table 4.1.,4,Four months of daily rifampicin monotherapy (4R),Rifampicin 150 mg cap,–,–,–,–,2,3,4,4,5
+WHO_TB_handbook_module1_TPT_2024,Table 4.1.,5,Four months of daily rifampicin monotherapy (4R),Rifampicin 300 mg cap [ c],–,–,–,–,1,1.5,2,2,2.5
+WHO_TB_handbook_module1_TPT_2024,Table 4.1.,6,Three months of daily rifampicin plus isoniazid (3HR),Isoniazid 300 mg tab,–,–,–,–,0.5,1,1,1,1.25
+WHO_TB_handbook_module1_TPT_2024,Table 4.1.,7,Three months of daily rifampicin plus isoniazid (3HR),Rifampicin 300 mg cap [c],–,–,–,–,1,1.5,2,2,2.5
+WHO_TB_handbook_module1_TPT_2024,Table 4.1.,8,Three months of daily rifampicin plus isoniazid (3HR),Rifampicin 75 mg and isoniazid 50 mg FDC dt,1,2,3,4,–,–,–,–,–
+WHO_TB_handbook_module1_TPT_2024,Table 4.1.,9,Three months of daily rifampicin plus isoniazid (3HR),Rifampicin 150 mg and isoniazid 75 mg FDC tab,–,–,–,–,2,3,4,4,5

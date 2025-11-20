@@ -1,0 +1,8 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE
+WHO_TB_handbook_module1_TPT_2024,Table 9.,1,TPT regimen,Total duration (months),Expected number of doses,80% of recommended doses (days),Extended time for treatment completion (days) (treatment duration +33% additional time)
+WHO_TB_handbook_module1_TPT_2024,Table 9.,2,6H (daily),6,182,146,239
+WHO_TB_handbook_module1_TPT_2024,Table 9.,3,3HR (daily),3,84,68,120
+WHO_TB_handbook_module1_TPT_2024,Table 9.,4,3HP (weekly),3,12,10,112
+WHO_TB_handbook_module1_TPT_2024,Table 9.,5,4R (daily),4,120,96,160
+WHO_TB_handbook_module1_TPT_2024,Table 9.,6,1HP (daily),1,28,23,40
+WHO_TB_handbook_module1_TPT_2024,Table 9.,7,6Lfx (daily),6,182,146,239

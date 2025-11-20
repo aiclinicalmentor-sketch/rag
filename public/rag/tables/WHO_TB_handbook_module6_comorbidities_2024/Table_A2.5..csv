@@ -1,0 +1,19 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,1,Subgroup,Algorithm,Cost of screening (USD),Cost of testing,Total cost (screening + testing),Cost per TB diagnosis (TP + FP),Cost per true TB diagnosis,Difference from Alg. 1 per true TB diagnosis
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,2,CD4 <200,Alg. 1,1 800.00,16 988.40,18 788.40,894.69,2 684.06,—
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,3,,Alg. 2,5 000.00,20 836.20,25 836.20,1 033.45,3 229.53,545.47
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,4,,Alg. 3,4 807.20,10 986.80,15 794.00,987.13,2 256.29,–427.77
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,5,,Alg. 4,NA,NA,NA,NA,NA,NA
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,6,CD4 >200,Alg. 1,1 800.00,12 632.40,14 432.40,902.03,2 405.40,—
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,7,,Alg. 2,5 000.00,17 230.40,22 230.40,1 058.59,3 175.77,770.37
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,8,,Alg. 3,4 055.40,6 630.80,10 686.20,971.47,1 781.03,–624.37
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,9,Outpatients not on ART,Alg. 1,1 800.00,15 294.40,17 094.40,899.71,2 442.06,—
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,10,,Alg. 2,5 000.00,19 626.20,24 626.20,1 026.09,3 078.28,636.22
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,11,,Alg. 3,4 534.20,8 833.00,13 367.20,954.80,1 909.60,–532.46
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,12,Outpatients on ART,Alg. 1,1 800.00,7 308.40,9 108.40,828.04,1 821.68,—
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,13,,Alg. 2,5 000.00,16 262.40,21 262.40,1 063.12,3 037.49,1 215.81
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,14,,Alg. 3,3 156.60,968.00,4 124.60,2 062.30,4 124.60,2 302.92
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,15,Inpatients,Alg. 1,1 800.00,21 562.20,23 362.20,898.55,2 920.28,—
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,16,,Alg. 2,5 000.00,22 506.00,27 506.00,1 057.92,3 438.25,517.98
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,17,,Alg. 3,5 567.40,19 408.40,24 975.80,1 040.66,3 121.98,201.70
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.5.,18,,Alg. 4,NA,NA,NA,NA,NA,NA

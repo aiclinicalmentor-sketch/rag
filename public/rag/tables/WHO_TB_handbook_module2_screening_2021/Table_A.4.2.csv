@@ -1,0 +1,12 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,1,#,TP,FP,FN,TN,% of prevalent cases detected,PPV,NPV
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,2,1,4,12,6,978,41%,26%,99%
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,3,2,3,8,7,982,31%,28%,99%
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,4,3,5,15,5,975,54%,27%,100%
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,5,4,2,8,8,982,15%,16%,99%
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,6,5,1,0,9,990,6%,61%,99%
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,7,6,2,8,8,982,15%,16%,99%
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,8,7,7,27,3,963,65%,20%,100%
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,9,8,4,7,6,983,38%,35%,99%
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,10,9,7,27,3,963,65%,20%,100%
+WHO_TB_handbook_module2_screening_2021,Table A.4.2,11,11,4,0,6,990,42%,91%,99%

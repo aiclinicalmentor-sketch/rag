@@ -1,0 +1,7 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module2_screening_2021,Table 2.4,1,Primary screening strategy,Weighted mean NNS (range) (number of studies),
+WHO_TB_handbook_module2_screening_2021,Table 2.4,2,,Low or moderate TB incidence a,Medium or high TB incidence a
+WHO_TB_handbook_module2_screening_2021,Table 2.4,3,Symptoms,4424 (2417–6031) n=1,1058 (31–4085) (n=22)
+WHO_TB_handbook_module2_screening_2021,Table 2.4,4,CXR,3016 (n=1),475 (186–605) (n=3)
+WHO_TB_handbook_module2_screening_2021,Table 2.4,5,Symptoms or CXR,1567 (23–2857) (n=3),426 (125–763) b (n=18)
+WHO_TB_handbook_module2_screening_2021,Table 2.4,6,mWRD (Xpert MTB/RIF),–,1002 (338–1010) (n=2)

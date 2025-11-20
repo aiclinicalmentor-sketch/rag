@@ -1,0 +1,8 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module6_comorbidities_2024,Table 3.5.,1,Clinical symptom-based screening (W4SS),"Screen for any one of current cough, fever, weight loss or night sweats",
+WHO_TB_handbook_module6_comorbidities_2024,Table 3.5.,2,Frequency of symptom screening,At every visit to a health facility or contact with a health worker,
+WHO_TB_handbook_module6_comorbidities_2024,Table 3.5.,3,Chest radiography,Not mandatory although desirable. May be considered where facilities are available and human resources and health system capacity permits,
+WHO_TB_handbook_module6_comorbidities_2024,Table 3.5.,4,Diagnostic testing for TB if screen test is positive,"WHO recommends rapid diagnostics such as Xpert® MTB/RIF, LF-LAM assay among seriously ill PLHIV (see Section 3.2 on diagnostics) or as per national guidelines",
+WHO_TB_handbook_module6_comorbidities_2024,Table 3.5.,5,"Test for TB infection (TST, IGRA or TBSTs)",Not required among people living with HIV. Unavailability of tests should not be a barrier to provision of TPT to those in need,
+WHO_TB_handbook_module6_comorbidities_2024,Table 3.5.,6,Contraindications to TPT,"Acute hepatitis, regular and heavy alcohol consumption or symptoms of peripheral neuropathy Concurrent use of other hepatotoxic medications (such as nevirapine) History of hypersensitivity to TPT",
+WHO_TB_handbook_module6_comorbidities_2024,Table 3.5.,7,Counselling,"Information on TB infection, need for TPT, schedule of medication collection, medication adherence support and follow-up visits, benefits from completing the course, adverse events, awareness about and actions on development of TB symptoms or adverse events",

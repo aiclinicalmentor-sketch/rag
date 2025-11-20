@@ -1,0 +1,6 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module1_TPT_2024,Table 4,1,Drug,Known adverse events,Uncommon adverse events
+WHO_TB_handbook_module1_TPT_2024,Table 4,2,Isoniazid,"Asymptomatic elevation of serum liver enzyme titres Hepatitis Peripheral neuropathy ( paraesthesia , numbness, limb pain) Skin rash Sleepiness and lethargy",Convulsions Pellagra Arthralgia Anaemia Lupoid reactions
+WHO_TB_handbook_module1_TPT_2024,Table 4,3,Rifampicin,"Gastrointestinal reactions (abdominal pain, nausea, vomiting) Hepatitis Generalized cutaneous reactions Thrombocytopenic purpura Discolouration of body fluids",Osteomalacia Pseudomembranous colitis Pseudo adrenal crisis Acute renal failure Shock Haemolytic anaemia Influenza-like syndrome Hypoprothrombinaemia
+WHO_TB_handbook_module1_TPT_2024,Table 4,4,Rifapentine,"Gastrointestinal reactions (abdominal pain, nausea, vomiting) Hypersensitivity reactions ( influenzalike symptoms) Hepatitis Discolouration of body fluids",Hypotension or syncope Decrease in white and red blood cell counts Decreased appetite Hyperbilirubinaemia Hypoprothrombinaemia
+WHO_TB_handbook_module1_TPT_2024,Table 4,5,Levofloxacin,Diarrhoea Nausea and bloating Arthralgia,Inflamed or torn tendons Muscle pain or weakness Peripheral neuropathy Mood or behaviour changes Insomnia Prolongation of the QTc interval Altered taste and smell

@@ -1,0 +1,8 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module6_comorbidities_2024,Table 2,1,Screening test,Sensitivity (%),Specificity (%)
+WHO_TB_handbook_module6_comorbidities_2024,Table 2,2,Prolonged cough (> 2 weeks),42,94
+WHO_TB_handbook_module6_comorbidities_2024,Table 2,3,Any cough,51,88
+WHO_TB_handbook_module6_comorbidities_2024,Table 2,4,"Any TB symptoms (cough, haemoptysis , fever, night sweats, weight loss)",71,64
+WHO_TB_handbook_module6_comorbidities_2024,Table 2,5,CXR (any abnormality),94,89
+WHO_TB_handbook_module6_comorbidities_2024,Table 2,6,CXR (abnormality suggestive of TB),85,96
+WHO_TB_handbook_module6_comorbidities_2024,Table 2,7,mWRDs (adults at high risk),69,99

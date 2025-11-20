@@ -1,0 +1,25 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD
+WHO_TB_handbook_module1_TPT_2024,Table 7.,1,Medication class,Examples,Isoniazid inhibits metabolism and increases blood levels,Rifamycins accelerate metabolism and decrease blood levels [a]
+WHO_TB_handbook_module1_TPT_2024,Table 7.,2,Antiarrhythmics,"Disopyramide, mexiletine , quinidine, tocainide",,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,3,Antibiotics,"Chloramphenicol, clarithromycin, dapsone, doxycycline, fluoroquinolones",,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,4,Anticoagulants,Warfarin,Up,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,5,Anticonvulsants,Phenytoin,"Up ( Phenytoin, carbamazepine, primidone, valproic acid)",Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,6,Antidepressants,"Amitriptyline, nortriptyline",Up (some selective serotonin reuptake inhibitors),Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,7,Antimalarials,,Up ( Halofantrine ),Down ( Quinine )
+WHO_TB_handbook_module1_TPT_2024,Table 7.,8,Antipsychotics,Haloperidol,Up,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,9,Antivirals,,"Up ( Ritonavir, efavirenz )","Down ( Protease inhibitors , integrase strand transfer inhibitor) Down (Nevirapine with rifampicin)"
+WHO_TB_handbook_module1_TPT_2024,Table 7.,10,Azole antifungals,"Fluconazole , itraconazole, ketoconazole",Up,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,11,Barbiturates,Phenobarbital,,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,12,Benzodiazepines,Diazepam,"Up ( Diazepam, triazolam )",Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,13,Beta-blockers,Propranolol,,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,14,Calcium channel blockers,"Diltiazem , nifedipine, verapamil",,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,15,Cardiac glycoside preparations,Digoxin,,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,16,Corticosteroids,Prednisone,,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,17,Fibrates,Clofibrate,,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,18,Oral hypoglycaemic agents,Sulfonylureas,,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,19,Hormonal contraceptives/ progestins,"Ethinyl oestradiol , levonorgestrel",,Down (Rifapentine)
+WHO_TB_handbook_module1_TPT_2024,Table 7.,20,Immunosuppres ants,"Cyclosporine, tacrolimus",,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,21,Methylxanthines,Theophylline,,Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,22,Narcotic analgesics,Methadone,Up ( Levomethyldate acetate),Down
+WHO_TB_handbook_module1_TPT_2024,Table 7.,23,Phosphodiesterase-5 inhibitors,Sildenafil,,Down ( Rifapentine)
+WHO_TB_handbook_module1_TPT_2024,Table 7.,24,Thyroid preparations,Levothyroxine,,Down

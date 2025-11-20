@@ -1,9 +1,9 @@
 doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
 WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,1,Age and type of EPTB,Intensive phase,Continuation phase
-WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,2,"Infants aged <3 months or weighing <3 kg, Peripheral lymph node TB",2HRZ or 2HRZE b,4HR
-WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,3,"Children and adolescents aged 3 months–<16 years , Peripheral lymph node TB",2HRZ or 2HRZE b,2HR
-WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,4,"Adolescents aged >16 years , Peripheral lymph node TB",2HRZ or 2HRZE b,4HR
-WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,5,"Children and adolescents aged 0–19 years , EPTB [c]",2HRZE,4HR
-WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,6,"Children and adolescents aged 0–19 years, TBM [ d ] (strong recommendation)",2HRZE,10HR
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,2,"Infants aged <3 months or weighing <3 kg, Peripheral lymph node TB",2HRZ or 2HRZE [ b ],4HR
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,3,"Children and adolescents aged 3 months–<16 years , Peripheral lymph node TB",2HRZ or 2HRZE [ b ],2HR
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,4,"Adolescents aged >16 years, Peripheral lymph node TB",2HRZ or 2HRZE [ b ],4HR
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,5,"Children and adolescents aged 0–19 years, EPTB [c]",2HRZE,4HR
+WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,6,"Children and adolescents aged 0–19 years, TBM [d] (strong recommendation)",2HRZE,10HR
 WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,7,"Children and adolescents aged 0–19 years, TBM [d] (conditional recommendation)",6HRZEto,-
 WHO_TB_handbook_module5_pediatrics_2022,Table 5.2.,8,"Children and adolescents aged 0–19 years, Osteoarticular TB",2HRZE,10HR

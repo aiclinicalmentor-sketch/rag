@@ -1,0 +1,12 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,1,,Intervention,CD4 cell count,Adults,Adolescents,Children < 10 years
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,2,Screening and diagnosis,"Screening tools for TB disease for adults and adolescents: W4SS, CXR, CRP, mWRDs , alone or in combination Screening tools for TB disease among children: symptom screening for children with HIV",Any,Yes,Yes,Yes ( symptom screen only)
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,3,,mWRDs as the first test for pulmonary TB diagnosis among those who screen positive for TB and investigations for extrapulmonary TB as applicable; CXR may also be used to support investigations,Any,Yes,Yes,Yes
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,4,,LF-LAM to assist TB diagnosis among people with symptoms and signs of TB,≤200 cells/mm 3 (inpatient) ≤100 cells/mm 3 (outpatient) Or any CD4 count with symptoms or if seriously ill,Yes,Yes,Yes
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,5,,Cryptococcal antigen screening,Recommended for <100 cells/mm 3 and considered for <200 cells/mm 3,Yes,Yes,No
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,6,Prophylaxis and pre-emptive treatment,Co-trimoxazole prophylaxis,<350 cells/mm 3 or clinical stage 3 or 4 Any CD4 count in settings with high prevalence of malaria or severe bacterial infections,Yes,Yes,Yes a
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,7,,TB preventive treatment b,Any,Yes,Yes,Yes
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,8,,Fluconazole pre-emptive therapy for cryptococcal antigen–positive people without evidence of meningitis,<100 cells/mm 3,Yes,Yes,Not ap- plicable (screening not advised)
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,9,ART initiation,Rapid ART initiation c,Any,Yes,Yes,Yes
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,10,,Defer initiation if clinical symptoms suggest meningitis (TB or cryptococcal),Any,Yes,Yes,Yes
+WHO_TB_handbook_module6_comorbidities_2024,Table A4.1,11,Adapted adherence support,"Tailored counselling to ensure optimal adherence to the advanced HIV disease package, including home visits if feasible",<200 cells/mm 3,Yes,Yes,Yes

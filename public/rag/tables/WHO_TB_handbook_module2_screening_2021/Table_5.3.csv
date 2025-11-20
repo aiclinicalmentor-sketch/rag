@@ -1,0 +1,8 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module2_screening_2021,Table 5.3,1,Population,Sensitivity (%),Specificity (%)
+WHO_TB_handbook_module2_screening_2021,Table 5.3,2,All people living with HIV,93,20
+WHO_TB_handbook_module2_screening_2021,Table 5.3,3,Inpatients,90,7
+WHO_TB_handbook_module2_screening_2021,Table 5.3,4,Outpatients on ART,85,33
+WHO_TB_handbook_module2_screening_2021,Table 5.3,5,Outpatients not on ART,94,19
+WHO_TB_handbook_module2_screening_2021,Table 5.3,6,≤ 200 CD4 cells/µL [a],94,14
+WHO_TB_handbook_module2_screening_2021,Table 5.3,7,Pregnant women living with HIV,75,56

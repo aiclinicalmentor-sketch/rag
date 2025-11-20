@@ -1,0 +1,8 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI,ColumnJ,ColumnK,ColumnL,ColumnM
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.4.,1,Subgroup,Alg. Sens,Alg. Spec,% Cases missed,PTP,N tested,TP,FP,TN,FN,PPV,NPV,NNT
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.4.,2,CD4 <200,80.7%,97.0%,19.3%,10%,1000,81,873,27,19,0.75,0.98,13
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.4.,3,,,,,20%,1000,161,776,24,39,0.87,0.95,7
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.4.,4,,,,,30%,1000,242,679,21,58,0.92,0.92,5
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.4.,5,Inpatients,82.7%,93.0%,17.3%,10%,1000,83,837,63,17,0.57,0.98,13
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.4.,6,,,,,20%,1000,165,744,56,35,0.75,0.96,7
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.4.,7,,,,,30%,1000,248,651,49,52,0.84,0.93,5

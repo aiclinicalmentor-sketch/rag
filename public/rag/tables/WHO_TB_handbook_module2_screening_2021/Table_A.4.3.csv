@@ -1,0 +1,4 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI
+WHO_TB_handbook_module2_screening_2021,Table A.4.3,1,Algorithm,TP,FP,FN,TN,% of prevalent cases detected,PPV,NPV,NNS
+WHO_TB_handbook_module2_screening_2021,Table A.4.3,2,W4SS followed by mWRD (1),74,56,26,844,74%,57%,97%,14
+WHO_TB_handbook_module2_screening_2021,Table A.4.3,3,mWRD (10),77,63,23,837,77%,55%,97%,13

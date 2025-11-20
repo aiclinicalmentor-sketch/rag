@@ -1,0 +1,5 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD
+WHO_TB_handbook_module6_comorbidities_2024,Table 4.2.,1,Population,Failing first-line regimen,Preferred second - line regimen,Alternative second - line regimen
+WHO_TB_handbook_module6_comorbidities_2024,Table 4.2.,2,Adults and adolescents [ a ],TDF [ b ] + 3TC (or FTC) + DTG [ c ],AZT + 3TC + ATV/r (or LPV/r),AZT + 3TC + DRV/r [ d ]
+WHO_TB_handbook_module6_comorbidities_2024,Table 4.2.,3,,TDF + 3TC (or FTC) + EFV (or NVP),AZT + 3TC + DTG [ c ],AZT + 3TC + ATV/r (or LPV/r or DRV/r) [ d ]
+WHO_TB_handbook_module6_comorbidities_2024,Table 4.2.,4,,AZT + 3TC + EFV (or NVP),TDF [ b ] + 3TC (or FTC) + DTG [ c ],TDF [ b ] + 3TC (or FTC) + ATV/r (or LPV/r or DRV/r) [ d ]

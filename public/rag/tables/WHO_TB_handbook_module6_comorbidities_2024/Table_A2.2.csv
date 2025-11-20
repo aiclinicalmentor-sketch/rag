@@ -1,0 +1,21 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI,ColumnJ,ColumnK,ColumnL,ColumnM,ColumnN,ColumnO,ColumnP,ColumnQ,ColumnR,ColumnS,ColumnT
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,1,Subgroup,Alg. Sens,Alg. Spec,% Cases missed,PTP,TP,FP,TN,FN,PPV,NPV,N tested,TP,FP,TN,FN,PPV,NPV,NNS,NNT
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,2,CD4 <200,80.7%,98.3%,19.3%,5%,47,133,817,3,5.4,97.8,864,40,801,16,7,71.2,99.2,25,22
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,3,,,,,10%,94,126,774,6,10.8,95.5,868,81,759,15,13,83.9,98.3,13,11
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,4,,,,,15%,141,119,731,9,16.2,93.0,872,121,716,15,20,89.2,97.3,9,8
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,5,,,,,20%,188,112,688,12,21.5,90.3,876,161,674,14,27,92.1,96.2,7,6
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,6,,,,,30%,282,98,602,18,31.9,84.5,884,242,590,12,40,95.3,93.7,5,4
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,7,CD4 >200,73.8%,98.6%,26.2%,1%,9,287,703,1,1.2,99.5,712,7,689,14,1,34.4,99.8,136,97
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,8,,,,,5%,43,276,675,7,6.0,97.5,718,37,661,13,6,73.2,99.1,28,20
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,9,,,,,10%,86,261,639,14,11.9,94.9,725,74,626,13,12,85.2,98.1,14,10
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,10,Outpatients not on ART,80.7%,98.4%,19.3%,1%,9,188,802,1,1.2,99.7,811,8,786,16,1,33.5,99.8,124,101
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,11,,,,,5%,47,181,770,3,5.8,98.4,817,40,754,15,7,72.4,99.1,25,21
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,12,,,,,10%,94,171,729,6,11.4,96.6,823,81,714,15,13,84.7,98.2,13,11
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,13,Outpatients on ART,73.0%,98.7%,27.0%,1%,9,327,663,2,1.3,99.5,672,7,650,13,1,35.5,99.8,138,93
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,14,,,,,5%,43,314,637,8,6.3,97.7,679,36,624,13,6,74.1,99.0,28,19
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,15,,,,,10%,85,297,603,15,12.4,95.2,688,73,591,12,12,85.8,98.0,14,10
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,16,Inpatients,77.3%,98.1%,22.7%,5%,45,67,884,5,4.8,93.0,929,39,866,18,6,68.6,99.3,26,25
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,17,,,,,10%,90,63,837,10,9.7,86.3,927,77,820,17,13,82.2,98.5,13,12
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,18,,,,,15%,135,60,791,15,14.6,79.9,926,116,775,16,19,88.0,97.6,9,8
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,19,,,,,20%,180,56,744,20,19.5,73.7,924,155,729,15,25,91.2,96.6,7,6
+WHO_TB_handbook_module6_comorbidities_2024,Table A2.2,20,,,,,30%,270,49,651,30,29.3,62.0,921,232,638,13,38,94.7,94.4,5,4

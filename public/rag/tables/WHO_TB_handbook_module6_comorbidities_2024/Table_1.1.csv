@@ -1,0 +1,8 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC
+WHO_TB_handbook_module6_comorbidities_2024,Table 1.1,1,Test,Specimen type,Resistance R/H b
+WHO_TB_handbook_module6_comorbidities_2024,Table 1.1,2,Xpert MTB/RIF,"Sputum Urine Blood [ a ] Cerebrospinal fluid Lymph node samples Pleural , peritoneal, pericardial or synovial fluid",R
+WHO_TB_handbook_module6_comorbidities_2024,Table 1.1,3,Xpert MTB/RIF Ultra,Sputum Cerebrospinal fluid Lymph node samples,R
+WHO_TB_handbook_module6_comorbidities_2024,Table 1.1,4,"Truenat MTB, MTB Plus and MTB-RIF Dx tests [ c ]",Sputum,R
+WHO_TB_handbook_module6_comorbidities_2024,Table 1.1,5,TB-LAMP (Eiken) [ d ],Sputum,-
+WHO_TB_handbook_module6_comorbidities_2024,Table 1.1,6,Moderate complexity automated NAATs [ e ],Sputum,R and H
+WHO_TB_handbook_module6_comorbidities_2024,Table 1.1,7,LF-LAM [ a ],Urine,–

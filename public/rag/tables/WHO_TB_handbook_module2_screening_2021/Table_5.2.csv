@@ -1,0 +1,8 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE
+WHO_TB_handbook_module2_screening_2021,Table 5.2,1,Population,Cut-off > 5 mg/L Sensitivity (%),Cut-off > 5 mg/L Specificity (%),Cut-off > 10 mg/L Sensitivity (%),Cut-off > 10 mg/L Specificity (%)
+WHO_TB_handbook_module2_screening_2021,Table 5.2,2,All people living with HIV,90,50,83,65
+WHO_TB_handbook_module2_screening_2021,Table 5.2,3,Inpatients,98,12,97,21
+WHO_TB_handbook_module2_screening_2021,Table 5.2,4,Outpatients on ART,40,80,20,90
+WHO_TB_handbook_module2_screening_2021,Table 5.2,5,Outpatients not on ART,89,54,82,67
+WHO_TB_handbook_module2_screening_2021,Table 5.2,6,≤ 200 CD4 cells/µL [a],93,40,90,54
+WHO_TB_handbook_module2_screening_2021,Table 5.2,7,Pregnant women living with HIV,70,41,70,54

@@ -1,0 +1,12 @@
+doc_id,table_id,row_index,ColumnA,ColumnB,ColumnC,ColumnD,ColumnE,ColumnF,ColumnG,ColumnH,ColumnI,ColumnJ,ColumnK,ColumnL,ColumnM,ColumnN,ColumnO
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,1,TPT regimens,Drug formulations,3–5.9 kg (< 3 months),3–5.9 kg (≥ 3 months),6–9.9 kg (< 6 months),6–9.9 kg (≥ 6 months),10–14.9 kg,15–19.9 kg,20–24.9 kg,25–29.9 kg,30–34.9 kg,35–39.9 kg,40–44.9 kg,45–49.9 kg,≥ 50 kg
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,2,Three months of weekly rifapentine plus isoniazid (3HP),Isoniazid 100 mg dt,0.6 (6 mL [a]),0.7 (7 mL [a]),1,1.5,2.5,3,4.5,4.5,6,6,7.5,7.5,9
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,3,Three months of weekly rifapentine plus isoniazid (3HP),Isoniazid 300 mg tab,–,–,–,–,–,1,1.5,1.5,2,2,2.5,2.5,3
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,4,Three months of weekly rifapentine plus isoniazid (3HP),Rifapentine 150 mg dt,0.5 (5 mL [d] ),0.7 (7 mL [d]),1.5,1.5,2,3,4,4,5,6,6,6,6
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,5,Three months of weekly rifapentine plus isoniazid (3HP),Rifapentine 300 mg tab –,–,–,–,–,–,1.5,2,2,2.5,3,3,3,3
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,6,Three months of weekly rifapentine plus isoniazid (3HP),Rifapentine 300 mg and isoniazid 300 mg FDC tab [e],–,–,–,–,–,1,1.5,2,2.5,3,3,3,3
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,7,One month of daily rifapentine plus isoniazid (1HP) [ f ],Isoniazid 300 mg tab,–,–,–,–,–,–,–,1,1,1,1,1,1
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,8,One month of daily rifapentine plus isoniazid (1HP) [ f ],Rifapentine 300 mg tab,–,–,–,–,–,–,–,2,2,2,2,2,2
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,9,Six months of daily levofloxacin (6Lfx),Lfx 100 mg dt,0.5,1,1,1.5,2,2.5,3,3.5,–,–,–,–,–
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,10,Six months of daily levofloxacin (6Lfx),Lfx 250 mg tab,0.25 (2.5 mL [d]),0.5 (5 mL [d] ),0.5 (5 mL [d] ),1 (10 mL [d] ),1,1.5,1.5,2,2,2,2,2,3
+WHO_TB_handbook_module1_TPT_2024,Table 4.2,11,Six months of daily levofloxacin (6Lfx),Lfx 500 mg tab,–,–,–,–,–,–,–,1,1,1,1,1,1.5
