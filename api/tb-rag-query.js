@@ -262,7 +262,6 @@ function inferScopeFromQuestion(question, intentFlags) {
 }
 
 function inferIntentFlags(question) {
-function inferIntentFlags(question) {
   const q = (question || "").toLowerCase();
   if (!q) return [];
 
@@ -814,7 +813,7 @@ function guessTimelineOrientation(logicalRows) {
   const headers = getTableHeaders(logicalRows);
   if (!headers.length) return { orientation: "unknown" };
 
-  // A) timepoints in COLUMNS → several time-like headers
+  // A)   // A) timepoints in COLUMNS -> several time-like headers
   const timeHeaders = headers.filter((h) => looksTimeLike(h));
   if (timeHeaders.length >= 2) {
     const entityHeader =
@@ -822,7 +821,7 @@ function guessTimelineOrientation(logicalRows) {
     return { orientation: "cols", entityHeader, timeHeaders };
   }
 
-  // B) timepoints in ROWS → first column values look time-like
+  // B)   // B) timepoints in ROWS -> first column values look time-like
   const firstCol = headers[0];
   const sampleRows = logicalRows.slice(0, 6);
   const timeLikeCount = sampleRows.filter((r) => looksTimeLike(r[firstCol]))
@@ -855,7 +854,7 @@ function renderDosingTable(chunk, logicalRows, headerRow) {
     ) || headers[0];
 
   const weightBandKeys = headers.filter((h) =>
-    /(kg|weight band|weight-band|weight range| to <| to ≤|≥|<=|>=)/i.test(h)
+    /(kg|weight band|weight-band|weight range| to <|<=|>=)/i.test(h)
   );
 
   // If we couldn't confidently find weight-band columns, just fall back to generic.
@@ -983,7 +982,7 @@ function renderPedsDosingTable(chunk, logicalRows, headerRow) {
       if (!cells.length) return;
       let line = `${med}`;
       if (form) line += ` (${form})`;
-      line += ` � ${cells.join("; ")}`;
+      line += ` -> ${cells.join("; ")}`;
       lines.push(line);
       return;
     }
@@ -997,7 +996,7 @@ function renderPedsDosingTable(chunk, logicalRows, headerRow) {
       parts.push(...bandParts);
     }
     parts.push(...doseParts);
-    line += ` � ${parts.join("; ")}`;
+    line += ` -> ${parts.join("; ")}`;
     lines.push(line);
   });
 
@@ -1073,7 +1072,7 @@ function renderRegimenTable(chunk, logicalRows, headerRow) {
         .filter(Boolean);
       lines.push(`${regimen}: ${cells.join("; ")}`);
     } else {
-      lines.push(`${regimen} — ${parts.join("; ")}`);
+      lines.push(`${regimen} - ${parts.join("; ")}`);
     }
   });
 
@@ -1110,7 +1109,7 @@ function renderDecisionTable(chunk, logicalRows, headerRow) {
     );
 
   const lines = [];
-  lines.push(`${caption}. IF–THEN decision rules:`);
+  lines.push(`${caption}. IF-THEN decision rules:`);
 
   let rowsWithIfThen = 0;
 
@@ -1256,7 +1255,7 @@ function renderTimelineTable(chunk, logicalRows, headerRow) {
     }
   }
 
-  // C) Unknown pattern → generic safe summary
+  // C) Unknown pattern -> generic safe summary
   const generic = renderGenericTable(chunk, logicalRows, headerRow);
   return {
     text: generic.text,
@@ -1269,7 +1268,7 @@ function renderTimelineTable(chunk, logicalRows, headerRow) {
 }
 
 function renderInteractionTable(chunk, logicalRows, headerRow) {
-  const caption = chunk.caption || "Drug–drug interaction table";
+  const caption = chunk.caption || "Drug-drug interaction table";
   const headers = getTableHeaders(logicalRows);
   if (!logicalRows.length || !headers.length) {
     return {
@@ -1338,7 +1337,7 @@ function renderInteractionTable(chunk, logicalRows, headerRow) {
 
     let line = "";
     if (drugs.length) line += `Combination ${drugs.join(" + ")}`;
-    if (effect) line += (line ? " — " : "") + `effect: ${effect}`;
+    if (effect) line += (line ? " - " : "") + `effect: ${effect}`;
     if (rec) line += (line ? "; " : "") + `recommendation: ${rec}`;
 
     lines.push(line || `Row ${idx + 1}: (see table)`);
@@ -1423,7 +1422,7 @@ function renderToxicityTable(chunk, logicalRows, headerRow) {
     if (!parts.length) {
       lines.push(`Grade ${grade}: see table row ${idx + 1}`);
     } else {
-      lines.push(`Grade ${grade}: ${parts.join(" — ")}`);
+      lines.push(`Grade ${grade}: ${parts.join(" - ")}`);
     }
 
     if (nonEmpty(grade)) rowsWithGrades += 1;
