@@ -1707,6 +1707,40 @@ module.exports = async (req, res) => {
     }));
     scoredTables.sort((a, b) => b.score - a.score);
 
+    // --- Module 4 recency/authority boost: 2025 > 2022 ---
+    for (const entry of scoredText) {
+      const c = chunks[entry.index];
+      if (!c) continue;
+
+      // Boost only for treatment-scope queries
+      if (scope === "treatment") {
+        const doc = (c.doc_id || "").toLowerCase();
+
+        // 2025 treatment module
+        if (doc.includes("module4") && doc.includes("2025")) {
+          entry.score *= 1.03;   // small, safe boost (~3%)
+        }
+      }
+    }
+
+    for (const entry of scoredTables) {
+      const c = chunks[entry.index];
+      if (!c) continue;
+
+      if (scope === "treatment") {
+        const doc = (c.doc_id || "").toLowerCase();
+
+        if (doc.includes("module4") && doc.includes("2025")) {
+          entry.score *= 1.03;
+        }
+      }
+    }
+    // --- end Module 4 boost ---
+
+    // NOW sort after boosting
+    scoredText.sort((a, b) => b.score - a.score);
+    scoredTables.sort((a, b) => b.score - a.score);
+
     // --- Optional table-aware boosting based on section proximity ---
     const anchorCount = Math.min(10, scoredText.length);
     const anchors = scoredText.slice(0, anchorCount).map(({ index, score }) => {
