@@ -1629,7 +1629,12 @@ function renderTable(chunk, rawRows) {
 }
 
 
-function enrichChunkWithTable(chunk) {
+function enrichChunkWithTable(chunk, options = {}) {
+  const includeTableRows = options.includeTableRows === true;
+  const tableRowLimit =
+    typeof options.tableRowLimit === "number"
+      ? Math.max(1, Math.floor(options.tableRowLimit))
+      : 0;
   const ct = (chunk.content_type || "").toLowerCase();
   const attachmentPath = chunk.attachment_path;
 
@@ -1639,13 +1644,17 @@ function enrichChunkWithTable(chunk) {
 
   try {
     const rawRows = loadTableRows(attachmentPath);
+    const limitedRows =
+      includeTableRows && Array.isArray(rawRows)
+        ? rawRows.slice(0, tableRowLimit || rawRows.length)
+        : null;
     const { subtype, tableText, debug } = renderTable(chunk, rawRows);
 
     return {
       ...chunk,
       table_subtype: subtype,
       table_text: tableText,
-      table_rows: rawRows,
+      ...(includeTableRows ? { table_rows: limitedRows } : {}),
       table_row_count: Array.isArray(rawRows) ? rawRows.length : 0,
       table_debug: debug || null
     };
@@ -1704,6 +1713,11 @@ module.exports = async (req, res) => {
     const question = body.question;
     let finalTopK = typeof body.top_k === "number" ? body.top_k : 8;
     let scope = body.scope || null;
+    const includeTableRows = body.include_table_rows === true;
+    const tableRowLimitRaw = Number(body.table_row_limit);
+    const tableRowLimit = Number.isFinite(tableRowLimitRaw)
+      ? Math.max(1, Math.min(500, Math.floor(tableRowLimitRaw)))
+      : 150;
     const retrievalLog = [];
     const addLog = (stage, payload) => {
       retrievalLog.push({ stage, ...(payload || {}) });
@@ -1729,7 +1743,9 @@ module.exports = async (req, res) => {
       question_preview:
         typeof question === "string" ? question.slice(0, 200) : null,
       requested_top_k: body.top_k ?? null,
-      scope_used: scope || null
+      scope_used: scope || null,
+      include_table_rows: includeTableRows,
+      table_row_limit: includeTableRows ? tableRowLimit : null
     });
 
     addLog("intent", {
@@ -2124,9 +2140,10 @@ module.exports = async (req, res) => {
 
     const top = deduped.slice(0, finalTopK);
 
+    const enrichmentOptions = { includeTableRows, tableRowLimit };
     const results = top.map(({ index, score }) => {
       const baseChunk = chunks[index] || {};
-      const c = enrichChunkWithTable(baseChunk);
+      const c = enrichChunkWithTable(baseChunk, enrichmentOptions);
 
       return {
         doc_id: c.doc_id,
@@ -2140,7 +2157,8 @@ module.exports = async (req, res) => {
         attachment_path: c.attachment_path ?? null,
         table_subtype: c.table_subtype ?? null,
         table_text: c.table_text ?? null,
-        table_rows: c.table_rows ?? null,
+        table_rows: includeTableRows ? c.table_rows ?? null : null,
+        table_row_count: c.table_row_count ?? null,
         score
       };
     });
