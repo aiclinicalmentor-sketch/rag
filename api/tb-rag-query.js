@@ -572,6 +572,40 @@ function inferPopulationContext(question, intentFlags) {
   return context;
 }
 
+function isDrugSusceptibleChunk(chunk) {
+  if (!chunk) return false;
+
+  const doc = (chunk.doc_id || "").toString().toLowerCase();
+  const section = (chunk.section_path || "").toString().toLowerCase();
+  const scope = (chunk.scope || "").toString().toLowerCase();
+  const text = (chunk.text || "").toString().toLowerCase();
+
+  const dsSignals = [
+    "drug - susceptible",
+    "drug-susceptible",
+    "drug susceptible",
+    "ds-tb",
+    "ds tb"
+  ];
+
+  const hasSignal = (s) => dsSignals.some((sig) => s.includes(sig));
+
+  if (hasSignal(scope)) return true;
+  if (hasSignal(section)) return true;
+  if (hasSignal(text)) return true;
+
+  // Module 4 chapter 1 is DS-TB; down-weight it for DR intent.
+  if (
+    doc.includes("module4") &&
+    doc.includes("treat") &&
+    section.includes("chapter 1")
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
 
 function filterIndicesByScope(indices, chunks, scope) {
   if (!scope) return indices;
@@ -1782,6 +1816,8 @@ module.exports = async (req, res) => {
     scoredTables.sort((a, b) => b.score - a.score);
 
     // --- Module-aware boosts: recency/authority & pediatric/TPT routing ---
+    const dsPenaltyFactor = 0.6;
+    let dsPenaltyText = 0;
     for (const entry of scoredText) {
       const c = chunks[entry.index] || {};
       const doc = (c.doc_id || "").toLowerCase();
@@ -1824,8 +1860,14 @@ module.exports = async (req, res) => {
           entry.score *= 1.03;
         }
       }
+
+      if (hasDrugResistanceIntent && isDrugSusceptibleChunk(c)) {
+        entry.score *= dsPenaltyFactor;
+        dsPenaltyText += 1;
+      }
     }
 
+    let dsPenaltyTables = 0;
     for (const entry of scoredTables) {
       const c = chunks[entry.index] || {};
       const doc = (c.doc_id || "").toLowerCase();
@@ -1861,8 +1903,22 @@ module.exports = async (req, res) => {
           entry.score *= 1.03;
         }
       }
+
+      if (hasDrugResistanceIntent && isDrugSusceptibleChunk(c)) {
+        entry.score *= dsPenaltyFactor;
+        dsPenaltyTables += 1;
+      }
     }
     // --- end module-aware boosts ---
+
+    if (hasDrugResistanceIntent) {
+      addLog("ds_downweight", {
+        intent_flag_present: hasDrugResistanceIntent,
+        penalized_text: dsPenaltyText,
+        penalized_tables: dsPenaltyTables,
+        factor: dsPenaltyFactor
+      });
+    }
 
     // Resort after boosting to respect adjusted scores
     scoredText.sort((a, b) => b.score - a.score);
