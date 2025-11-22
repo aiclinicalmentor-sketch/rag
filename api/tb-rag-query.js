@@ -461,7 +461,72 @@ function inferIntentFlags(question) {
     flags.push("special_populations");
   }
 
-  // Comorbidities (HIV, diabetes, renal, liver, mental health, substance use)
+  
+  // Drug-resistant TB / MDR/RR/XDR intent
+  if (
+    has([
+      "mdr-tb",
+      "mdr tb",
+      "xdr-tb",
+      "xdr tb",
+      "pre-xdr",
+      "pre xdr",
+      "rr-tb",
+      "rr tb",
+      "rifampicin-resistant",
+      "rifampin-resistant",
+      "drug-resistant tb",
+      "drug resistant tb",
+      "fluoroquinolone-resistant",
+      "fluoroquinolone resistance"
+    ])
+  ) {
+    flags.push("drug_resistance");
+  }
+
+  // TB preventive treatment / TPT intent
+  if (
+    has([
+      "tpt",
+      "tb preventive treatment",
+      "tb preventive therapy",
+      "preventive treatment",
+      "preventive therapy",
+      "ipt",
+      "isoniazid preventive therapy",
+      "3hp",
+      "1hp",
+      "3hr",
+      "4r",
+      "latent tb infection treatment",
+      "ltbi treatment",
+      "tb infection treatment",
+      "tb infection therapy"
+    ])
+  ) {
+    flags.push("tpt");
+  }
+
+  // DR-TPT (preventive treatment for contacts of MDR/RR-TB, levofloxacin, etc.)
+  if (
+    has([
+      "levofloxacin preventive",
+      "levofloxacin prophylaxis",
+      "6lfx",
+      "6 months of levofloxacin",
+      "mdr-tb contact",
+      "mdr tb contact",
+      "rr-tb contact",
+      "rr tb contact",
+      "contact of mdr-tb",
+      "household contact of mdr-tb"
+    ])
+  ) {
+    flags.push("dr_tpt");
+    flags.push("tpt");
+  }
+
+// Comorbidities (HIV, diabetes, renal, liver, mental health, substance use)
   if (
     has([
       "hiv",
@@ -1612,10 +1677,19 @@ module.exports = async (req, res) => {
 
     const intentFlags = inferIntentFlags(question || "");
     const populationContext = inferPopulationContext(question || "", intentFlags);
+    const hasFlag = (f) => Array.isArray(intentFlags) && intentFlags.includes(f);
+    const isPediatric = hasFlag("special_populations");
+    const hasDrugResistanceIntent = hasFlag("drug_resistance");
+    const hasTptIntent = hasFlag("tpt");
+    const hasDrTptIntent = hasFlag("dr_tpt");
 
     if (!scope) {
       scope = inferScopeFromQuestion(question, intentFlags);
     }
+
+    const isDiagnosisScope = scope === "diagnosis";
+    const isTreatmentScope = scope === "treatment";
+    const isPreventionScope = scope === "prevention";
 
     addLog("request", {
       question_preview:
@@ -1707,39 +1781,93 @@ module.exports = async (req, res) => {
     }));
     scoredTables.sort((a, b) => b.score - a.score);
 
-    // --- Module 4 recency/authority boost: 2025 > 2022 ---
+    // --- Module-aware boosts: recency/authority & pediatric/TPT routing ---
     for (const entry of scoredText) {
-      const c = chunks[entry.index];
-      if (!c) continue;
+      const c = chunks[entry.index] || {};
+      const doc = (c.doc_id || "").toLowerCase();
+      const section = (c.section_path || "").toLowerCase();
 
-      // Boost only for treatment-scope queries
-      if (scope === "treatment") {
-        const doc = (c.doc_id || "").toLowerCase();
+      if (isTreatmentScope) {
+        // 2025 treatment module (Module 4)
+        if (doc.includes("module4") && doc.includes("treatment") && doc.includes("2025")) {
+          entry.score *= 1.03;
+        }
 
-        // 2025 treatment module
-        if (doc.includes("module4") && doc.includes("2025")) {
-          entry.score *= 1.03;   // small, safe boost (~3%)
+        // Pediatric DS-TB treatment: Module 5, section 5.2
+        if (
+          isPediatric &&
+          !hasDrugResistanceIntent &&
+          doc.includes("module5") &&
+          doc.includes("pediatr") &&
+          (
+            section.includes("5.2.") ||
+            section.includes("treatment of drug-susceptible tb in children")
+          )
+        ) {
+          entry.score *= 1.03;
+        }
+      }
+
+      // Pediatric diagnosis: favor Module 3 (diagnosis)
+      if (isDiagnosisScope && isPediatric) {
+        if (
+          doc.includes("module3") &&
+          (doc.includes("diag") || section.includes("diagnosis"))
+        ) {
+          entry.score *= 1.03;
+        }
+      }
+
+      // TB preventive treatment: favor Module 1 TPT 2024
+      if (isPreventionScope) {
+        if (doc.includes("module1") && doc.includes("tpt") && doc.includes("2024")) {
+          entry.score *= 1.03;
         }
       }
     }
 
     for (const entry of scoredTables) {
-      const c = chunks[entry.index];
-      if (!c) continue;
+      const c = chunks[entry.index] || {};
+      const doc = (c.doc_id || "").toLowerCase();
+      const section = (c.section_path || "").toLowerCase();
 
-      if (scope === "treatment") {
-        const doc = (c.doc_id || "").toLowerCase();
+      if (isTreatmentScope) {
+        if (doc.includes("module4") && doc.includes("treatment") && doc.includes("2025")) {
+          entry.score *= 1.03;
+        }
 
-        if (doc.includes("module4") && doc.includes("2025")) {
+        if (
+          isPediatric &&
+          !hasDrugResistanceIntent &&
+          doc.includes("module5") &&
+          doc.includes("pediatr") &&
+          section.includes("5.2.")
+        ) {
+          entry.score *= 1.03;
+        }
+      }
+
+      if (isDiagnosisScope && isPediatric) {
+        if (
+          doc.includes("module3") &&
+          (doc.includes("diag") || section.includes("diagnosis"))
+        ) {
+          entry.score *= 1.03;
+        }
+      }
+
+      if (isPreventionScope) {
+        if (doc.includes("module1") && doc.includes("tpt") && doc.includes("2024")) {
           entry.score *= 1.03;
         }
       }
     }
-    // --- end Module 4 boost ---
+    // --- end module-aware boosts ---
 
-    // NOW sort after boosting
+    // Resort after boosting to respect adjusted scores
     scoredText.sort((a, b) => b.score - a.score);
     scoredTables.sort((a, b) => b.score - a.score);
+
 
     // --- Optional table-aware boosting based on section proximity ---
     const anchorCount = Math.min(10, scoredText.length);
@@ -1756,9 +1884,28 @@ module.exports = async (req, res) => {
     });
 
     const anchorDocSectionMap = [];
+    let hasModule4DrAnchor = false;
+    let hasModule1TptAnchor = false;
+
     for (const a of anchors) {
       if (!a.doc_id) continue;
       anchorDocSectionMap.push(a);
+      const docId = (a.doc_id || "").toLowerCase();
+      const sectionPath = (a.section_path || "").toLowerCase();
+      if (
+        docId.includes("module4") &&
+        docId.includes("treatment") &&
+        sectionPath.includes("chapter 2 : drug-resistant tb treatment")
+      ) {
+        hasModule4DrAnchor = true;
+      }
+      if (
+        docId.includes("module1") &&
+        docId.includes("tpt") &&
+        sectionPath.includes("tb preventive treatment")
+      ) {
+        hasModule1TptAnchor = true;
+      }
     }
 
     const maxTextScore = scoredText.length ? scoredText[0].score : 1.0;
@@ -1785,6 +1932,46 @@ module.exports = async (req, res) => {
 
     scoredTables.sort((a, b) => b.score - a.score);
     // --- End table-aware boosting ---
+
+
+    // Penalize outdated pediatric MDR regimen tables from Module 5 when Module 4 DR content is present
+    if (isTreatmentScope && isPediatric && hasDrugResistanceIntent && hasModule4DrAnchor) {
+      for (const entry of scoredTables) {
+        const c = chunks[entry.index] || {};
+        const doc = (c.doc_id || "").toLowerCase();
+        const ct = (c.content_type || "").toLowerCase();
+        const subtype = (c.table_subtype || "").toLowerCase();
+        if (!doc.includes("module5") || !doc.includes("pediatr")) continue;
+        if (ct !== "table") continue;
+        if (!(subtype === "regimen" || subtype === "decision")) continue;
+        entry.score *= 0.97;
+      }
+      scoredTables.sort((a, b) => b.score - a.score);
+    }
+
+    // Penalize outdated TPT regimen tables from Module 5 when Module 1 TPT content is present
+    if (isPreventionScope && hasTptIntent && hasModule1TptAnchor) {
+      for (const entry of scoredTables) {
+        const c = chunks[entry.index] || {};
+        const doc = (c.doc_id || "").toLowerCase();
+        const ct = (c.content_type || "").toLowerCase();
+        const subtype = (c.table_subtype || "").toLowerCase();
+        const section = (c.section_path || "").toLowerCase();
+        if (!doc.includes("module5") || !doc.includes("pediatr")) continue;
+        if (ct !== "table") continue;
+        if (!(subtype === "regimen" || subtype === "decision")) continue;
+        if (
+          !section.includes("3.3.5") &&
+          !section.includes("3.3.6") &&
+          !section.includes("preventive treatment")
+        ) {
+          continue;
+        }
+        entry.score *= 0.97;
+      }
+      scoredTables.sort((a, b) => b.score - a.score);
+    }
+
 
     // Take top-N from each channel before merging
     const TEXT_LIMIT = 10;
@@ -1813,6 +2000,61 @@ module.exports = async (req, res) => {
 
     let combined = topText.concat(topTables);
     combined.sort((a, b) => b.score - a.score);
+
+    // Ensure at least a couple of Module 4 DR-TB text chunks for pediatric MDR/RR-TB queries
+    if (isTreatmentScope && isPediatric && hasDrugResistanceIntent) {
+      const module4DrCandidates = scoredText.filter(({ index }) => {
+        const c = chunks[index] || {};
+        const doc = (c.doc_id || "").toLowerCase();
+        const section = (c.section_path || "").toLowerCase();
+        return (
+          doc.includes("module4") &&
+          doc.includes("treatment") &&
+          section.includes("chapter 2 : drug-resistant tb treatment")
+        );
+      });
+
+      let needed = 2;
+      for (const cand of module4DrCandidates) {
+        if (needed <= 0) break;
+        const alreadyIn = combined.some((e) => e.index === cand.index);
+        if (!alreadyIn) {
+          combined.push(cand);
+          needed -= 1;
+        }
+      }
+      combined.sort((a, b) => b.score - a.score);
+    }
+
+    // Ensure at least a couple of Module 1 TPT text chunks for TPT queries
+    if (isPreventionScope && hasTptIntent) {
+      const module1TptCandidates = scoredText.filter(({ index }) => {
+        const c = chunks[index] || {};
+        const doc = (c.doc_id || "").toLowerCase();
+        const section = (c.section_path || "").toLowerCase();
+        return (
+          doc.includes("module1") &&
+          doc.includes("tpt") &&
+          doc.includes("2024") &&
+          (
+            section.includes("tb preventive treatment") ||
+            section.includes("tb infection")
+          )
+        );
+      });
+
+      let needed = 2;
+      for (const cand of module1TptCandidates) {
+        if (needed <= 0) break;
+        const alreadyIn = combined.some((e) => e.index === cand.index);
+        if (!alreadyIn) {
+          combined.push(cand);
+          needed -= 1;
+        }
+      }
+      combined.sort((a, b) => b.score - a.score);
+    }
+
 
     const seen = new Set();
     const deduped = [];
