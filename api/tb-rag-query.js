@@ -2030,8 +2030,8 @@ module.exports = async (req, res) => {
 
 
     // Take top-N from each channel before merging
-    const TEXT_LIMIT = 10;
-    const TABLE_LIMIT = 5;
+    const TEXT_LIMIT = 20;
+    const TABLE_LIMIT = 8;
 
     const topText = scoredText.slice(
       0,
