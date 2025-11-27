@@ -1,17 +1,20 @@
 openapi: 3.1.0
 info:
   title: TB Clinical Mentor Actions API
-  version: 1.0.0
+  version: 1.3.0
   description: >
-    Action surface for the TB Clinical Mentor GPT. Clinicians supply a free-form
-    question about a tuberculosis case, and the action returns the most relevant
-    sections of the TB guidelines/handbooks stored in the Retrieval-Augmented
-    Generation (RAG) store.
+    Action surface for the TB Clinical Mentor GPT. Clinicians send a free-form
+    TB question and the action returns the most relevant guideline passages
+    from the local RAG store based on WHO TB modules.
   contact:
     name: TB Clinical Mentor
     url: https://chatgpt.com/g/g-68e126775224819193328c1977555fd0-tb-clinical-mentor-v2
+  license:
+    name: Creative Commons Attribution 4.0 International
+    url: https://creativecommons.org/licenses/by/4.0/
+security: []
 servers:
-  - url: https://rag-two-rouge.vercel.app
+  - url: "https://rag-two-rouge.vercel.app"
     description: This is the production domain that hosts this API.
 paths:
   /api/tb-rag-query:
@@ -19,10 +22,9 @@ paths:
       operationId: fetchRelevantTbGuidance
       summary: Retrieve relevant TB guidance passages
       description: >
-        Calculates an embedding for the clinician question and returns the top
-        matching guideline or handbook passages from the on-device RAG store.
-        Use this action whenever additional TB-specific context is needed before
-        giving clinical advice.
+        Embed a clinician TB question and return the top-matching WHO TB
+        handbook or guideline passages from the on-device RAG store. Use this
+        before giving case-specific TB advice.
       requestBody:
         required: true
         content:
@@ -31,8 +33,7 @@ paths:
               $ref: '#/components/schemas/QueryRequest'
       responses:
         "200":
-          description: >
-            Top passages ordered by cosine similarity to the clinician question.
+          description: Top passages ordered by similarity to the clinician question.
           content:
             application/json:
               schema:
@@ -42,20 +43,23 @@ paths:
                   summary: Example response
                   value:
                     question: What are the recommended monitoring steps for a patient on bedaquiline?
-                    top_k: 3
+                    top_k: 8
+                    scope: "treatment"
                     results:
                       - doc_id: tb_handbook_v3
+                        guideline_title: "WHO operational handbook on tuberculosis, Module 4: treatment"
+                        year: 2022
                         chunk_id: chunk-01752
                         section_path: Chapter 4 > Drug-Resistant TB > Monitoring
                         text: >
                           For patients receiving bedaquiline, monitor liver function tests weekly for
                           the first month, then monthly thereafter. Electrocardiograms should be
-                          obtained ....
+                          obtained ...
                         attachment_id: bedaquiline-monitoring.pdf
                         attachment_path: attachments/bedaquiline-monitoring.pdf
                         score: 0.8123
         "400":
-          description: Missing or malformed question. The response includes an "error" string.
+          description: Missing or malformed question field.
           content:
             application/json:
               schema:
@@ -67,9 +71,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         "500":
-          description: >
-            Unexpected retrieval or embedding failure. The "error" string will
-            include details suitable for logs.
+          description: Retrieval or embedding failure.
           content:
             application/json:
               schema:
@@ -85,26 +87,27 @@ components:
         question:
           type: string
           description: >
-            Free-form clinician question about a TB patient. This text is embedded
-            and compared against the stored TB guideline passages.
+            Free-form clinician question about a TB patient. Include enough
+            clinical context (age, HIV status, comorbidities, prior treatment,
+            and resource setting) to retrieve relevant guidance.
           minLength: 1
           examples:
             - How should I adjust the regimen for a TB/HIV co-infected patient with renal impairment?
         top_k:
           type: integer
           description: >
-            Maximum number of passages to return. Defaults to 8 and supports up to
-            10 results for GPT Actions.
+            Desired number of passages to return. Defaults to 8 and supports
+            between 1 and 8 results.
           minimum: 1
-          maximum: 10
+          maximum: 8
           default: 8
           examples:
-            - 5
+            - 8
         include_table_rows:
           type: boolean
           description: >
-            When true, include raw table rows for table chunks. Defaults to false to
-            keep responses small.
+            When true, include raw table_rows in results for table chunks. Defaults
+            to false to keep responses small.
           default: false
         table_row_limit:
           type: integer
@@ -114,8 +117,23 @@ components:
           minimum: 1
           maximum: 500
           default: 150
+        scope:
+          type: string
+          description: >
+            Optional topic hint to focus retrieval on part of the TB corpus.
+            Supported values:
+            - "prevention" for TB infection, TPT, contact management, and IPC.
+            - "screening" for systematic screening and triage.
+            - "diagnosis" for diagnostic algorithms and pathways.
+            - "treatment" for regimens, dosing, monitoring, toxicity, and failure.
+            Pediatrics, pregnancy, HIV, diabetes, and other comorbid conditions
+            should be expressed in the question text, not as scope values.
+          enum: [prevention, screening, diagnosis, treatment]
+          examples:
+            - diagnosis
     QueryResponse:
       type: object
+      additionalProperties: false
       required:
         - question
         - top_k
@@ -126,7 +144,12 @@ components:
           description: Echo of the received clinician question.
         top_k:
           type: integer
-          description: Number of passages returned in "results".
+          description: Number of passages returned in results.
+        scope:
+          type:
+            - string
+            - "null"
+          description: Scope actually used for retrieval if any.
         results:
           type: array
           description: Relevant TB guidance passages ordered by similarity.
@@ -134,6 +157,7 @@ components:
             $ref: '#/components/schemas/QueryResult'
     QueryResult:
       type: object
+      additionalProperties: false
       required:
         - doc_id
         - chunk_id
@@ -144,48 +168,64 @@ components:
         doc_id:
           type: string
           description: Identifier of the source document within the RAG corpus.
+        guideline_title:
+          type:
+            - string
+            - "null"
+          description: Human-readable title of the guideline or handbook, if available.
+        year:
+          type:
+            - integer
+            - "null"
+          description: Publication year of the guideline module, if available.
         chunk_id:
           type: string
           description: Unique identifier of the chunk within the document.
         section_path:
           type: string
           description: Breadcrumb-style path pointing to the relevant guideline section.
-        text:
-          type: string
-          description: Excerpt of the guideline passage to show to clinicians.
         content_type:
-          type: string
-          nullable: true
+          type:
+            - string
+            - "null"
           description: Content type of the chunk (e.g., "text" or "table").
         table_subtype:
-          type: string
-          nullable: true
+          type:
+            - string
+            - "null"
           description: >
-            Detected subtype for table chunks (e.g., "regimen", "dosing",
-            "decision"); null for non-table chunks.
+            Detected subtype for table chunks (e.g., "regimen", "dosing", "decision");
+            null for non-table chunks.
         table_text:
-          type: string
-          nullable: true
-          description: >
-            Textual rendering of table content for LLM consumption; present for table
-            chunks.
+          type:
+            - string
+            - "null"
+          description: Textual rendering of table content for table chunks.
         table_rows:
-          type: array
-          nullable: true
-          description: Raw table rows (capped by table_row_limit) when requested.
+          type:
+            - array
+            - "null"
+          description: >
+            Raw table rows (capped by table_row_limit) when include_table_rows=true.
           items:
             type: object
         table_row_count:
-          type: integer
-          nullable: true
+          type:
+            - integer
+            - "null"
           description: Total number of rows in the underlying table.
-        attachment_id:
+        text:
           type: string
-          nullable: true
+          description: Excerpt of the guideline passage to show to clinicians.
+        attachment_id:
+          type:
+            - string
+            - "null"
           description: Optional attachment identifier if files are associated with the passage.
         attachment_path:
-          type: string
-          nullable: true
+          type:
+            - string
+            - "null"
           description: Optional relative path to download the associated attachment.
         score:
           type: number
@@ -193,6 +233,7 @@ components:
           description: Cosine similarity score where higher values mean a closer match.
     ErrorResponse:
       type: object
+      additionalProperties: false
       required:
         - error
       properties:
