@@ -1695,6 +1695,106 @@ function formatRetrievalEntry(chunk, score) {
   };
 }
 
+
+function pickMixConfig(intentFlags, scope, finalTopK) {
+  const has = (f) => Array.isArray(intentFlags) && intentFlags.includes(f);
+
+  const isTableHeavy =
+    has("dosing") ||
+    has("weight_based_dosing") ||
+    has("pediatric_dosing") ||
+    has("algorithm") ||
+    has("timeline") ||
+    has("regimen_overview");
+
+  let minText;
+  let maxTables;
+
+  if (isTableHeavy) {
+    // Table-heavy questions: allow tables to dominate but try to keep at least a little text.
+    minText = Math.min(1, finalTopK);
+    maxTables = finalTopK - minText;
+  } else {
+    if (scope === "treatment" || scope === "diagnosis") {
+      // For most clinical questions, aim for a balanced mix of narrative text + tables.
+      minText = Math.min(4, finalTopK);
+      maxTables = finalTopK - minText;
+    } else if (scope === "prevention" || scope === "programmatic") {
+      // For prevention/programmatic questions, emphasize narrative.
+      minText = Math.min(5, finalTopK);
+      maxTables = finalTopK - minText;
+    } else {
+      // Fallback: roughly half text, half tables.
+      minText = Math.min(Math.ceil(finalTopK / 2), finalTopK);
+      maxTables = finalTopK - minText;
+    }
+  }
+
+  // Clamp values to safe ranges.
+  minText = Math.max(0, Math.min(minText, finalTopK));
+  maxTables = Math.max(0, Math.min(maxTables, finalTopK - minText));
+
+  return {
+    k: finalTopK,
+    minText,
+    maxTables
+  };
+}
+
+function mixByContentType(entries, chunks, config) {
+  const { k, minText, maxTables } = config;
+
+  const textEntries = [];
+  const tableEntries = [];
+
+  for (const e of entries) {
+    const c = chunks[e.index] || {};
+    const ct = (c.content_type || "").toLowerCase();
+    if (ct === "table") {
+      tableEntries.push(e);
+    } else {
+      textEntries.push(e);
+    }
+  }
+
+  // 1) Guarantee minimum text (in ranked order)
+  const final = [];
+  for (const e of textEntries.slice(0, minText)) {
+    final.push(e);
+  }
+
+  // 2) Fill remaining slots from ranked entries, respecting maxTables.
+  let tableCount = final.filter((e) => {
+    const c = chunks[e.index] || {};
+    return (c.content_type || "").toLowerCase() === "table";
+  }).length;
+
+  for (const e of entries) {
+    if (final.length >= k) break;
+    if (final.includes(e)) continue;
+
+    const c = chunks[e.index] || {};
+    const ct = (c.content_type || "").toLowerCase();
+
+    if (ct === "table") {
+      if (tableCount >= maxTables) continue;
+      tableCount += 1;
+    }
+
+    final.push(e);
+  }
+
+  // 3) If we still don't reach k, top up with remaining text.
+  if (final.length < k) {
+    for (const e of textEntries) {
+      if (final.length >= k) break;
+      if (!final.includes(e)) final.push(e);
+    }
+  }
+
+  return final.slice(0, k);
+}
+
 // ---------- Main handler ----------
 
 module.exports = async (req, res) => {
@@ -2138,7 +2238,8 @@ module.exports = async (req, res) => {
       deduped.push(entry);
     }
 
-    const top = deduped.slice(0, finalTopK);
+    const mixConfig = pickMixConfig(intentFlags, scope, finalTopK);
+    const top = mixByContentType(deduped, chunks, mixConfig);
 
     const enrichmentOptions = { includeTableRows, tableRowLimit };
     const results = top.map(({ index, score }) => {
